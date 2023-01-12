@@ -13,7 +13,7 @@
 
   };
 
-  outputs = { nixpkgs, home-manager, ... }@inputs: {
+  outputs = { nixpkgs, ... }@inputs: {
     # NixOS configuration entrypoint
     # Available through 'nixos-rebuild --flake .#your-hostname'
     nixosConfigurations = {
@@ -27,7 +27,7 @@
 
     # Standalone home-manager configuration entrypoint
     # Available through 'home-manager --flake .#your-username@your-hostname'
-    homeConfigurations = {
+    /* homeConfigurations = {
       # FIXME replace with your username@hostname
       "your-username@your-hostname" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
@@ -35,6 +35,6 @@
         # > Our main home-manager configuration file <
         modules = [ ./home-manager/home.nix ];
       };
-    };
+    }; */
   };
 }
