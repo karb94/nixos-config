@@ -35,8 +35,9 @@
   };
 
   environment.systemPackages = with pkgs; [
-    neovim
     brave
+    git
+    neovim
   ];
 
 # FIXME: Add the rest of your current configuration
