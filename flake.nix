@@ -9,13 +9,15 @@
     # home-manager.url = "github:nix-community/home-manager";
     # home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-    # hardware.url = "github:nixos/nixos-hardware";
+    hardware.url = "github:nixos/nixos-hardware";
 
   };
 
   outputs = { nixpkgs, ... }@inputs: {
     # NixOS configuration entrypoint
     # Available through 'nixos-rebuild --flake .#your-hostname'
+    # install nixos with:
+    # nix-shell -p nixUnstable --run 'sudo nixos-install --flake github:karb94/nixos-config#LDN_desktop'
     nixosConfigurations = {
       # FIXME replace with your hostname
       LDN_desktop = nixpkgs.lib.nixosSystem {
