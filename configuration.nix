@@ -34,6 +34,10 @@
     };
   };
 
+  environment.systemPackages = with pkgs; [
+    nvim
+    brave
+  ];
 
 # FIXME: Add the rest of your current configuration
 
