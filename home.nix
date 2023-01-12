@@ -13,6 +13,6 @@ in
 
     home.file."hm".source = ln ./test_dir/test;
     xdg.config = {
-      "alacritty".source = ln ${dotfiles}/alacritty;
+      "alacritty".source = ln "${dotfiles}/alacritty";
     }
   }
