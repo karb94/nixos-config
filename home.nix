@@ -3,6 +3,7 @@ with config;
 let
   ln = lib.file.mkOutOfStoreSymlink;
   dotfiles="${xdg.configHome}/dotfiles";
+  dotconfig = "${dotfiles}/.config";
 in
   {
     # Home Manager needs a bit of information about you and the
@@ -14,6 +15,6 @@ in
 
     home.file."hm".source = ln ./test_dir/test;
     xdg.configFile = {
-      "alacritty".source = ln "${dotfiles}/alacritty";
+      "alacritty".source = ln "${dotconfig}/alacritty";
     };
   }
