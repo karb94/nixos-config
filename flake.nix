@@ -23,20 +23,27 @@
       LDN_desktop = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs; }; # Pass flake inputs to our config
         # > Our main nixos configuration file <
-        modules = [ ./configuration.nix ];
+        modules = [
+          ./configuration.nix
+          home-manager.nixosModules.home-manager {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.carles = import ./home.nix;
+          }
+        ];
       };
     };
 
     # Standalone home-manager configuration entrypoint
     # Available through 'home-manager --flake .#your-username@your-hostname'
-    homeConfigurations = {
-      # FIXME replace with your username@hostname
-      "carles@LDN_desktop" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
-        extraSpecialArgs = { inherit inputs; }; # Pass flake inputs to our config
-        # > Our main home-manager configuration file <
-        modules = [ ./home.nix ];
-      };
-    };
+    # homeConfigurations = {
+    #   # FIXME replace with your username@hostname
+    #   "carles@LDN_desktop" = home-manager.lib.homeManagerConfiguration {
+    #     pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
+    #     extraSpecialArgs = { inherit inputs; }; # Pass flake inputs to our config
+    #     # > Our main home-manager configuration file <
+    #     modules = [ ./home.nix ];
+    #   };
+    # };
   };
 }
