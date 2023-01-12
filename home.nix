@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 let
   ln = config.lib.file.mkOutOfStoreSymlink;
-  dotfiles="${xdg.configHome}/dotfiles";
+  dotfiles="${config.xdg.configHome}/dotfiles";
 in
   {
     # Home Manager needs a bit of information about you and the
@@ -12,7 +12,7 @@ in
     home.stateVersion = "22.11";
 
     home.file."hm".source = ln ./test_dir/test;
-    xdg.config = {
+    config.xdg.config = {
       "alacritty".source = ln "${dotfiles}/alacritty";
     };
   }
