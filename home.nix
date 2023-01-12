@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 let
   ln = config.lib.file.mkOutOfStoreSymlink;
-  dotfiles=${xdg.configHome}/dotfiles;
+  dotfiles="${xdg.configHome}/dotfiles";
 in
   {
     # Home Manager needs a bit of information about you and the
