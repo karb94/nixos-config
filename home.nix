@@ -12,6 +12,9 @@ let
     "lf"
     "mpv"
     "newsboat"
+    "nvim/after"
+    "nvim/init.vim"
+    "nvim/lua"
     "picom"
     "rofi"
     "rofi"
@@ -37,11 +40,5 @@ in
 
     home.stateVersion = "22.11";
 
-    
-    # home.file."hm".source = ln ./test_dir/test;
     xdg.configFile = mkSymlinks "${dotConfigDir}" dotConfigFilesToLink;
-    # xdg.configFile = {
-    #   "alacritty/alacritty.yml".source = ln "${dotconfig}/alacritty/alacritty.yml";
-    #   "bspwm/bspwmrc".source = ln "${dotconfig}/bspwm/bspwmrc";
-    # };
   }
