@@ -12,7 +12,7 @@ let
   # f = commonDir: path: {name="${path}"; value={source=("${commonDir}/${path}");};}
   mkSymlink = commonDir: 
   let
-    f = path: {name="${path}"; value={source=("${commonDir}/${path}");};};
+    f = path: {name="${path}"; value={source=(ln "${commonDir}/${path}");};};
   in
     paths: builtins.listToAttrs (map f paths);
 in
