@@ -4,18 +4,16 @@ let
   ln = lib.file.mkOutOfStoreSymlink;
   dotfiles="${xdg.configHome}/dotfiles";
   dotconfig = "${dotfiles}/.config";
-  # link = parentFolder: path: 
   p = [
-    "alacritty/alacritty.yml"
-    "bspwm/bspwmrc"
+    "alacritty"
+    "bspwm"
     "bash"
   ];
-  # f = commonDir: path: {name="${path}"; value={source=("${commonDir}/${path}");};}
   mkSymlink = commonDir: 
   let
     f = path: {
-      name="${path}";
-      value={source=(ln "${commonDir}/${path}");};
+      name = "${path}";
+      value = {source = ln "${commonDir}/${path}";};
     };
   in
     paths: builtins.listToAttrs (map f paths);
