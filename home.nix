@@ -39,7 +39,7 @@ in
 
     
     # home.file."hm".source = ln ./test_dir/test;
-    xdg.configFile = mkSymlink "${dotconfig}" p;
+    xdg.configFile = mkSymlinks "${dotconfig}" p;
     # xdg.configFile = {
     #   "alacritty/alacritty.yml".source = ln "${dotconfig}/alacritty/alacritty.yml";
     #   "bspwm/bspwmrc".source = ln "${dotconfig}/bspwm/bspwmrc";
