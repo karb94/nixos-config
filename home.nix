@@ -8,13 +8,13 @@ let
   p = [
     "alacritty/alacritty.yml"
     "bspwm/bspwmrc"
-  ]
+  ];
   # f = commonDir: path: {name="${path}"; value={source=("${commonDir}/${path}");};}
   mkSymlink = commonDir: 
   let
-    f = path: {name="${path}"; value={source=("${commonDir}/${path}");};}
+    f = path: {name="${path}"; value={source=("${commonDir}/${path}");};};
   in
-    paths: builtins.listToAttrs (map f paths)
+    paths: builtins.listToAttrs (map f paths);
 in
   {
     # Home Manager needs a bit of information about you and the
