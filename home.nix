@@ -13,7 +13,7 @@ let
   let
     f = path: {
       name = "${path}";
-      value = {source = (ln "${commonDir}/${path}");};
+      value = {source = ln "${commonDir}/${path}";};
     };
   in
     paths: builtins.listToAttrs (map f paths);
