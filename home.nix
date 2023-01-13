@@ -1,22 +1,33 @@
 { config, pkgs, ... }:
 with config;
 let
-  ln = lib.file.mkOutOfStoreSymlink;
   dotfiles="${xdg.configHome}/dotfiles";
-  dotconfig = "${dotfiles}/.config";
-  p = [
+  dotConfigDir = "${dotfiles}/.config";
+  dotConfigToLink = [
     "alacritty"
-    "bspwm"
     "bash"
+    "bspwm"
+    "dunst"
+    "git"
+    "lf"
+    "mpv"
+    "newsboat"
+    "picom"
+    "rofi"
+    "rofi"
+    "sxhkd"
+    "youtube-dl"
+    "zathura"
   ];
-  mkSymlink = commonDir: 
-  let
-    f = path: {
-      name = "${path}";
-      value = {source = ln "${commonDir}/${path}";};
-    };
-  in
-    paths: builtins.listToAttrs (map f paths);
+  mkSymlinks = commonDir: 
+    let
+      ln = lib.file.mkOutOfStoreSymlink;
+      f = path: {
+        name = "${path}";
+        value = {source = ln "${commonDir}/${path}";};
+      };
+    in
+      paths: builtins.listToAttrs (map f paths);
 in
   {
     # Home Manager needs a bit of information about you and the

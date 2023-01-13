@@ -38,6 +38,7 @@
     brave
     git
     neovim
+    tree
   ];
 
 # FIXME: Add the rest of your current configuration
