@@ -36,6 +36,7 @@
 
   environment.systemPackages = with pkgs; [
     brave
+    fzf
     git
     neovim
     tree
