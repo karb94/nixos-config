@@ -3,7 +3,7 @@ with config;
 let
   dotfiles="${xdg.configHome}/dotfiles";
   dotConfigDir = "${dotfiles}/.config";
-  dotConfigToLink = [
+  dotConfigFilesToLink = [
     "alacritty"
     "bash"
     "bspwm"
@@ -39,7 +39,7 @@ in
 
     
     # home.file."hm".source = ln ./test_dir/test;
-    xdg.configFile = mkSymlinks "${dotconfig}" dotConfigToLink;
+    xdg.configFile = mkSymlinks "${dotConfigDir}" dotConfigFilesToLink;
     # xdg.configFile = {
     #   "alacritty/alacritty.yml".source = ln "${dotconfig}/alacritty/alacritty.yml";
     #   "bspwm/bspwmrc".source = ln "${dotconfig}/bspwm/bspwmrc";
