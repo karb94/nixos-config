@@ -38,6 +38,7 @@
     brave
     fzf
     git
+    lf
     neovim
     tree
   ];
