@@ -48,7 +48,7 @@ in
     home.sessionVariables = {
       EDITOR = "nvim";
     };
-    home = mkSymlinks "${homeDir}" HomeFilesToLink;
+    home.file = mkSymlinks "${homeDir}" HomeFilesToLink;
 
     xdg.configFile = mkSymlinks "${dotConfigDir}" dotConfigFilesToLink;
 
