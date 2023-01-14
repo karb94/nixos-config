@@ -1,12 +1,13 @@
 { config, pkgs, ... }:
 with config;
 let
+  repoDir="${xdg.configHome}/dotfiles";
   mkSymlinks = commonDir: 
     let
       ln = lib.file.mkOutOfStoreSymlink;
       f = path: {
         name = "${path}";
-        value = {source = ln "${commonDir}/${path}";};
+        value = {source = ln "${repoDir}/${commonDir}${path}";};
       };
     in
       paths: builtins.listToAttrs (map f paths);
@@ -17,8 +18,6 @@ let
     ".inputrc"
     ".xinitrc"
   ];
-  dotfiles="${xdg.configHome}/dotfiles";
-  dotConfigDir = "${dotfiles}/.config";
   dotConfigFilesToLink = [
     "alacritty"
     "bash"
@@ -48,10 +47,10 @@ in
     home.sessionVariables = {
       EDITOR = "nvim";
     };
-    home.file = mkSymlinks "${dotfiles}" HomeFilesToLink;
+    home.file = mkSymlinks "" HomeFilesToLink;
     # home.file.".xinitrc".source = lib.file.mkOutOfStoreSymlink "${homeDir}/.xinitrc";
 
-    xdg.configFile = mkSymlinks "${dotConfigDir}" dotConfigFilesToLink;
+    xdg.configFile = mkSymlinks ".config/" dotConfigFilesToLink;
 
     programs.bash.enable = true;
     programs.bash.historyFile = "$HOME/.config/bash/history";
