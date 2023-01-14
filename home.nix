@@ -45,9 +45,9 @@ in
     home.stateVersion = "22.11";
     home.username = "carles";
     home.homeDirectory = "/home/carles";
-    home.sessionVariables = {
-      EDITOR = "nvim";
-    };
+    # home.sessionVariables = {
+    #   EDITOR = "nvim";
+    # };
 
     xdg.configFile = mkSymlinks "${dotConfigDir}" dotConfigFilesToLink;
 
