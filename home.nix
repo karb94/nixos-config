@@ -14,8 +14,7 @@ let
   userName = "/home/carles";
   homeDir = "/home/${userName}";
   HomeFilesToLink = [
-    ".bashrc"
-    ".profile_extra"
+    ".inputrc"
     ".xinitrc"
   ];
   dotfiles="${xdg.configHome}/dotfiles";
@@ -49,6 +48,7 @@ in
     home.sessionVariables = {
       EDITOR = "nvim";
     };
+    home = mkSymlinks "${homeDir}" HomeFilesToLink;
 
     xdg.configFile = mkSymlinks "${dotConfigDir}" dotConfigFilesToLink;
 
