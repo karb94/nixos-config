@@ -49,12 +49,13 @@ in
 
     xdg.configFile = mkSymlinks "${dotConfigDir}" dotConfigFilesToLink;
 
+    programs.bash.enable = true;
     programs.bash.bashrcExtra = ''
-    # If not running interactively, don't do anything
-    [[ $- != *i* ]] && return
+      # If not running interactively, don't do anything
+      [[ $- != *i* ]] && return
 
-    # Source extra configuration
-    test -f $HOME/.config/bash/config.bash && source $_
+      # Source extra configuration
+      test -f $HOME/.config/bash/config.bash && source $_
     '';
 
   }
