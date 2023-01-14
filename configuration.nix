@@ -69,6 +69,6 @@
   environment.systemPackages = with pkgs; [
     hsetroot
     unclutter
-  ]
+  ];
 
 }
