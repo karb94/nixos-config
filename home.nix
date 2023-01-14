@@ -11,7 +11,7 @@ let
     in
       paths: builtins.listToAttrs (map f paths);
 
-  userName = "/home/carles";
+  userName = "carles";
   homeDir = "/home/${userName}";
   HomeFilesToLink = [
     ".inputrc"
@@ -48,7 +48,7 @@ in
     home.sessionVariables = {
       EDITOR = "nvim";
     };
-    home.file = mkSymlinks "" HomeFilesToLink;
+    home.file = mkSymlinks "${homeDir}" HomeFilesToLink;
     # home.file.".xinitrc".source = lib.file.mkOutOfStoreSymlink "${homeDir}/.xinitrc";
 
     xdg.configFile = mkSymlinks "${dotConfigDir}" dotConfigFilesToLink;
