@@ -41,7 +41,9 @@
     lf
     neovim
     tree
-    make
+    coreutils
+    findutils
+    gnumake
   ];
 
 # FIXME: Add the rest of your current configuration
