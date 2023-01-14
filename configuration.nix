@@ -48,6 +48,8 @@
     bspwm
     sxhkd
     alacritty
+    hsetroot
+    unclutter
   ];
 
 # FIXME: Add the rest of your current configuration
@@ -66,9 +68,5 @@
   services.xserver.enable = true;
   services.xserver.displayManager.startx.enable = true;
   services.xserver.windowManager.bspwm.enable = true;
-  environment.systemPackages = with pkgs; [
-    hsetroot
-    unclutter
-  ];
 
 }
