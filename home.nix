@@ -16,7 +16,7 @@ let
   HomeFilesToLink = [
     ".bashrc"
     ".profile_extra"
-  ]
+  ];
   dotfiles="${xdg.configHome}/dotfiles";
   dotConfigDir = "${dotfiles}/.config";
   dotConfigFilesToLink = [
