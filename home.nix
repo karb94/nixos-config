@@ -49,7 +49,7 @@ in
       EDITOR = "nvim";
     };
     # home.file = mkSymlinks "${homeDir}" HomeFilesToLink;
-    home.file.".xinitrc".source = ln "${homeDir}/.xinitrc";
+    home.file.".xinitrc".source = lib.file.mkOutOfStoreSymlink "${homeDir}/.xinitrc";
 
     xdg.configFile = mkSymlinks "${dotConfigDir}" dotConfigFilesToLink;
 
