@@ -44,6 +44,7 @@
     coreutils
     findutils
     gnumake
+    cmake
   ];
 
 # FIXME: Add the rest of your current configuration
