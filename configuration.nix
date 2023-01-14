@@ -45,6 +45,9 @@
     findutils
     gnumake
     cmake
+    bspwm
+    sxhkd
+    alacritty
   ];
 
 # FIXME: Add the rest of your current configuration
@@ -59,4 +62,8 @@
 
 # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "22.11";
+
+  services.xserver.enable = true;
+  services.xserver.windowManager.bspwm.enable = true;
+
 }
