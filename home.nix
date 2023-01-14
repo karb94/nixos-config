@@ -50,6 +50,7 @@ in
     xdg.configFile = mkSymlinks "${dotConfigDir}" dotConfigFilesToLink;
 
     programs.bash.enable = true;
+    programs.bash.historyFile = "$HOME/.config/bash/history";
     programs.bash.initExtra = ''
       # Source extra configuration
       test -f $HOME/.config/bash/config.bash && source $_
