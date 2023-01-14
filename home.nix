@@ -1,6 +1,22 @@
 { config, pkgs, ... }:
 with config;
 let
+  mkSymlinks = commonDir: 
+    let
+      ln = lib.file.mkOutOfStoreSymlink;
+      f = path: {
+        name = "${path}";
+        value = {source = ln "${commonDir}/${path}";};
+      };
+    in
+      paths: builtins.listToAttrs (map f paths);
+
+  userName = "/home/carles";
+  homeDir = "/home/${userName}";
+  HomeFilesToLink = [
+    ".bashrc"
+    ".profile_extra"
+  ]
   dotfiles="${xdg.configHome}/dotfiles";
   dotConfigDir = "${dotfiles}/.config";
   dotConfigFilesToLink = [
@@ -22,15 +38,6 @@ let
     "youtube-dl"
     "zathura"
   ];
-  mkSymlinks = commonDir: 
-    let
-      ln = lib.file.mkOutOfStoreSymlink;
-      f = path: {
-        name = "${path}";
-        value = {source = ln "${commonDir}/${path}";};
-      };
-    in
-      paths: builtins.listToAttrs (map f paths);
 in
   {
     # Home Manager needs a bit of information about you and the
