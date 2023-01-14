@@ -9,6 +9,7 @@
 
     # You can also split up your configuration and import pieces of it here:
     ./users.nix
+    ./xorg.nix
 
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
@@ -45,11 +46,7 @@
     findutils
     gnumake
     cmake
-    bspwm
-    sxhkd
     alacritty
-    hsetroot
-    unclutter
   ];
 
 # FIXME: Add the rest of your current configuration

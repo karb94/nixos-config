@@ -32,7 +32,6 @@ let
     "nvim/lua"
     "picom"
     "rofi"
-    "rofi"
     "sxhkd"
     "youtube-dl"
     "zathura"
