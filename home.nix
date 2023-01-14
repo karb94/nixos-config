@@ -55,6 +55,6 @@ in
 
     # Source extra configuration
     test -f $HOME/.config/bash/config.bash && source $_
-    ''
+    '';
 
   }
