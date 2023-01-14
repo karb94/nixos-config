@@ -42,10 +42,12 @@ in
   {
     # Home Manager needs a bit of information about you and the
     # paths it should manage.
+    home.stateVersion = "22.11";
     home.username = "carles";
     home.homeDirectory = "/home/carles";
-
-    home.stateVersion = "22.11";
+    home.sessionVariables = {
+      EDITOR = "nvim";
+    }
 
     xdg.configFile = mkSymlinks "${dotConfigDir}" dotConfigFilesToLink;
 
