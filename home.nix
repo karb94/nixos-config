@@ -16,6 +16,7 @@ let
     ".bashrc"
     ".inputrc"
     ".profile"
+    ".profile_extra"
     ".xinitrc"
   ];
   dotConfigFilesToLink = [
