@@ -15,7 +15,9 @@ let
   userName = "carles";
   homeDir = "/home/${userName}";
   HomeFilesToLink = [
+    ".bashrc"
     ".inputrc"
+    ".profile"
     ".xinitrc"
   ];
   dotConfigFilesToLink = [
@@ -46,17 +48,14 @@ in
     home.sessionVariables = {
       EDITOR = "nvim";
     };
+    home.sessionsPath = [
+      "$HOME/.local/bin"
+      "$HOME/.local/scripts"
+    ]
+
     home.file = mkSymlinks "" HomeFilesToLink;
     # home.file.".xinitrc".source = lib.file.mkOutOfStoreSymlink "${homeDir}/.xinitrc";
 
     xdg.configFile = mkSymlinks ".config/" dotConfigFilesToLink;
-
-    programs.bash.enable = true;
-    programs.bash.historyFile = "$HOME/.config/bash/history";
-    programs.bash.shellOptions = [];
-    programs.bash.initExtra = ''
-      # Source extra configuration
-      test -f "$HOME/.config/bash/config.bash" && source $_
-    '';
 
   }
