@@ -50,7 +50,7 @@ in
     xdg.configFile = mkSymlinks ".config/" dotConfigFilesToLink;
 
     programs.chromium.enable = true;
-    programs.chromium.package = pkg.brave;
+    programs.chromium.package = pkgs.brave;
     programs.chromium.extensions = [
       { id = "cjpalhdlnbpafiamejdnhcphjbkeiagm"; } # Bitwarden
       { id = "nngceckbapebfimnlniiiahkandclblb"; } # Ublock Origin
