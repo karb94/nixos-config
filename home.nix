@@ -48,16 +48,4 @@ in
     home.file = mkSymlinks "" HomeFilesToLink;
 
     xdg.configFile = mkSymlinks ".config/" dotConfigFilesToLink;
-
-    programs.chromium.enable = true;
-    programs.chromium.package = pkgs.brave;
-    programs.chromium.extensions = [
-      { id = "cjpalhdlnbpafiamejdnhcphjbkeiagm"; } # Bitwarden
-      { id = "nngceckbapebfimnlniiiahkandclblb"; } # Ublock Origin
-      {
-        id = "dcpihecpambacapedldabdbpakmachpb";
-        updateUrl = "https://raw.githubusercontent.com/iamadamdev/bypass-paywalls-chrome/master/src/updates/updates.xml";
-      }
-    ];
-
   }
