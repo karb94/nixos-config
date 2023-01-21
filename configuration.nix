@@ -55,7 +55,8 @@
     extraGroups = [ "wheel" ]; # Enable ‘sudo’.
     # openssh.authorizedKeys.keys = ["Add your public key here"];
   };
-
+  virtualisation.libvirtd.enable = true;
+ 
   # Bootloader
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
