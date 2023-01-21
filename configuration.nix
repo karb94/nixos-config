@@ -45,6 +45,17 @@
   networking.hostName = "LDN_desktop";
   networking.networkmanager.enable = true;
 
+  # Enable the OpenSSH server.
+  services.sshd.enable = true;
+  services.openssh.enable = true;
+  networking.firewall.allowedTCPPorts = [ 22 ];
+  users.users.carles = {
+    isNormalUser = true;
+    extraGroups = [ "wheel" ]; # Enable ‘sudo’.
+    # openssh.authorizedKeys.keys = ["Add your public key here"];
+  };
+
+  # Bootloader
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
@@ -60,9 +71,6 @@
     (nerdfonts.override { fonts = [ "FiraCode" ]; })
   ];
 
-  # Enable the OpenSSH server.
-  services.sshd.enable = true;
-  services.openssh.enable = true;
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "22.11";
