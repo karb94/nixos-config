@@ -20,7 +20,6 @@ let
     ".xinitrc"
   ];
   dotConfigFilesToLink = [
-    ''BraveSoftware/Brave-Browser/Default/Preferences''
     "alacritty"
     "bash"
     "bspwm"
