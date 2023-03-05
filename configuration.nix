@@ -14,7 +14,7 @@
 
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
-    ./vm-hardware-configuration.nix
+    # ./vm-hardware-configuration.nix
   ];
 
   nixpkgs.config.allowUnfree = true;
