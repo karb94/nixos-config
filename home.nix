@@ -1,13 +1,15 @@
 { inputs, config, pkgs, ... }:
 with config;
 let
-  repoDir="${xdg.configHome}/dotfiles";
+  repoName = "dotfiles";
+  sourcesDir = "${xdg.configHome}/${repoName}";
+  repoSource = {dotfiles.source = "${inputs.dotfiles}";};
   mkSymlinks = commonDir: 
     let
       ln = lib.file.mkOutOfStoreSymlink;
       f = path: {
         name = "${path}";
-        value = {source = ln "${repoDir}/${commonDir}${path}";};
+        value = {source = ln "${sourcesDir}/${commonDir}${path}";};
       };
     in
       paths: builtins.listToAttrs (map f paths);
@@ -37,7 +39,7 @@ let
     "youtube-dl"
     "zathura"
   ];
-  configSources = mkSymlinks "" configFilesToSymlink;
+  configSources = mkSymlinks ".config/" configFilesToSymlink;
 in
   {
     # Home Manager needs a bit of information about you and the
@@ -47,10 +49,7 @@ in
     home.homeDirectory = "/home/carles";
 
     home.file = homeSources;
-    # home.file = mkSymlinks "" HomeFilesToLink + {dotfiles.source = "${inputs.dotfiles}";};
 
-    xdg.configFile = configSources // {dotfiles.source = "${inputs.dotfiles}";};
-
-    # home.file.{dotfiles.source = "${inputs.dotfiles}"};
+    xdg.configFile = configSources // repoSource;
 
   }
