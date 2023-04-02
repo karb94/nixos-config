@@ -46,6 +46,7 @@
         modules = [
           ./configuration.nix
           home-manager.nixosModules.home-manager {
+            extraSpecialArgs = { inherit inputs; };
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.users.carles = import ./home.nix;
