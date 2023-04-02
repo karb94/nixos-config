@@ -12,6 +12,7 @@
 # sudo mount /dev/disk/by-label/boot /mnt/boot
 # sudo dd if=/dev/zero of=/mnt/.swapfile bs=1024 count=10485760 (10GB)
 
+
 {
   description = "NixOS config";
 
@@ -23,7 +24,12 @@
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
+    # NixOS hardware configuration
     hardware.url = "github:nixos/nixos-hardware";
+
+    # Dotfiles
+    dotfiles.url = "github:karb94/dotfiles";
+    dotfiles.flake = false;
 
   };
 
