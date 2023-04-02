@@ -11,15 +11,15 @@ let
       };
     in
       paths: builtins.listToAttrs (map f paths);
-
-  HomeFilesToLink = [
+  homeFilesToSymlink = [
     ".bashrc"
     ".inputrc"
     ".profile"
     ".profile_extra"
     ".xinitrc"
   ];
-  dotConfigFilesToLink = [
+  homeSources = mkSymlinks "" homeFilesToSymlink;
+  configFilesToSymlink = [
     "alacritty"
     "bash"
     "bspwm"
@@ -37,7 +37,7 @@ let
     "youtube-dl"
     "zathura"
   ];
-  configAtrrs = mkSymlinks "" HomeFilesToLink;
+  configSources = mkSymlinks "" configFilesToSymlink;
 in
   {
     # Home Manager needs a bit of information about you and the
@@ -46,10 +46,10 @@ in
     home.username = "carles";
     home.homeDirectory = "/home/carles";
 
-    home.file = configAtrrs // {dotfiles.source = "${inputs.dotfiles}";};
+    home.file = homeSources;
     # home.file = mkSymlinks "" HomeFilesToLink + {dotfiles.source = "${inputs.dotfiles}";};
 
-    xdg.configFile = mkSymlinks ".config/" dotConfigFilesToLink;
+    xdg.configFile = configSources // {dotfiles.source = "${inputs.dotfiles}";};
 
     # home.file.{dotfiles.source = "${inputs.dotfiles}"};
 
