@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ inputs, config, pkgs, ... }:
 with config;
 let
   repoDir="${xdg.configHome}/dotfiles";
@@ -48,4 +48,7 @@ in
     home.file = mkSymlinks "" HomeFilesToLink;
 
     xdg.configFile = mkSymlinks ".config/" dotConfigFilesToLink;
+
+    home."dotfiles".source = "${inputs.dotfiles}";
+
   }
