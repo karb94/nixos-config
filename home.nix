@@ -49,6 +49,6 @@ in
 
     xdg.configFile = mkSymlinks ".config/" dotConfigFilesToLink;
 
-    # home."dotfiles".source = "${inputs.dotfiles}";
+    home."dotfiles".source = "${inputs.dotfiles}";
 
   }
