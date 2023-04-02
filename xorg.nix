@@ -4,10 +4,13 @@
 
   environment.systemPackages = with pkgs; [
     bspwm
-    sxhkd
+    dunst
     hsetroot
-    unclutter
+    picom
     rofi
+    sxhkd
+    unclutter
+    xob
   ];
 
   services.xserver.enable = true;

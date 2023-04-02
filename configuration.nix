@@ -46,14 +46,13 @@
   networking.networkmanager.enable = true;
 
   # Enable the OpenSSH server.
-  services.sshd.enable = true;
-  services.openssh.enable = true;
-  services.openssh.permitRootLogin = "yes";
-  networking.firewall.allowedTCPPorts = [ 22 ];
+  # services.sshd.enable = true;
+  # services.openssh.enable = true;
+  # services.openssh.permitRootLogin = "yes";
+  # networking.firewall.allowedTCPPorts = [ 22 ];
   users.users.carles = {
     isNormalUser = true;
     extraGroups = [ "wheel" ]; # Enable ‘sudo’.
-    # openssh.authorizedKeys.keys = ["Add your public key here"];
   };
   virtualisation.libvirtd.enable = true;
  
