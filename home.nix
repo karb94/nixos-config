@@ -45,7 +45,8 @@ in
     home.username = "carles";
     home.homeDirectory = "/home/carles";
 
-    home.file = (mkSymlinks "" HomeFilesToLink) + {dotfiles.source = "${inputs.dotfiles}";};
+    home.file = (mkSymlinks "" HomeFilesToLink);
+    # + {dotfiles.source = "${inputs.dotfiles}";}
 
     xdg.configFile = mkSymlinks ".config/" dotConfigFilesToLink;
 
