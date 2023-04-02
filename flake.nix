@@ -28,7 +28,7 @@
     hardware.url = "github:nixos/nixos-hardware";
 
     # Dotfiles
-    dotfiles.url = "github:karb94/dotfiles";
+    dotfiles.url = "github:karb94/dotfiles/nixos";
     dotfiles.flake = false;
 
   };
