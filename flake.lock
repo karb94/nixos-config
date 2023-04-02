@@ -3,15 +3,16 @@
     "dotfiles": {
       "flake": false,
       "locked": {
-        "lastModified": 1673817622,
-        "narHash": "sha256-uCSWwIqOuMH8VCisKG+NfUjIN0WovJbkuzKr9IgcBPY=",
+        "lastModified": 1673908370,
+        "narHash": "sha256-6JdeoPQ/Zn4f8j2LVFbETJrqjTajCQI0SGISxmOu5b4=",
         "owner": "karb94",
         "repo": "dotfiles",
-        "rev": "fb471444cec886a5b6e43d246c7b3baea72a947b",
+        "rev": "1bb0e9c7194f620f73cb5f1baa24920d7b2cd9b1",
         "type": "github"
       },
       "original": {
         "owner": "karb94",
+        "ref": "nixos",
         "repo": "dotfiles",
         "type": "github"
       }
