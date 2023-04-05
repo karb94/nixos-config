@@ -50,6 +50,7 @@ in
 
     home.file = homeSources;
 
-    xdg.configFile = configSources // repoSource;
+    # xdg.configFile = configSources // repoSource;
+    xdg.configFile = configSources;
 
   }

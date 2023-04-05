@@ -49,8 +49,9 @@
   environment.etc.link_config = {
     enable = true;
     user = "carles";
+    mode = "0600";
     text = ''
-      ln -s ${inputs.dotfiles} /home/carles
+      ln -s ${inputs.dotfiles} /home/carles/.config/dotfiles
     '';
   };
  
