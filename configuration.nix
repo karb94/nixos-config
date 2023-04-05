@@ -49,9 +49,9 @@
   environment.etc.link_config = {
     enable = true;
     user = "carles";
-    text = [
-      "ln -s ${inputs.dotfiles} /home/carles"
-    ];
+    text = ''
+      ln -s ${inputs.dotfiles} /home/carles
+    '';
   };
  
   # Bootloader
