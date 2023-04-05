@@ -45,16 +45,14 @@
   networking.hostName = "LDN_desktop";
   networking.networkmanager.enable = true;
 
-  # Enable the OpenSSH server.
-  # services.sshd.enable = true;
-  # services.openssh.enable = true;
-  # services.openssh.permitRootLogin = "yes";
-  # networking.firewall.allowedTCPPorts = [ 22 ];
-  users.users.carles = {
-    isNormalUser = true;
-    extraGroups = [ "wheel" ]; # Enable ‘sudo’.
+  # Setup script
+  environment.etc.link_config = {
+    enable = true;
+    user = "carles";
+    text = [
+      "ln -s ${inputs.dotfiles} /home/carles"
+    ];
   };
-  virtualisation.libvirtd.enable = true;
  
   # Bootloader
   boot.loader.systemd-boot.enable = true;

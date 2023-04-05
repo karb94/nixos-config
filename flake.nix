@@ -35,7 +35,9 @@
 
   outputs = { nixpkgs, home-manager, hardware, ... }@inputs: {
     # NixOS configuration entrypoint
-    # Available through 'nixos-rebuild --flake .#your-hostname'
+    # Available through:
+    # nixos-rebuild switch --flake .#your-hostname (locally)
+    # nixos-rebuild switch --flake github:karb94#LDN_desktop (remotely)
     # install nixos with:
     # nix-shell -p nixUnstable --run 'sudo nixos-install --flake github:karb94/nixos-config#LDN_desktop'
     nixosConfigurations = {
@@ -55,16 +57,5 @@
       };
     };
 
-    # Standalone home-manager configuration entrypoint
-    # Available through 'home-manager --flake .#your-username@your-hostname'
-    # homeConfigurations = {
-    #   # FIXME replace with your username@hostname
-    #   "carles@LDN_desktop" = home-manager.lib.homeManagerConfiguration {
-    #     pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
-    #     extraSpecialArgs = { inherit inputs; }; # Pass flake inputs to our config
-    #     # > Our main home-manager configuration file <
-    #     modules = [ ./home.nix ];
-    #   };
-    # };
   };
 }
