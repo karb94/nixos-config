@@ -47,5 +47,6 @@ in
     home.homeDirectory = "/home/carles";
 
     home.file = homeSources;
+    xdg.enable = true; # track XDG files and directories
     xdg.configFile = configSources;
   }
