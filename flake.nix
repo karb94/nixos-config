@@ -41,7 +41,7 @@
     # install nixos with:
     # nix-shell -p nixUnstable --run 'sudo nixos-install --flake github:karb94/nixos-config#LDN_desktop'
     nixosConfigurations = let 
-      hm_module = home-manager.nixosModules.home-manager {
+      hm_opts = {
         home-manager.useGlobalPkgs = true;
         home-manager.useUserPackages = true;
         home-manager.users.carles = import ./home.nix;
@@ -55,7 +55,7 @@
         modules = [
           ./configuration.nix
           ./vm-hardware-configuration.nix
-          hm_module
+          (home-manager.nixosModules.home-manager hm_opts)
           { config._module.args = { inherit self; }; }
         ];
       };
@@ -66,7 +66,7 @@
           modules = [
             ./configuration.nix
             ./vm-hardware-configuration.nix
-            hm_module
+            (home-manager.nixosModules.home-manager hm_opts)
         { config._module.args = { inherit self; }; }
           ];
       };
