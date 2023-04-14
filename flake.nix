@@ -44,19 +44,25 @@
       # FIXME replace with your hostname
       LDN_desktop = nixpkgs.lib.nixosSystem (
       let 
-        home-manager_module = home-manager.nixosModules.home-manager {
-        home-manager.useGlobalPkgs = true;
-        home-manager.useUserPackages = true;
-        home-manager.users.carles = import ./home.nix;
-        home-manager.extraSpecialArgs = { inherit inputs; };
-        };
+        a = 1;
+        # home-manager_module = home-manager.nixosModules.home-manager {
+        # home-manager.useGlobalPkgs = true;
+        # home-manager.useUserPackages = true;
+        # home-manager.users.carles = import ./home.nix;
+        # home-manager.extraSpecialArgs = { inherit inputs; };
+        # };
       in {
         specialArgs = { inherit inputs; }; # Pass flake inputs to our config
         # > Our main nixos configuration file <
         modules = [
           ./configuration.nix
           ./vm-hardware-configuration.nix
-          home-manager_module
+          home-manager.nixosModules.home-manager {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.carles = import ./home.nix;
+            home-manager.extraSpecialArgs = { inherit inputs; };
+          }
           { config._module.args = { inherit self; }; }
         ];
       });
