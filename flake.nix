@@ -57,12 +57,12 @@
         modules = [
           ./configuration.nix
           ./vm-hardware-configuration.nix
-          home-manager.nixosModules.home-manager {
+          (home-manager.nixosModules.home-manager {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.users.carles = import ./home.nix;
             home-manager.extraSpecialArgs = { inherit inputs; };
-          }
+          })
           { config._module.args = { inherit self; }; }
         ];
       });
