@@ -42,7 +42,9 @@
     # nix-shell -p nixUnstable --run 'sudo nixos-install --flake github:karb94/nixos-config#LDN_desktop'
     nixosConfigurations = {
       # FIXME replace with your hostname
-      LDN_desktop = nixpkgs.lib.nixosSystem {
+      LDN_desktop = nixpkgs.lib.nixosSystem (let
+      a = "dfs";
+      in {
         specialArgs = { inherit inputs; }; # Pass flake inputs to our config
         # > Our main nixos configuration file <
         modules = [
@@ -56,22 +58,22 @@
           }
           { config._module.args = { inherit self; }; }
         ];
-      };
+      });
 
       libvirt_vm = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs; }; # Pass flake inputs to our config
           # > Our main nixos configuration file <
-          modules = [
-            ./configuration.nix
-            ./vm-hardware-configuration.nix
-            home-manager.nixosModules.home-manager {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.users.carles = import ./home.nix;
-              home-manager.extraSpecialArgs = { inherit inputs; };
-            }
-        { config._module.args = { inherit self; }; }
-          ];
+        modules = [
+          ./configuration.nix
+          ./vm-hardware-configuration.nix
+          home-manager.nixosModules.home-manager {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.carles = import ./home.nix;
+            home-manager.extraSpecialArgs = { inherit inputs; };
+          }
+          { config._module.args = { inherit self; }; }
+        ];
       };
     };
 
