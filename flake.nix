@@ -33,7 +33,7 @@
 
   };
 
-  outputs = { nixpkgs, home-manager, hardware, ... }@inputs: {
+  outputs = { self, nixpkgs, home-manager, hardware, ... }@inputs: {
     # NixOS configuration entrypoint
     # Available through:
     # nixos-rebuild switch --flake .#your-hostname (locally)
@@ -53,6 +53,7 @@
             home-manager.users.carles = import ./home.nix;
             home-manager.extraSpecialArgs = { inherit inputs; };
           }
+          { config._module.args = { inherit self; }; }
         ];
       };
     };
