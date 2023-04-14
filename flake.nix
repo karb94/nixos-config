@@ -44,7 +44,12 @@
       # FIXME replace with your hostname
       LDN_desktop = nixpkgs.lib.nixosSystem (
       let 
-        a = 1;
+        hmConfig = {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          home-manager.users.carles = import ./home.nix;
+          home-manager.extraSpecialArgs = { inherit inputs; };
+        };
         # home-manager_module = home-manager.nixosModules.home-manager {
         # home-manager.useGlobalPkgs = true;
         # home-manager.useUserPackages = true;
@@ -57,13 +62,8 @@
         modules = [
           ./configuration.nix
           ./vm-hardware-configuration.nix
-           {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.carles = import ./home.nix;
-            home-manager.extraSpecialArgs = { inherit inputs; };
-          }
           home-manager.nixosModules.home-manager
+          hmConfig
           { config._module.args = { inherit self; }; }
         ];
       });
