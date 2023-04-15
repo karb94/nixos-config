@@ -1,16 +1,21 @@
 # INSTALLATION INSTRUCTIONS
 #
-# sudo gdisk /dev/sdX
+# sudo -i
+# gdisk /dev/sdX
 # n; default; default; +500M; ef00    (EFI system partition)
 # n; default; default; default; 8304  (Linux x86-64 root (/))
 # w; Y;
-# sudo mkfs.fat -F 32 /dev/sdX1 -n boot
-# sudo mkfs.ext4 /dev/sdX2 -L root
-# sudo mkdir /mnt
-# sudo mount /dev/disk/by-label/root /mnt
-# sudo mkdir /mnt/boot
-# sudo mount /dev/disk/by-label/boot /mnt/boot
-# sudo dd if=/dev/zero of=/mnt/.swapfile bs=1024 count=10485760 (10GB)
+# mkfs.fat -F 32 /dev/sdX1 -n boot
+# mkfs.ext4 /dev/sdX2 -L root
+# mkdir /mnt
+# mount /dev/disk/by-label/root /mnt
+# mkdir /mnt/boot
+# mount /dev/disk/by-label/boot /mnt/boot
+# fallocate -l 20G /mnt/.swapfile
+# [OR] dd if=/dev/zero of=/mnt/.swapfile bs=1024 count=20971520 (20GB)
+# chmod 0600 /mnt/.swapfile
+# mkswap /mnt/.swapfile -L swap
+# swapon /mnt/.swapfile
 
 
 {
