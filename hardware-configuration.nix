@@ -1,4 +1,4 @@
-{ modulesPath, config, lib, ... }: {
+{ inputs, modulesPath, config, lib, ... }: {
 
   # Import generic hardware configuration
   imports = [
@@ -6,7 +6,7 @@
     inputs.hardware.nixosModules.common-cpu-amd
     inputs.hardware.nixosModules.common-pc-ssd
     inputs.hardware.nixosModules.common-hidpi
-  ]
+  ];
 
   boot.initrd.availableKernelModules = [
     "ahci"
@@ -32,7 +32,7 @@
   swapDevices = [
     {
       device = "/.swapfile";
-      size = 20480  # 20GB
+      size = 20480;  # 20GB
     }
   ];
 

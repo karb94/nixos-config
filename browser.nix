@@ -1,10 +1,11 @@
-{
+
+{ self, inputs, lib, config, pkgs, ... }: {
 
   environment.systemPackages = with pkgs; [
     brave
   ];
 
-  config.programs.chromium = {
+  programs.chromium = {
     enable = true;
     extensions = [
       "nngceckbapebfimnlniiiahkandclblb" # Bitwarden

@@ -1,7 +1,7 @@
 
 { self, inputs, lib, config, pkgs, ... }: {
 
-  imports = [ ./nvim.nix ]
+  imports = [ ./nvim.nix ];
 
   environment.systemPackages = with pkgs; [
     fzf
