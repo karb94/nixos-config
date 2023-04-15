@@ -18,6 +18,8 @@
   ];
   boot.kernelModules = [ "kvm-amd" ];
 
+  hardware.enableAllFirmware = lib.mkDefault true;
+
   fileSystems = {
     "/" = {
       device = "/dev/disk/by-label/root";
@@ -36,9 +38,5 @@
     }
   ];
 
-  networking.useDHCP = lib.mkDefault true;
-
-  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-  hardware.enableAllFirmware = lib.mkDefault true;
-  hardware.video.hidpi.enable = lib.mkDefault true;
+  # nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 }

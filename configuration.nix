@@ -2,18 +2,13 @@
 # Use this to configure your system environment (it replaces /etc/nixos/configuration.nix)
 
 { self, inputs, lib, config, pkgs, ... }: {
-# You can import other NixOS modules here
-  imports = [
 
-    # You can also split up your configuration and import pieces of it here:
+  imports = [
     ./users.nix
     ./xorg.nix
     ./browser.nix
-
-    # Import your generated (nixos-generate-config) hardware configuration
-    ./hardware-configuration.nix
     ./cli.nix
-
+    ./hardware-configuration.nix
   ];
 
   nixpkgs.config.allowUnfree = true;
@@ -25,13 +20,31 @@
     auto-optimise-store = true;
   };
 
+  # Bootloader
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
   environment.systemPackages = with pkgs; [
     alacritty
   ];
 
-  # TODO: Set your hostname
+  # Networking
   networking.hostName = "LDN_desktop";
+  networking.useDHCP = lib.mkDefault true;
   networking.networkmanager.enable = true;
+  networking.networkmanager.wifi.backend = "iwd";
+
+  # Locale
+  i18n.supportedLocales = [
+    "en_GB.UTF-8/UTF-8"
+    "es_ES.UTF-8/UTF-8"
+    "ca_ES.UTF-8/UTF-8"
+  ];
+  i18n.defaultLocale = "en_GB.UTF-8";
+
+  # Fonts
+  fonts.fonts = with pkgs; [
+    (nerdfonts.override { fonts = [ "FiraCode" ]; })
+  ];
 
   # Setup script
   environment.etc.link_config = {
@@ -43,22 +56,7 @@
     '';
   };
  
-  # Bootloader
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-
-  # Locale
-  i18n.supportedLocales = [
-    "en_GB.UTF-8/UTF-8"
-    "es_ES.UTF-8/UTF-8"
-    "ca_ES.UTF-8/UTF-8"
-  ];
-  i18n.defaultLocale = "en_GB.UTF-8";
-
-  fonts.fonts = with pkgs; [
-    (nerdfonts.override { fonts = [ "FiraCode" ]; })
-  ];
-
+  # Auto-update flake
   system.autoUpgrade = {
     enable = true;
     allowReboot = false;
@@ -72,5 +70,5 @@
   };
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-  system.stateVersion = "22.11";
+  system.stateVersion = "23.05";
 }
