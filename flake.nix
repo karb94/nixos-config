@@ -56,7 +56,6 @@
           # > Our main nixos configuration file <
           modules = [
             ./configuration.nix
-            ./vm-hardware-configuration.nix
             home-manager.nixosModules.home-manager
             hmConfig
             { config._module.args = { inherit self; }; }
@@ -69,12 +68,8 @@
           modules = [
             ./configuration.nix
             ./vm-hardware-configuration.nix
-            home-manager.nixosModules.home-manager {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.users.carles = import ./home.nix;
-              home-manager.extraSpecialArgs = { inherit inputs; };
-            }
+            home-manager.nixosModules.home-manager
+            hmConfig
             { config._module.args = { inherit self; }; }
           ];
         };
