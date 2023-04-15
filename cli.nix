@@ -4,15 +4,16 @@
   imports = [ ./nvim.nix ];
 
   environment.systemPackages = with pkgs; [
-    fzf
-    git
-    lf
-    tree
+    clang
+    cmake
     coreutils
     findutils
+    fzf
+    git
     gnumake
-    cmake
+    lf
     newsboat
+    tree
   ];
 
 }
