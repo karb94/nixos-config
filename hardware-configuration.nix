@@ -8,6 +8,8 @@
     inputs.hardware.nixosModules.common-hidpi
   ];
 
+  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
+
   boot.initrd.availableKernelModules = [
     "ahci"
     "xhci_pci"
@@ -38,5 +40,4 @@
     }
   ];
 
-  # nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 }
