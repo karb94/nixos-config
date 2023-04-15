@@ -4,8 +4,6 @@
 { self, inputs, lib, config, pkgs, ... }: {
 # You can import other NixOS modules here
   imports = [
-    inputs.hardware.nixosModules.common-cpu-amd
-    # inputs.hardware.nixosModules.common-ssd
 
     # You can also split up your configuration and import pieces of it here:
     ./users.nix
@@ -14,6 +12,8 @@
 
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
+    ./cli.nix
+
   ];
 
   nixpkgs.config.allowUnfree = true;
@@ -26,18 +26,7 @@
   };
 
   environment.systemPackages = with pkgs; [
-    brave
-    fzf
-    git
-    lf
-    neovim
-    tree
-    coreutils
-    findutils
-    gnumake
-    cmake
     alacritty
-    newsboat
   ];
 
   # TODO: Set your hostname

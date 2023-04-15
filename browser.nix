@@ -1,4 +1,9 @@
 {
+
+  environment.systemPackages = with pkgs; [
+    brave
+  ];
+
   config.programs.chromium = {
     enable = true;
     extensions = [
