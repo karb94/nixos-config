@@ -13,7 +13,7 @@
     gnumake
     lf
     newsboat
-    python312
+    python311
     ripgrep
     tree
   ];
