@@ -5,6 +5,7 @@
     neovim
     nil
     tree-sitter
+    nodePackages.bash-language-server
   ];
 
 }
