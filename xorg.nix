@@ -3,6 +3,7 @@
 { inputs, lib, config, pkgs, ... }: {
 
   environment.systemPackages = with pkgs; [
+    alacritty
     bspwm
     dunst
     hsetroot
@@ -11,6 +12,7 @@
     sxhkd
     unclutter
     xob
+    xsel
   ];
 
   services.xserver.enable = true;

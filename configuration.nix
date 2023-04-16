@@ -23,15 +23,22 @@
   # Bootloader
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  environment.systemPackages = with pkgs; [
-    alacritty
-  ];
 
   # Networking
   networking.hostName = "LDN_desktop";
   networking.useDHCP = lib.mkDefault true;
   networking.networkmanager.enable = true;
   networking.networkmanager.wifi.backend = "iwd";
+
+
+  # Audio
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+  };
 
   # Locale
   i18n.supportedLocales = [
