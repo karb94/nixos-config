@@ -49,4 +49,5 @@ in
     home.file = homeSources;
     xdg.enable = true; # track XDG files and directories
     xdg.configFile = configSources;
+    xdg.dataFile."applications/brave-browser.desktop".source = lib.file.mkOutOfStoreSymlink "${pkgs.brave}/share/applications/brave-browser.desktop";
   }
