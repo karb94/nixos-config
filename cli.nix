@@ -17,6 +17,7 @@
     python311
     ripgrep
     tree
+    yt-dlp
   ];
 
 }
