@@ -12,6 +12,7 @@
     fzf
     git
     gnumake
+    jq
     lf
     newsboat
     python311
