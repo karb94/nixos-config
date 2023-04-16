@@ -4,6 +4,7 @@
   imports = [ ./nvim.nix ];
 
   environment.systemPackages = with pkgs; [
+    bottom
     clang
     cmake
     coreutils
