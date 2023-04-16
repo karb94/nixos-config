@@ -3,7 +3,6 @@
 { inputs, lib, config, pkgs, ... }: {
 
   environment.systemPackages = with pkgs; [
-    alacritty
     bspwm
     dunst
     hsetroot

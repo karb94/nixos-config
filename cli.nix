@@ -7,6 +7,7 @@
     clang
     cmake
     coreutils
+    fd
     findutils
     fzf
     git
