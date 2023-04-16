@@ -18,7 +18,7 @@ let
     ".profile"
     ".profile_extra"
     ".xinitrc"
-    ".local/scripts"
+    ".local/bin"
   ];
   homeSources = mkSymlinks "" homeFilesToSymlink;
   configFilesToSymlink = [
