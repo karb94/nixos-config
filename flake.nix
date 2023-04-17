@@ -26,8 +26,8 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-22.11";
 
     # Home manager
-    # home-manager.url = "github:nix-community/home-manager";
-    # home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    home-manager.url = "github:nix-community/home-manager";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     # NixOS hardware configuration
     hardware.url = "github:nixos/nixos-hardware";
@@ -46,14 +46,14 @@
     # install nixos with:
     # nix-shell -p nixUnstable --run 'sudo nixos-install --flake github:karb94/nixos-config#LDN_desktop'
     nixosConfigurations = (
-      # let
-        # hmConfig = {
-        #   home-manager.useGlobalPkgs = true;
-        #   home-manager.useUserPackages = true;
-        #   home-manager.users.carles = import ./home.nix;
-        #   home-manager.extraSpecialArgs = { inherit inputs; };
-        # };
-      # in
+      let
+        hmConfig = {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          home-manager.users.carles = import ./home.nix;
+          home-manager.extraSpecialArgs = { inherit inputs; };
+        };
+      in
         {
         # FIXME replace with your hostname
         LDN_desktop = nixpkgs.lib.nixosSystem {
@@ -61,8 +61,8 @@
           # > Our main nixos configuration file <
           modules = [
             ./configuration.nix
-            # home-manager.nixosModules.home-manager
-            # hmConfig
+            home-manager.nixosModules.home-manager
+            hmConfig
             { config._module.args = { inherit self; }; }
           ];
         };
@@ -73,8 +73,8 @@
           modules = [
             ./configuration.nix
             ./vm-hardware-configuration.nix
-            # home-manager.nixosModules.home-manager
-            # hmConfig
+            home-manager.nixosModules.home-manager
+            hmConfig
             { config._module.args = { inherit self; }; }
           ];
         };
