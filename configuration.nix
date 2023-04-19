@@ -25,7 +25,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   # Networking
-  networking.hostName = "LDN_desktop";
+  networking.hostName = "selrak";
   networking.useDHCP = lib.mkDefault true;
   networking.networkmanager.enable = true;
   networking.networkmanager.wifi.backend = "iwd";
