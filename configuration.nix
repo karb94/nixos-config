@@ -39,6 +39,7 @@
     alsa.support32Bit = true;
     pulse.enable = true;
   };
+  hardware.bluetooth.enable = true;
 
   # Locale
   i18n.supportedLocales = [
@@ -80,6 +81,7 @@
     alacritty
     mpv
     spotify
+    zathura
   ];
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
