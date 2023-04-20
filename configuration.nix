@@ -88,10 +88,18 @@
   security.doas.enable = true;
   # security.sudo.enable = false;
   # Configure doas
-  security.doas.extraRules = [{
-    users = [ "carles" ];
-    keepEnv = true;
-  }];
+  security.doas.extraRules = [
+    {
+      groups = [ "wheel" ];
+      keepEnv = true;
+    }
+    {
+      groups = [ "wheel" ];
+      command = "${pkgs.nixos-rebuild}/bin/nixos-rebuild";
+      nopass = true;
+      keepEnv = true;
+    }
+  ];
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "23.05";
