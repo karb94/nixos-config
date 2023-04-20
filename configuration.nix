@@ -84,6 +84,15 @@
     zathura
   ];
 
+  # Enable doas instead of sudo
+  security.doas.enable = true;
+  # security.sudo.enable = false;
+  # Configure doas
+  security.doas.extraRules = [{
+    users = [ "carles" ];
+    keepEnv = true;
+  }];
+
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "23.05";
 }
