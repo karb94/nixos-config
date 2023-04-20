@@ -96,7 +96,7 @@
     {
       groups = [ "wheel" ];
       cmd = "${pkgs.nixos-rebuild}/bin/nixos-rebuild";
-      nopass = true;
+      noPass = true;
       keepEnv = true;
     }
   ];
