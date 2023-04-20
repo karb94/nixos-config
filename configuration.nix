@@ -96,6 +96,7 @@
     {
       groups = [ "wheel" ];
       cmd = "${pkgs.nixos-rebuild}/bin/nixos-rebuild";
+      args = [ "switch" "boot" "test" ];
       noPass = true;
       keepEnv = true;
     }
