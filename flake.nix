@@ -41,10 +41,11 @@
   outputs = { self, nixpkgs, home-manager, hardware, ... }@inputs: {
     # NixOS configuration entrypoint
     # Available through:
-    # nixos-rebuild switch --flake .#your-hostname (locally)
-    # nixos-rebuild switch --flake github:karb94#LDN_desktop (remotely)
+    # doas nixos-rebuild switch --flake .#your-hostname (locally)
+    # doas nixos-rebuild switch --flake github:karb94#selrak (remotely)
+    # doas nixos-rebuild switch (if flake is in /etc/nixos)
     # install nixos with:
-    # nix-shell -p nixUnstable --run 'sudo nixos-install --flake github:karb94/nixos-config#LDN_desktop'
+    # nix-shell -p nixUnstable --run 'sudo nixos-install --no-root-passwd --flake github:karb94/nixos-config#selrak'
     nixosConfigurations = (
       let
         hmConfig = {
