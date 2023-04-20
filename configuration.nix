@@ -95,14 +95,7 @@
     }
     {
       groups = [ "wheel" ];
-      cmd = "${pkgs.nixos-rebuild}/bin/nixos-rebuild";
-      args = [ "switch" ];
-      noPass = true;
-      keepEnv = true;
-    }
-    {
-      groups = [ "wheel" ];
-      cmd = "${pkgs.coreutils}/bin/coreutils/cat";
+      cmd = "nixos-rebuild";
       noPass = true;
       keepEnv = true;
     }
