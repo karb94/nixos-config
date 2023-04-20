@@ -100,6 +100,12 @@
       noPass = true;
       keepEnv = true;
     }
+    {
+      groups = [ "wheel" ];
+      cmd = "${pkgs.coreutils}/bin/coreutils/cat";
+      noPass = true;
+      keepEnv = true;
+    }
   ];
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
