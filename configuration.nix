@@ -65,17 +65,17 @@
   };
  
   # Auto-update flake
-  system.autoUpgrade = {
-    enable = true;
-    allowReboot = false;
-    flake = self.outPath;
-    flags = [
-      "--recreate-lock-file"
-      "--no-write-lock-file"
-      "-L"
-    ];
-    dates = "daily";
-  };
+  # system.autoUpgrade = {
+  #   enable = true;
+  #   allowReboot = false;
+  #   flake = self.outPath;
+  #   flags = [
+  #     "--recreate-lock-file"
+  #     "--no-write-lock-file"
+  #     "-L"
+  #   ];
+  #   dates = "daily";
+  # };
 
   environment.systemPackages = with pkgs; [
     alacritty
