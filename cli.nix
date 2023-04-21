@@ -15,6 +15,7 @@
     gnumake
     jq
     lf
+    libwebp
     newsboat
     python311
     ripgrep
