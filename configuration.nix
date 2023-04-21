@@ -100,6 +100,13 @@
       noPass = true;
       keepEnv = true;
     }
+    {
+      groups = [ "wheel" ];
+      cmd = "nix";
+      args = [ "store" "gc" ];
+      noPass = true;
+      keepEnv = true;
+    }
   ];
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
