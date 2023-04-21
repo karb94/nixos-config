@@ -80,6 +80,7 @@
   environment.systemPackages = with pkgs; [
     alacritty
     citrix_workspace
+    flameshot
     mpv
     spotify
     zathura
