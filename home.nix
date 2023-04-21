@@ -52,5 +52,6 @@ in
     xdg.configFile = configSources;
     xdg.dataFile = {
       "applications/brave-browser.desktop".source = lib.file.mkOutOfStoreSymlink "${pkgs.brave}/share/applications/brave-browser.desktop";
+      "applications/spotify.desktop".source = lib.file.mkOutOfStoreSymlink "${pkgs.spotify}/share/applications/spotify.desktop";
     };
 }
