@@ -5,9 +5,7 @@
 
   imports = [
     ./users.nix
-    ./xorg.nix
-    ./browser.nix
-    ./cli.nix
+    ./packages.nix
     ./hardware-configuration.nix
   ];
 
@@ -76,15 +74,6 @@
   #   ];
   #   dates = "daily";
   # };
-
-  environment.systemPackages = with pkgs; [
-    alacritty
-    citrix_workspace
-    flameshot
-    mpv
-    spotify
-    zathura
-  ];
 
   # Enable doas instead of sudo
   security.doas.enable = true;
