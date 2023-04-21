@@ -6,6 +6,7 @@
     bspwm
     dunst
     hsetroot
+    nsxiv
     picom
     rofi
     sxhkd
