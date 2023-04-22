@@ -1,8 +1,12 @@
-# This is your system's configuration file.
-# Use this to configure your system environment (it replaces /etc/nixos/configuration.nix)
-
-{ self, inputs, lib, config, pkgs, ... }: {
-
+# General configuration
+{
+  self,
+  inputs,
+  lib,
+  config,
+  pkgs,
+  ...
+}: {
   imports = [
     ./users.nix
     ./packages.nix
@@ -28,7 +32,6 @@
   networking.networkmanager.enable = true;
   networking.networkmanager.wifi.backend = "iwd";
 
-
   # Audio
   security.rtkit.enable = true;
   services.pipewire = {
@@ -49,7 +52,7 @@
 
   # Fonts
   fonts.fonts = with pkgs; [
-    (nerdfonts.override { fonts = [ "FiraCode" ]; })
+    (nerdfonts.override {fonts = ["FiraCode"];})
   ];
 
   # Setup script
@@ -61,7 +64,7 @@
       ln -s ${inputs.dotfiles} /home/carles/.config/dotfiles
     '';
   };
- 
+
   # Auto-update flake
   # system.autoUpgrade = {
   #   enable = true;
@@ -74,30 +77,6 @@
   #   ];
   #   dates = "daily";
   # };
-
-  # Enable doas instead of sudo
-  security.doas.enable = true;
-  security.sudo.enable = false;
-  # Configure doas
-  security.doas.extraRules = [
-    {
-      groups = [ "wheel" ];
-      keepEnv = true;
-    }
-    {
-      groups = [ "wheel" ];
-      cmd = "nixos-rebuild";
-      noPass = true;
-      keepEnv = true;
-    }
-    {
-      groups = [ "wheel" ];
-      cmd = "nix";
-      args = [ "store" "gc" ];
-      noPass = true;
-      keepEnv = true;
-    }
-  ];
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "23.05";
