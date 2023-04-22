@@ -5,6 +5,7 @@
   with pkgs; 
   let
     cli_pkgs = [
+      alejandra
       bottom
       clang
       cmake
@@ -17,14 +18,16 @@
       jq
       lf
       libwebp
+      neovim
       newsboat
       python311
       ripgrep
       tree
       yt-dlp
     ];
-    general_pkgs = with pkgs; [
+    general_pkgs = [
       alacritty
+      brave
       citrix_workspace
       flameshot
       mpv
@@ -35,20 +38,23 @@
   {
 
   imports = [
-    ./browser.nix
-    # ./cli.nix
     ./xorg.nix
   ];
 
   environment.systemPackages = general_pkgs ++ cli_pkgs;
 
-  # environment.systemPackages = with pkgs; [
-  #   alacritty
-  #   citrix_workspace
-  #   flameshot
-  #   mpv
-  #   spotify
-  #   zathura
-  # ];
+  programs.chromium = {
+    enable = true;
+    extensions = [
+      "nngceckbapebfimnlniiiahkandclblb" # Bitwarden
+        "cjpalhdlnbpafiamejdnhcphjbkeiagm" # uBlock Origin
+        "dbepggeogbaibhgnhhndojpepiihcmeb" # Vimium
+        "dcpihecpambacapedldabdbpakmachpb;https://raw.githubusercontent.com/iamadamdev/bypass-paywalls-chrome/master/src/updates/updates.xml"   # Bypass paywalls
+    ];
+    extraOpts = {
+      "show_wallet_icon_on_toolbar" = false;
+    };
+
+  };
 
 }
