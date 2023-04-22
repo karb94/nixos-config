@@ -4,6 +4,15 @@
 { self, inputs, lib, config, pkgs, ... }:
   with pkgs; 
   let
+    general_pkgs = [
+      alacritty
+      brave
+      citrix_workspace
+      flameshot
+      mpv
+      spotify
+      zathura
+    ];
     cli_pkgs = [
       alejandra
       bottom
@@ -25,23 +34,20 @@
       tree
       yt-dlp
     ];
-    general_pkgs = [
-      alacritty
-      brave
-      citrix_workspace
-      flameshot
-      mpv
-      spotify
-      zathura
+    neovim_pkgs = [
+      neovim
+      nil
+      tree-sitter
+      nodePackages.bash-language-server
     ];
-    in
+  in
   {
 
   imports = [
     ./xorg.nix
   ];
 
-  environment.systemPackages = general_pkgs ++ cli_pkgs;
+  environment.systemPackages = general_pkgs ++ cli_pkgs ++ neovim_pkgs;
 
   programs.chromium = {
     enable = true;
