@@ -45,20 +45,27 @@ with config; let
   ];
   configSources = mkSymlinks ".config/" configFilesToSymlink;
 
-  linkDesktopApps = let
-    ln = lib.file.mkOutOfStoreSymlink;
-    appStorePath = pkgs."${appName}";
-    f = pkgName: appName: {
-      name = "applications/${appName}.desktop";
-      value = {source = ln "${appStorePath}/share/applications/${appName}.desktop";};
-    };
-    in paths: builtins.listToAttrs (lib.attrsets.mapAttrs' f);
+  # linkDesktopApps = let
+  #   ln = lib.file.mkOutOfStoreSymlink;
+  #   appStorePath = pkgs."${appName}";
+  #   f = pkgName: appName: {
+  #     name = "applications/${appName}.desktop";
+  #     value = {source = ln "${appStorePath}/share/applications/${appName}.desktop";};
+  #   };
+  #   in paths: builtins.listToAttrs (lib.attrsets.mapAttrs' f);
   desktopApps = {
     zathura = "org.pwmt.zathura-pdf-mupdf";
     brave = "brave-browser";
     spotify = "spotify";
   };
-  # desktopAppsSources = linkDesktopApps desktopApps;
+  desktopAppsSources = let
+  ln = lib.file.mkOutOfStoreSymlink;
+  appStorePath = pkgs."${appName}";
+  f = pkgName: appName: {
+    name = "applications/${appName}.desktop";
+    value = {source = ln "${appStorePath}/share/applications/${appName}.desktop";};
+  };
+in paths: builtins.listToAttrs (lib.attrsets.mapAttrs' f desktopApps);
   # f = pkgName: appName: {
   #   name = "applications/${appName}.desktop";
   #   value = {source = ln "${appStorePath}/share/applications/${appName}.desktop";};
@@ -74,11 +81,11 @@ in {
   xdg.enable = true; # track XDG files and directories
   xdg.configFile = configSources;
 
-  # xdg.dataFile = desktopAppsSources;
+  xdg.dataFile = desktopAppsSources;
 
-  xdg.dataFile = {
-    "applications/brave-browser.desktop".source = lib.file.mkOutOfStoreSymlink "${pkgs.brave}/share/applications/brave-browser.desktop";
-    "applications/spotify.desktop".source = lib.file.mkOutOfStoreSymlink "${pkgs.spotify}/share/applications/spotify.desktop";
-    "applications/org.pwmt.zathura-pdf-mupdf.desktop".source = lib.file.mkOutOfStoreSymlink "${pkgs.zathura}/share/applications/.desktop";
-  };
+  # xdg.dataFile = {
+  #   "applications/brave-browser.desktop".source = lib.file.mkOutOfStoreSymlink "${pkgs.brave}/share/applications/brave-browser.desktop";
+  #   "applications/spotify.desktop".source = lib.file.mkOutOfStoreSymlink "${pkgs.spotify}/share/applications/spotify.desktop";
+  #   "applications/org.pwmt.zathura-pdf-mupdf.desktop".source = lib.file.mkOutOfStoreSymlink "${pkgs.zathura}/share/applications/.desktop";
+  # };
 }
