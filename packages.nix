@@ -24,6 +24,7 @@ with pkgs; let
     cmake
     coreutils
     fd
+    file
     findutils
     fzf
     git
