@@ -1,18 +1,19 @@
 {
   config,
   pkgs,
+  lib,
   ...
-}:
-with config; let
+}: let
   repoName = "dotfiles";
-  sourcesDir = "${xdg.configHome}/${repoName}";
+  sourcesDir = "${config.xdg.configHome}/${repoName}";
   mkSymlinks = commonDir: let
-    ln = lib.file.mkOutOfStoreSymlink;
+    ln = config.lib.file.mkOutOfStoreSymlink;
     f = path: {
       name = "${path}";
       value = {source = ln "${sourcesDir}/${commonDir}${path}";};
     };
-  in paths: builtins.listToAttrs (map f paths);
+  in
+    paths: builtins.listToAttrs (map f paths);
 
   homeFilesToSymlink = [
     ".bashrc"
@@ -45,44 +46,20 @@ with config; let
   ];
   configSources = mkSymlinks ".config/" configFilesToSymlink;
 
-  # linkDesktopApps = let
-  #   ln = lib.file.mkOutOfStoreSymlink;
-  #   appStorePath = pkgs."${appName}";
-  #   f = pkgName: appName: {
-  #     name = "applications/${appName}.desktop";
-  #     value = {source = ln "${appStorePath}/share/applications/${appName}.desktop";};
-  #   };
-  #   in paths: builtins.listToAttrs (lib.attrsets.mapAttrs' f);
   desktopApps = {
     zathura = "org.pwmt.zathura-pdf-mupdf";
     brave = "brave-browser";
     spotify = "spotify";
   };
-
-  # f = pkgName: appName: let
-  # appStorePath = pkgs."${appName}";
-  # in {
-  #   name = "applications/${appName}.desktop";
-  #   value = {source = ln "${appStorePath}/share/applications/${appName}.desktop";};
-  # };
-
-  # desktopAppsSources = let
-  # ln = lib.file.mkOutOfStoreSymlink;
-  # # appStorePath = pkgs."${appName}";
-  # f = pkgName: appName: let
-  # appStorePath = pkgs."${appName}";
-  # in {
-  #   name = "applications/${appName}.desktop";
-  #   value = {source = ln "${appStorePath}/share/applications/${appName}.desktop";};
-  # };
-  # in paths: builtins.listToAttrs (lib.attrsets.mapAttrs' f desktopApps);
-  # r = lib.attrsets.mapAttrs' f desktopApps;
-  # f = pkgName: appName: {
-  #   name = "applications/${appName}.desktop";
-  #   value = {source = ln "${appStorePath}/share/applications/${appName}.desktop";};
-  # };
-  # desktopApps;
-
+  desktopAppsSources = let
+    ln = config.lib.file.mkOutOfStoreSymlink;
+    f = pkgName: appName: let
+      appStorePath = pkgs."${pkgName}";
+    in {
+      name = "applications/${appName}.desktop";
+      value = {source = ln "${appStorePath}/share/applications/${appName}.desktop";};
+    };
+  in (lib.attrsets.mapAttrs' f desktopApps);
 in {
   home.stateVersion = "22.11";
   home.username = "carles";
@@ -92,11 +69,5 @@ in {
   xdg.enable = true; # track XDG files and directories
   xdg.configFile = configSources;
 
-  # xdg.dataFile = desktopAppsSources;
-
-  xdg.dataFile = {
-    "applications/brave-browser.desktop".source = lib.file.mkOutOfStoreSymlink "${pkgs.brave}/share/applications/brave-browser.desktop";
-    "applications/spotify.desktop".source = lib.file.mkOutOfStoreSymlink "${pkgs.spotify}/share/applications/spotify.desktop";
-    "applications/org.pwmt.zathura-pdf-mupdf.desktop".source = lib.file.mkOutOfStoreSymlink "${pkgs.zathura}/share/applications/.desktop";
-  };
+  xdg.dataFile = desktopAppsSources;
 }
