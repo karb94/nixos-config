@@ -4,7 +4,7 @@
     carles = {
       initialPassword = "d";
       isNormalUser = true;
-      extraGroups = [ "wheel" ];
+      extraGroups = [ "wheel" "video" ];
     };
   };
 }
