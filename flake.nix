@@ -29,6 +29,12 @@
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
+    # Impermanence
+    impermanence = {
+      url = "github:nix-community/impermanence";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # NixOS hardware configuration
     hardware.url = "github:nixos/nixos-hardware";
 
@@ -59,7 +65,6 @@
         # FIXME replace with your hostname
         selrak = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs; }; # Pass flake inputs to our config
-          # > Our main nixos configuration file <
           modules = [
             ./configuration.nix
             home-manager.nixosModules.home-manager
@@ -70,7 +75,6 @@
 
         libvirt_vm = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs; }; # Pass flake inputs to our config
-            # > Our main nixos configuration file <
           modules = [
             ./configuration.nix
             ./vm-hardware-configuration.nix
@@ -78,6 +82,17 @@
             hmConfig
             { config._module.args = { inherit self; }; }
           ];
+        };
+
+        impermanence = nixpkgs.lib.nixosSystem {
+          specialArgs = { inherit inputs; }; # Pass flake inputs to our config
+            modules = [
+              ./configuration.nix
+              ./impermanence-hardware-configuration.nix
+              home-manager.nixosModules.home-manager
+              hmConfig
+              { config._module.args = { inherit self; }; }
+            ];
         };
       }
     );

@@ -1,9 +1,6 @@
 # Packages to install
 {
-  self,
-  inputs,
   lib,
-  config,
   pkgs,
   ...
 }:
@@ -13,6 +10,7 @@ with pkgs; let
     brave
     citrix_workspace
     flameshot
+    freetube
     mpv
     spotify
     zathura

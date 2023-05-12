@@ -3,11 +3,11 @@
     "dotfiles": {
       "flake": false,
       "locked": {
-        "lastModified": 1682378909,
-        "narHash": "sha256-Up6TQf9mFGrOHKwPbXM3xv0dnjs5rT4br/sTyAdXHzo=",
+        "lastModified": 1683714969,
+        "narHash": "sha256-aqRKC2hDk/l66zDJLMwbSp7dSR+RoChN7Fl0uM8iQHo=",
         "owner": "karb94",
         "repo": "dotfiles",
-        "rev": "c5ff1c8ca656b75ca9f0caefd258c82f7fab35ac",
+        "rev": "44289dfef7bcd373ef06cc3331a5ec6cccbcb359",
         "type": "github"
       },
       "original": {
@@ -19,11 +19,11 @@
     },
     "hardware": {
       "locked": {
-        "lastModified": 1683269598,
-        "narHash": "sha256-KNsb+nBbB1Fmxd07dt4E0KXMT4YeKJB7gQaA6Xfk+mo=",
+        "lastModified": 1683836901,
+        "narHash": "sha256-ecv+VfhGmeQOBS6j9SptM0aKS25sMIEh+QbaYI4pyI0=",
         "owner": "nixos",
         "repo": "nixos-hardware",
-        "rev": "51559e691f1493a26f94f1df1aaf516bb507e78b",
+        "rev": "fb1317948339713afa82a775a8274a91334f6182",
         "type": "github"
       },
       "original": {
@@ -39,16 +39,31 @@
         ]
       },
       "locked": {
-        "lastModified": 1683651229,
-        "narHash": "sha256-HN0Mw8g1XQIrcdyzqT00YW0Uqi/V/BUUUAgvcK1pcSM=",
+        "lastModified": 1683892466,
+        "narHash": "sha256-/zN3pQ4xoyolJoxrtn9oLU4JMjG5+c5K7BeLxZ7BR8o=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "983f8a1bb965b261492123cd8e2d07da46d4d50a",
+        "rev": "70c8bd08e6c186e5c628a4e5af6f7ad67cd344b8",
         "type": "github"
       },
       "original": {
         "owner": "nix-community",
         "repo": "home-manager",
+        "type": "github"
+      }
+    },
+    "impermanence": {
+      "locked": {
+        "lastModified": 1682268411,
+        "narHash": "sha256-ICDKQ7tournRVtfM8C2II0qHiOZOH1b3dXVOCsgr11o=",
+        "owner": "nix-community",
+        "repo": "impermanence",
+        "rev": "df1692e2d9f1efc4300b1ea9201831730e0b817d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "impermanence",
         "type": "github"
       }
     },
@@ -73,6 +88,7 @@
         "dotfiles": "dotfiles",
         "hardware": "hardware",
         "home-manager": "home-manager",
+        "impermanence": "impermanence",
         "nixpkgs": "nixpkgs"
       }
     }
