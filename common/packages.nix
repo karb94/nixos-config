@@ -13,6 +13,7 @@ with pkgs; let
     freetube
     mpv
     spotify
+    tor
     zathura
   ];
   cli_pkgs = [

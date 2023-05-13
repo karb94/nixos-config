@@ -47,9 +47,10 @@
   configSources = mkSymlinks ".config/" configFilesToSymlink;
 
   desktopApps = {
-    zathura = "org.pwmt.zathura-pdf-mupdf";
     brave = "brave-browser";
+    freetube = "freetube";
     spotify = "spotify";
+    zathura = "org.pwmt.zathura-pdf-mupdf";
   };
   desktopAppsSources = let
     ln = config.lib.file.mkOutOfStoreSymlink;

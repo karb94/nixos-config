@@ -8,7 +8,7 @@
     inputs.hardware.nixosModules.common-hidpi
   ];
 
-  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
+  # nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 
   boot.initrd.availableKernelModules = [
     "ahci"
@@ -51,10 +51,10 @@
       "/var/lib/systemd/coredump"
       "/etc/NetworkManager/system-connections"
     ];
-    files = [
-      "/etc/machine-id"
-      { file = "/etc/nix/id_rsa"; parentDirectory = { mode = "u=rwx,g=,o="; }; }
-    ];
+    # files = [
+    #   "/etc/machine-id"
+    #   { file = "/etc/nix/id_rsa"; parentDirectory = { mode = "u=rwx,g=,o="; }; }
+    # ];
     # users.talyz = {
     #   directories = [
     #     "Downloads"
