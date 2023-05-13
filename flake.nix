@@ -91,6 +91,22 @@
               home-manager.nixosModules.home-manager
               hmConfig
               { config._module.args = { inherit self; }; }
+                impermanence.nixosModules.impermanence {
+                environment.persistence."/nix/persist/system" = {
+                  hideMounts = true;
+                  directories = [
+                    "/var/log"
+                    "/var/lib/bluetooth"
+                    "/var/lib/nixos"
+                    "/var/lib/systemd/coredump"
+                    "/etc/NetworkManager/system-connections"
+                  ];
+                  files = [
+                    "/etc/machine-id"
+                    { file = "/etc/nix/id_rsa"; parentDirectory = { mode = "u=rwx,g=,o="; }; }
+                  ];
+                };
+              };
             ];
         };
 
