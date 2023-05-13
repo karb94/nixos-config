@@ -8,11 +8,11 @@
     ./common/audio.nix
     ./common/locale.nix
     ./common/fonts.nix
-    ./common/users.nix
+    ./common/impermanence-users.nix
     ./common/packages.nix
     ./common/doas.nix
     ./desktop/xorg.nix
-    ./desktop/hardware-configuration.nix
+    ./desktop/impermanence-hardware-configuration.nix
   ];
 
   # Home-manager setup script

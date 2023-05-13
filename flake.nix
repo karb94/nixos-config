@@ -41,7 +41,7 @@
 
   };
 
-  outputs = { self, nixpkgs, home-manager, hardware, ... }@inputs: {
+  outputs = { self, nixpkgs, home-manager, hardware, impermanence, ... }@inputs: {
     # NixOS configuration entrypoint
     # Available through:
     # doas nixos-rebuild switch --flake .#your-hostname (locally)
@@ -86,12 +86,12 @@
           system = "x86_64-linux";
           specialArgs = { inherit inputs; }; # Pass flake inputs to our config
             modules = [
-              ./desktop-configuration.nix
+              ./impermanence-configuration.nix
               ./desktop/impermanence-hardware-configuration.nix
               home-manager.nixosModules.home-manager
               hmConfig
               { config._module.args = { inherit self; }; }
-                impermanence.nixosModules.impermanence {
+              impermanence.nixosModules.impermanence {
                 environment.persistence."/nix/persist/system" = {
                   hideMounts = true;
                   directories = [
@@ -106,7 +106,7 @@
                     { file = "/etc/nix/id_rsa"; parentDirectory = { mode = "u=rwx,g=,o="; }; }
                   ];
                 };
-              };
+              }
             ];
         };
 
