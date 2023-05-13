@@ -30,10 +30,7 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     # Impermanence
-    impermanence = {
-      url = "github:nix-community/impermanence";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    impermanence.url = "github:nix-community/impermanence";
 
     # NixOS hardware configuration
     hardware.url = "github:nixos/nixos-hardware";
@@ -57,16 +54,17 @@
         hmConfig = {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
-          home-manager.users.carles = import ./home.nix;
+          home-manager.users.carles = import ./desktop/home.nix;
           home-manager.extraSpecialArgs = { inherit inputs; };
         };
       in
         {
         # FIXME replace with your hostname
         selrak = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
           specialArgs = { inherit inputs; }; # Pass flake inputs to our config
           modules = [
-            ./configuration.nix
+            ./desktop-configuration.nix
             home-manager.nixosModules.home-manager
             hmConfig
             { config._module.args = { inherit self; }; }
@@ -85,14 +83,20 @@
         };
 
         impermanence = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
           specialArgs = { inherit inputs; }; # Pass flake inputs to our config
             modules = [
-              ./configuration.nix
-              ./impermanence-hardware-configuration.nix
+              ./desktop-configuration.nix
+              ./desktop/impermanence-hardware-configuration.nix
               home-manager.nixosModules.home-manager
               hmConfig
               { config._module.args = { inherit self; }; }
             ];
+        };
+
+        live-usb = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [ ./live-usb-configuration.nix ];
         };
       }
     );

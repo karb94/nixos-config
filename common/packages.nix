@@ -44,8 +44,6 @@ with pkgs; let
     nodePackages.bash-language-server
   ];
 in {
-  imports = [./xorg.nix];
-
   environment.systemPackages = general_pkgs ++ cli_pkgs ++ neovim_pkgs;
 
   # Enable doas instead of sudo

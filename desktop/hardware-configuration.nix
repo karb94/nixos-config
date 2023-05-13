@@ -8,7 +8,7 @@
     inputs.hardware.nixosModules.common-hidpi
   ];
 
-  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
+  # nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 
   boot.initrd.availableKernelModules = [
     "ahci"

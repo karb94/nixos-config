@@ -1,16 +1,15 @@
 # General configuration
 {
-  self,
   inputs,
   lib,
-  config,
   pkgs,
   ...
 }: {
   imports = [
-    ./users.nix
-    ./packages.nix
-    ./hardware-configuration.nix
+    ./common/users.nix
+    ./common/packages.nix
+    ./desktop/xorg.nix
+    ./desktop/hardware-configuration.nix
   ];
 
   nixpkgs.config.allowUnfree = true;
