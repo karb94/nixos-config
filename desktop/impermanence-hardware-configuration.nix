@@ -28,7 +28,7 @@
       fsType = "tmpfs";
       options = [ "size=2G" "mode=755" ];
     };
-    "/home/carles" = {
+    "/home" = {
       device = "/dev/disk/by-partlabel/home";
       fsType = "ext4";
     };
