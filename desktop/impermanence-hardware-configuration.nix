@@ -42,7 +42,7 @@
     };
   };
 
-  environment.persistence."/nix/persist/system" = {
+  inputs.impermanence.environment.persistence."/nix/persist/system" = {
     hideMounts = true;
     directories = [
       "/var/log"
