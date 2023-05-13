@@ -94,6 +94,8 @@
             ];
         };
 
+        # Build ISO image with the following command:
+        # nix build .#nixosConfigurations.live-usb.config.system.build.isoImage --impure
         live-usb = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [ ./live-usb-configuration.nix ];

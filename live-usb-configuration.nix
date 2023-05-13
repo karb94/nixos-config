@@ -22,6 +22,9 @@
   # Networking
   networking.hostName = "live-usb";
   networking.useDHCP = lib.mkDefault true;
+  # Disable wpa_supplicant which is enabled by the imports
+  networking.wireless.enable = false;
+  # Enable NetworkManager with iwd wifi backend
   networking.networkmanager.enable = true;
   networking.networkmanager.wifi.backend = "iwd";
 
@@ -35,6 +38,18 @@
 
   isoImage.volumeID = lib.mkForce "id-live";
   isoImage.isoName = lib.mkForce "id-live.iso";
+
+  environment.systemPackages = with pkgs; [
+    neovim
+    bottom
+    coreutils
+    findutils
+    git
+    lf
+    ripgrep
+    tree
+    bitwarden-cli
+  ];
 
   # security.polkit.extraConfig = ''
   #   polkit.addRule(function(action, subject) {
