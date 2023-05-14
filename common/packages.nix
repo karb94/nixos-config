@@ -5,7 +5,7 @@
     general_pkgs = [
       alacritty
       brave
-      #citrix_workspace
+      citrix_workspace
       flameshot
       freetube
       mpv

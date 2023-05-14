@@ -1,9 +1,5 @@
-# Nix configuration
+# Bootloader
 {...}: {
-  nix.settings = {
-    # Enable flakes and new 'nix' command
-    experimental-features = ["nix-command" "flakes"];
-    # Deduplicate and optimize nix store
-    auto-optimise-store = true;
-  };
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
 }
