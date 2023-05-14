@@ -60,7 +60,6 @@
     #     ".screenrc"
     #   ];
     # };
-  };
 
   # swapDevices = [
   #   {
