@@ -17,6 +17,13 @@
 # mkswap /mnt/.swapfile -L swap
 # swapon /mnt/.swapfile
 
+# NixOS configuration entrypoint
+# Available through:
+# doas nixos-rebuild switch --flake .#your-hostname (locally)
+# doas nixos-rebuild switch --flake github:karb94#selrak (remotely)
+# doas nixos-rebuild switch (if flake is in /etc/nixos)
+# install nixos with:
+# nix-shell -p nixUnstable --run 'sudo nixos-install --no-root-passwd --flake github:karb94/nixos-config#selrak'
 
 {
   description = "NixOS config";
@@ -41,82 +48,34 @@
 
   };
 
-  outputs = { self, nixpkgs, home-manager, hardware, impermanence, ... }@inputs: {
-    # NixOS configuration entrypoint
-    # Available through:
-    # doas nixos-rebuild switch --flake .#your-hostname (locally)
-    # doas nixos-rebuild switch --flake github:karb94#selrak (remotely)
-    # doas nixos-rebuild switch (if flake is in /etc/nixos)
-    # install nixos with:
-    # nix-shell -p nixUnstable --run 'sudo nixos-install --no-root-passwd --flake github:karb94/nixos-config#selrak'
-    nixosConfigurations = (
-      let
-        hmConfig = {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          home-manager.users.carles = import ./desktop/home.nix;
-          home-manager.extraSpecialArgs = { inherit inputs; };
-        };
-      in
-        {
-        # FIXME replace with your hostname
-        selrak = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          specialArgs = { inherit inputs; }; # Pass flake inputs to our config
-          modules = [
-            ./desktop-configuration.nix
-            home-manager.nixosModules.home-manager
-            hmConfig
-            { config._module.args = { inherit self; }; }
-          ];
-        };
+  outputs = { self, nixpkgs, ... }@inputs: {
 
-        libvirt_vm = nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit inputs; }; # Pass flake inputs to our config
-          modules = [
-            ./configuration.nix
-            ./vm-hardware-configuration.nix
-            home-manager.nixosModules.home-manager
-            hmConfig
-            { config._module.args = { inherit self; }; }
-          ];
-        };
+    nixosConfigurations = {
+      # FIXME replace with your hostname
+      selrak = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = { inherit inputs; }; # Pass flake inputs to our config
+        modules = [ ./desktop-configuration.nix ];
+      };
 
-        impermanence = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          specialArgs = { inherit inputs; }; # Pass flake inputs to our config
-            modules = [
-              ./impermanence-configuration.nix
-              ./desktop/impermanence-hardware-configuration.nix
-              home-manager.nixosModules.home-manager
-              hmConfig
-              { config._module.args = { inherit self; }; }
-              impermanence.nixosModules.impermanence {
-                environment.persistence."/nix/persist/system" = {
-                  hideMounts = true;
-                  directories = [
-                    "/var/log"
-                    "/var/lib/bluetooth"
-                    "/var/lib/nixos"
-                    "/var/lib/systemd/coredump"
-                    "/etc/NetworkManager/system-connections"
-                  ];
-                  files = [
-                    "/etc/machine-id"
-                    { file = "/etc/nix/id_rsa"; parentDirectory = { mode = "u=rwx,g=,o="; }; }
-                  ];
-                };
-              }
-            ];
-        };
+      impermanence = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = { inherit inputs; };
+          modules = [ ./impermanence-configuration.nix ];
+      };
 
-        # Build ISO image with the following command:
-        # nix build .#nixosConfigurations.live-usb.config.system.build.isoImage --impure
-        live-usb = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          modules = [ ./live-usb-configuration.nix ];
-        };
-      }
-    );
+      # Build ISO image with the following command:
+      # nix build .#nixosConfigurations.live-usb.config.system.build.isoImage --impure
+      live-usb = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [ ./live-usb-configuration.nix ];
+      };
+
+      # libvirt_vm = nixpkgs.lib.nixosSystem {
+      #   specialArgs = { inherit inputs; }; # Pass flake inputs to our config
+      #   modules = [ ./configuration.nix ];
+      # };
+
+    };
   };
 }

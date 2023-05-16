@@ -1,5 +1,5 @@
 # User configuration
-{ ... }: {
+{
   users.mutableUsers = false;
   users.users = {
     carles = {

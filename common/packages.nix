@@ -16,6 +16,8 @@
 
     cli_pkgs = [
       alejandra
+      bash
+      bashInteractive
       bottom
       clang
       cmake
@@ -38,7 +40,6 @@
     ];
 
     neovim_pkgs = [
-      neovim
       nil
       tree-sitter
       nodePackages.bash-language-server

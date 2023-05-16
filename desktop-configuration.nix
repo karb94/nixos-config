@@ -2,17 +2,18 @@
 { inputs, ... }: {
 
   imports = [
-    ./common/nix.nix
-    ./common/bootloader.nix
-    ./common/networking.nix
     ./common/audio.nix
-    ./common/locale.nix
+    ./common/bootloader.nix
     ./common/fonts.nix
-    ./common/users.nix
+    ./common/locale.nix
+    ./common/networking.nix
+    ./common/nix.nix
     ./common/packages.nix
-    ./common/doas.nix
-    ./desktop/xorg.nix
+    ./common/superuser.nix
+    ./common/users.nix
     ./desktop/hardware-configuration.nix
+    ./desktop/home-manager.nix
+    ./desktop/xorg.nix
   ];
 
   # Home-manager setup script

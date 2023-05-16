@@ -1,4 +1,4 @@
-{ inputs, modulesPath, config, lib, ... }: {
+{ inputs, lib, ... }: {
 
   # Import generic hardware configuration
   imports = [
@@ -6,6 +6,7 @@
     inputs.hardware.nixosModules.common-cpu-amd
     inputs.hardware.nixosModules.common-pc-ssd
     inputs.hardware.nixosModules.common-hidpi
+    inputs.impermanence.nixosModules.impermanence
   ];
 
   # nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
@@ -40,6 +41,21 @@
       device = "/dev/disk/by-partlabel/boot";
       fsType = "vfat";
     };
+  };
+
+  environment.persistence."/nix/persist/system" = {
+    hideMounts = true;
+    directories = [
+      "/var/log"
+        "/var/lib/bluetooth"
+        "/var/lib/nixos"
+        "/var/lib/systemd/coredump"
+        "/etc/NetworkManager/system-connections"
+    ];
+    files = [
+      "/etc/machine-id"
+      { file = "/etc/nix/id_rsa"; parentDirectory = { mode = "u=rwx,g=,o="; }; }
+    ];
   };
 
     # users.talyz = {
