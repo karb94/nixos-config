@@ -5,7 +5,7 @@
     # Disable root
     root.hashedPassword = "!";
     carles = {
-      passwordFile = "/persist/passwords/carles";
+      passwordFile = "/persist/system/passwords/carles";
       isNormalUser = true;
       extraGroups = [ "wheel" "video" ];
     };
