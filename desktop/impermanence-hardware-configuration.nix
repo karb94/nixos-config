@@ -94,7 +94,7 @@ in {
 
   swapDevices = [
     {
-      device = "/swapfile";
+      device = "/swap/swapfile";
       size = 20480;  # 20GB
     }
   ];
