@@ -10,6 +10,7 @@
     <nixpkgs/nixos/modules/installer/cd-dvd/installation-cd-base.nix>
   ];
 
+  hardware.enableAllFirmware = true;
   nixpkgs.config.allowUnfree = true;
 
   nix.settings = {
