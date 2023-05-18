@@ -37,17 +37,17 @@ in {
       options = [ "size=2G" "mode=755" ];
     };
     "/home" = {
-      device = "/dev/disk/by-partlabel/home";
+      device = "/dev/disk/by-partlabel/root";
       fsType = "btrfs";
       options = [ "subvol=home" "compress=zstd" "noatime" ];
     };
     "/nix" = {
-      device = "/dev/disk/by-partlabel/nix";
+      device = "/dev/disk/by-partlabel/root";
       fsType = "btrfs";
       options = [ "subvol=home" "compress=zstd" "noatime" ];
     };
     "/persist" = {
-      device = "/dev/disk/by-partlabel/nix";
+      device = "/dev/disk/by-partlabel/root";
       fsType = "btrfs";
       options = [ "subvol=home" "compress=zstd" "noatime" ];
       neededForBoot = true;
