@@ -44,12 +44,18 @@ in {
     "/nix" = {
       device = "/dev/disk/by-partlabel/root";
       fsType = "btrfs";
-      options = [ "subvol=home" "compress=zstd" "noatime" ];
+      options = [ "subvol=nix" "compress=zstd" "noatime" ];
     };
     "/persist" = {
       device = "/dev/disk/by-partlabel/root";
       fsType = "btrfs";
-      options = [ "subvol=home" "compress=zstd" "noatime" ];
+      options = [ "subvol=persist" "compress=zstd" "noatime" ];
+      neededForBoot = true;
+    };
+    "/swap" = {
+      device = "/dev/disk/by-partlabel/root";
+      fsType = "btrfs";
+      options = [ "subvol=swap" "compress=zstd" "noatime" ];
       neededForBoot = true;
     };
     "/boot" = {
