@@ -28,7 +28,7 @@ in {
 
   hardware.enableAllFirmware = lib.mkDefault true;
 
-  boot.initrd.luks.devices."luks".device = drive_link;
+  boot.initrd.luks.devices."luks".device = "/dev/disk/by-partlabel/root";
 
   fileSystems = {
     "/" = {
