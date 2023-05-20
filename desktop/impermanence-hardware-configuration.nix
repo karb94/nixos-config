@@ -57,7 +57,7 @@ in {
       neededForBoot = true;
     };
     "/swap" = {
-      device = "/dev/disk/by-partlabel/root";
+      device = luks_device;
       fsType = "btrfs";
       options = [ "subvol=swap" "compress=zstd" "noatime" ];
       neededForBoot = true;
