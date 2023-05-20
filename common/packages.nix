@@ -22,12 +22,14 @@
       clang
       cmake
       coreutils
+      cryptsetup
       fd
       file
       findutils
       fzf
       git
       gnumake
+      gptfdisk
       jq
       lf
       libwebp

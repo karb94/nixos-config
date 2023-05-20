@@ -3,6 +3,8 @@ let
   # The last part of the drive id corresponds to the physical serial number
   drive_id = "ata-Samsung_SSD_860_EVO_500GB_S3Z2NB1KA98698A";
   drive_link = "/dev/disk/by-id/${drive_id}";
+  luks_name = "luksroot";
+  luks_device = "/dev/mapper/luksroot";
 in {
 
   # Import generic hardware configuration
@@ -10,7 +12,7 @@ in {
     inputs.hardware.nixosModules.common-pc
     inputs.hardware.nixosModules.common-cpu-amd
     inputs.hardware.nixosModules.common-pc-ssd
-    inputs.hardware.nixosModules.common-hidpi
+    # inputs.hardware.nixosModules.common-hidpi
     inputs.impermanence.nixosModules.impermanence
   ];
 
@@ -28,26 +30,28 @@ in {
 
   hardware.enableAllFirmware = lib.mkDefault true;
 
-  boot.initrd.luks.devices."luksroot".device = "/dev/disk/by-partlabel/root";
+  boot.initrd.luks.devices."${luks_name}".device = drive_link;
 
   fileSystems = {
     "/" = {
       device = "none";
       fsType = "tmpfs";
-      options = [ "size=2G" "mode=755" ];
+      options = [ "size=4G" "mode=755" ];
+      neededForBoot = true;
     };
     "/home" = {
-      device = "/dev/disk/by-partlabel/root";
+      device = luks_device;
       fsType = "btrfs";
       options = [ "subvol=home" "compress=zstd" "noatime" ];
     };
     "/nix" = {
-      device = "/dev/disk/by-partlabel/root";
+      device = luks_device;
       fsType = "btrfs";
-      options = [ "subvol=nix" "compress=zstd" "noatime" ];
+      options = [ "subvol=home" "compress=zstd" "noatime" ];
+      neededForBoot = true;
     };
     "/persist" = {
-      device = "/dev/disk/by-partlabel/root";
+      device = luks_device;
       fsType = "btrfs";
       options = [ "subvol=persist" "compress=zstd" "noatime" ];
       neededForBoot = true;
