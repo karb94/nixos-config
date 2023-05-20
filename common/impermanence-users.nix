@@ -3,7 +3,7 @@
   users.mutableUsers = false;
   users.users = {
     # Disable root
-    root.hashedPassword = "!";
+    root.passwordFile = "/persist/system/passwords/root";
     carles = {
       passwordFile = "/persist/system/passwords/carles";
       isNormalUser = true;

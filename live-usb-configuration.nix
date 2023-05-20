@@ -146,7 +146,9 @@
 
     printf "\n\nCreating /persist directories\n"
     mkdir -vp /mnt/persist/{system/passwords,home}
-    printf "\n\nSet password\n"
+    printf "\n\nSet root password\n"
+    mkpasswd -m SHA-512 > /mnt/persist/system/passwords/root
+    printf "\n\nSet \"carles\" user password\n"
     mkpasswd -m SHA-512 > /mnt/persist/system/passwords/carles
 
     printf "\n\nInstalling NixOS\n"
