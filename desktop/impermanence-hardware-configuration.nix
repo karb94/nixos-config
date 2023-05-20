@@ -1,8 +1,5 @@
 { inputs, lib, ... }:
 let
-  # The last part of the drive id corresponds to the physical serial number
-  drive_id = "ata-Samsung_SSD_860_EVO_500GB_S3Z2NB1KA98698A";
-  drive_link = "/dev/disk/by-id/${drive_id}";
   luks_name = "luksroot";
   luks_device = "/dev/mapper/luksroot";
 in {
@@ -30,7 +27,10 @@ in {
 
   hardware.enableAllFirmware = lib.mkDefault true;
 
-  boot.initrd.luks.devices."${luks_name}".device = "/dev/disk/by-partlabel/root";
+  boot.initrd = {
+    luks.devices."${luks_name}".device = "/dev/disk/by-partlabel/root";
+    systemd.enable = true;
+  };
 
   fileSystems = {
     "/" = {

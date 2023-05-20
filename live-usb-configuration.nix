@@ -147,7 +147,7 @@
     printf "\n\nCreating /persist directories\n"
     mkdir -vp /mnt/persist/{system/passwords,home}
     printf "\n\nSet password\n"
-    mkpasswd -m SHA-512 > /persist/system/passwords/carles
+    mkpasswd -m SHA-512 > /mnt/persist/system/passwords/carles
 
     printf "\n\nInstalling NixOS\n"
     nixos-install --no-root-passwd --flake github:karb94/nixos-config#impermanence
