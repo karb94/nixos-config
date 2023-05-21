@@ -72,12 +72,12 @@
 
     # connect to the wifi network
     wifi_connect() {
-      printf "\n\nConnecting to '3c9c 5ghz' wifi\n"
-      nmcli --ask device wifi connect '3c9c 5ghz'
+      printf "\n\nConnecting to '3C9C 5Ghz' wifi\n"
+      nmcli --ask device wifi connect '3C9C 5Ghz'
       while [ $? -ne 0 ]
       do
         printf "\n\nIncorrect password. try again.\n"
-        nmcli --ask device wifi connect '3c9c 5ghz'
+        nmcli --ask device wifi connect '3C9C 5Ghz'
       done
     }
 
@@ -127,7 +127,7 @@
 
     format_luks() {
       printf "\n\nEncrypting root partition with luks\n"
-      cryptsetup -v luksformat "$root_device"
+      cryptsetup -v luksFormat "$root_device"
     }
 
     open_luks() {
@@ -192,7 +192,7 @@
     }
 
     format_disk() {
-      local device=$(choose_disk)
+      local device=$1
       wipe_disk "$device"
       partition_disk "$device"
       format_luks
@@ -204,6 +204,8 @@
       create_passwords
       install_nixos
     }
+
+    format_disk
     '';
   };
 
