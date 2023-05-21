@@ -145,7 +145,11 @@
     mount -vo subvol=swap,compress=zstd,noatime "$LUKS_DEVICE" /mnt/swap
 
     printf "\n\nCreating /persist directories\n"
-    mkdir -vp /mnt/persist/{system/passwords,home}
+    mkdir -vp /mnt/persist/system/var/log
+    mkdir -vp /mnt/persist/system/var/lib/{nixos,bluetooth,systemd/coredump}
+    mkdir -vp /mnt/persist/system/etc/NetworkManager/system-connections
+    mkdir -vp /mnt/persist/system/passwords
+
     printf "\n\nSet root password\n"
     mkpasswd -m SHA-512 > /mnt/persist/system/passwords/root
     printf "\n\nSet \"carles\" user password\n"

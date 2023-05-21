@@ -9,11 +9,9 @@ in {
     inputs.hardware.nixosModules.common-pc
     inputs.hardware.nixosModules.common-cpu-amd
     inputs.hardware.nixosModules.common-pc-ssd
-    # inputs.hardware.nixosModules.common-hidpi
+    inputs.hardware.nixosModules.common-hidpi
     inputs.impermanence.nixosModules.impermanence
   ];
-
-  # nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 
   boot.initrd.availableKernelModules = [
     "ahci"
@@ -29,7 +27,7 @@ in {
 
   boot.initrd = {
     luks.devices."${luks_name}".device = "/dev/disk/by-partlabel/root";
-    systemd.enable = true;
+    # systemd.enable = true;
   };
 
   fileSystems = {
