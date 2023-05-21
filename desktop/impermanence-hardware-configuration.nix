@@ -45,7 +45,7 @@ in {
     "/nix" = {
       device = luks_device;
       fsType = "btrfs";
-      options = [ "subvol=home" "compress=zstd" "noatime" ];
+      options = [ "subvol=nix" "compress=zstd" "noatime" ];
       neededForBoot = true;
     };
     "/persist" = {
