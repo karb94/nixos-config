@@ -62,101 +62,148 @@
     # exit when any command fails
     set -e
 
-    # Connect to the wifi network
-    printf "\n\nConnecting to '3C9C 5Ghz' Wifi\n"
-    nmcli --ask device wifi connect '3C9C 5Ghz'
-    while [ $? -ne 0 ]
-    do
-      printf "\n\nIncorrect password. Try again.\n"
-      nmcli --ask device wifi connect '3C9C 5Ghz'
-    done
+    boot_device="/dev/disk/by-partlabel/boot"
+    root_device="/dev/disk/by-partlabel/root"
+    boot_part_num=1
+    root_part_num=2
+    luks_name="luksroot"
+    luks_device="/dev/mapper/$luks_name"
+    btrfs_top_level="/tmp/root"
 
-    # Capture disk names into the "disks" Bash array
-    mapfile -t DISKS < <(
-      lsblk --output NAME,TYPE --noheadings --list |
+    # connect to the wifi network
+    wifi_connect() {
+      printf "\n\nConnecting to '3c9c 5ghz' wifi\n"
+      nmcli --ask device wifi connect '3c9c 5ghz'
+      while [ $? -ne 0 ]
+      do
+        printf "\n\nIncorrect password. try again.\n"
+        nmcli --ask device wifi connect '3c9c 5ghz'
+      done
+    }
+
+    # select a disk
+    choose_disk() {
+      # capture disk names into the "disks" bash array
+      mapfile -t disks < <(
+      lsblk --output name,type --noheadings --list |
         awk '$2 == "disk" {print $1}'
-    )
+      )
+      while true
+      do
+        # print device information
+        lsblk -o name,size,label,partlabel,fstype,mountpoints
+        # prompt the selection of the device
+        ps3="Select a disk: "
+        select disk in ''${disks[@]}; do break; done;
+        # prompt confirmation
+        printf "\nYou selected disk \"$disk\"\n\n"
+        lsblk -o name,size,label,partlabel,fstype,mountpoints "/dev/$disk"
+        printf "\n"; read -p "confirm your selection (y/n): " -n 1 -r; printf "\n\n"
+        if [[ $reply =~ ^[yy]$ ]]; then break; fi;
+      done
+      echo "/dev/$disk"
+    }
 
-    while true
-    do
-      # Print device information
-      lsblk -o NAME,SIZE,LABEL,PARTLABEL,FSTYPE,MOUNTPOINTS
-      # Prompt the selection of the device
-      PS3="Select a disk: "
-      select DISK in ''${DISKS[@]}; do break; done;
-      # Prompt confirmation
-      printf "\nYou selected disk \"$DISK\"\n\n"
-      lsblk -o NAME,SIZE,LABEL,PARTLABEL,FSTYPE,MOUNTPOINTS "/dev/$DISK"
-      printf "\n"; read -p "Confirm your selection (y/n): " -n 1 -r; printf "\n\n"
-      if [[ $REPLY =~ ^[Yy]$ ]]; then break; fi;
-    done
+    # delete the partition table of a disk
+    wipe_disk() {
+      local device="$1"
+      printf "\n\nWiping $device disk\n"
+      wipefs --all --force "$device"
+    }
 
-    DEVICE="/dev/$DISK"
+    # create boot and root partitions and add correct types and partlabels
+    partition_disk() {
+      local device="$1"
+      printf "\n\nCreating boot and root partitions in $device\n"
+      sgdisk \
+        -n "$boot_part_num"::+500m \
+        -t "$boot_part_num":ef00   \
+        -c "$boot_part_num":"boot" \
+        -n "$root_part_num"::0     \
+        -t "$root_part_num":8304   \
+        -c "$root_part_num":"root" \
+        -p "$device"
+    }
 
-    printf "\n\nWiping $DISK disk\n"
-    wipefs --all --force $DEVICE
+    format_luks() {
+      printf "\n\nEncrypting root partition with luks\n"
+      cryptsetup -v luksformat "$root_device"
+    }
 
-    BOOT_PART_NUM=1
-    ROOT_PART_NUM=2
-    # Create boot and root partitions and add correct types and partlabels
-    printf "\n\nCreating boot and root partitions in $DEVICE\n"
-    sgdisk \
-      -n "$BOOT_PART_NUM"::+500M \
-      -t "$BOOT_PART_NUM":ef00   \
-      -c "$BOOT_PART_NUM":"boot" \
-      -n "$ROOT_PART_NUM"::0     \
-      -t "$ROOT_PART_NUM":8304   \
-      -c "$ROOT_PART_NUM":"root" \
-      -p "$DEVICE"
+    open_luks() {
+      printf "\n\nOpening encrypted partition and mapping it to "$luks_name"\n"
+      cryptsetup -v open "$root_device" "$luks_name"
+    }
 
-    BOOT_DEVICE="$DEVICE$BOOT_PART_NUM"
-    ROOT_DEVICE="$DEVICE$ROOT_PART_NUM"
-    LUKS_NAME="luksroot"
-    LUKS_DEVICE="/dev/mapper/$LUKS_NAME"
-    LUKS_TOP_LEVEL="/tmp/root"
+    format_partitions() {
+      printf "\n\nCreating FAT32 (boot) and BTRFS (root) filesystems\n"
+      mkfs.vfat "$boot_device"
+      mkfs.btrfs "$luks_device"
+    }
 
-    printf "\n\nEncrypting root partition with LUKS\n"
-    cryptsetup -v luksFormat "$ROOT_DEVICE"
-    printf "\n\nOpening encrypted partition and mapping it to "$LUKS_NAME"\n"
-    cryptsetup -v open "$ROOT_DEVICE" "$LUKS_NAME"
+    create_subvolumes() {
+      printf "\n\nMounting top-level btrfs sub-volume to $btrfs_top_level\n"
+      mkdir -pv /tmp/root
+      mount "$luks_device" "$btrfs_top_level"
+      printf "\n\nCreating btrfs subvolumes\n"
+      btrfs subvolume create "$btrfs_top_level/nix"
+      btrfs subvolume create "$btrfs_top_level/persist"
+      btrfs subvolume create "$btrfs_top_level/home"
+      btrfs subvolume create "$btrfs_top_level/swap"
+      printf "\n\nUnmounting top-level btrfs sub-volume\n"
+      umount -v "$btrfs_top_level"
+    }
 
-    printf "\n\nCreating FAT32 (boot) and BTRFS (root) filesystems\n"
-    mkfs.vfat "$BOOT_DEVICE"
-    mkfs.btrfs "$LUKS_DEVICE"
+    mount_partitions() {
+      printf "\n\nMounting root tmpfs to /mnt\n"
+      mount -t tmpfs none /mnt
+      printf "\n\nMounting top-level btrfs sub-volume to $btrfs_top_level\n"
+      mkdir -pv /tmp/root
+      mount "$luks_device" "$btrfs_top_level"
+      printf "\n\nMounting boot partition\n"
+      mkdir -vp /mnt/boot
+      mount -v "$boot_device" /mnt/boot
+      printf "\n\nMounting BTRFS subvolumes\n"
+      mkdir -vp /mnt/{nix,persist,home,swap}
+      mount -vo subvol=nix,compress=zstd,noatime "$luks_device" /mnt/nix
+      mount -vo subvol=persist,compress=zstd,noatime "$luks_device" /mnt/persist
+      mount -vo subvol=home,compress=zstd,noatime "$luks_device" /mnt/home
+      mount -vo subvol=swap,compress=zstd,noatime "$luks_device" /mnt/swap
+    }
 
-    printf "\n\nMounting root tmpfs to /mnt\n"
-    mount -t tmpfs none /mnt
+    create_persist_dirs() {
+      printf "\n\nCreating /persist directories\n"
+      mkdir -vp /mnt/persist/system/var/log
+      mkdir -vp /mnt/persist/system/var/lib/{nixos,bluetooth,systemd/coredump}
+      mkdir -vp /mnt/persist/system/etc/networkmanager/system-connections
+      mkdir -vp /mnt/persist/system/passwords
+    }
 
-    printf "\n\nMounting top-level BTRFS sub-volume to $LUKS_TOP_LEVEL\n"
-    mkdir -pv /tmp/root
-    mount "$LUKS_DEVICE" "$LUKS_TOP_LEVEL"
-    printf "\n\nCreating BTRFS subvolumes\n"
-    btrfs subvolume create "$LUKS_TOP_LEVEL/nix"
-    btrfs subvolume create "$LUKS_TOP_LEVEL/persist"
-    btrfs subvolume create "$LUKS_TOP_LEVEL/home"
-    btrfs subvolume create "$LUKS_TOP_LEVEL/swap"
+    create_passwords() {
+      # printf "\n\nset root password\n"
+      # mkpasswd -m sha-512 > /mnt/persist/system/passwords/root
+      printf "\n\nSet \"carles\" user password\n"
+      mkpasswd -m sha-512 > /mnt/persist/system/passwords/carles
+    }
 
-    printf "\n\nMounting boot partition and subvolumes\n"
-    mkdir -vp /mnt/{boot,nix,persist,home,swap}
-    mount "$BOOT_DEVICE" /mnt/boot
-    mount -vo subvol=nix,compress=zstd,noatime "$LUKS_DEVICE" /mnt/nix
-    mount -vo subvol=persist,compress=zstd,noatime "$LUKS_DEVICE" /mnt/persist
-    mount -vo subvol=home,compress=zstd,noatime "$LUKS_DEVICE" /mnt/home
-    mount -vo subvol=swap,compress=zstd,noatime "$LUKS_DEVICE" /mnt/swap
+    install_nixos() {
+      printf "\n\nInstalling nixos\n"
+      nixos-install --no-root-passwd --flake 'github:karb94/nixos-config#impermanence'
+    }
 
-    printf "\n\nCreating /persist directories\n"
-    mkdir -vp /mnt/persist/system/var/log
-    mkdir -vp /mnt/persist/system/var/lib/{nixos,bluetooth,systemd/coredump}
-    mkdir -vp /mnt/persist/system/etc/NetworkManager/system-connections
-    mkdir -vp /mnt/persist/system/passwords
-
-    printf "\n\nSet root password\n"
-    mkpasswd -m SHA-512 > /mnt/persist/system/passwords/root
-    printf "\n\nSet \"carles\" user password\n"
-    mkpasswd -m SHA-512 > /mnt/persist/system/passwords/carles
-
-    printf "\n\nInstalling NixOS\n"
-    nixos-install --no-root-passwd --flake github:karb94/nixos-config#impermanence
+    format_disk() {
+      local device=$(choose_disk)
+      wipe_disk "$device"
+      partition_disk "$device"
+      format_luks
+      open_luks
+      format_partitions
+      create_subvolumes
+      mount_partitions
+      create_persists_dirs
+      create_passwords
+      install_nixos
+    }
     '';
   };
 
