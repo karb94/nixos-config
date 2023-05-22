@@ -11,7 +11,6 @@ in {
     inputs.hardware.nixosModules.common-pc-ssd
     inputs.hardware.nixosModules.common-hidpi
     inputs.impermanence.nixosModules.impermanence
-    inputs.impermanence.nixosModules.home-manager.impermanence
   ];
 
   boot.initrd.availableKernelModules = [
