@@ -11,6 +11,7 @@ in {
     inputs.hardware.nixosModules.common-pc-ssd
     inputs.hardware.nixosModules.common-hidpi
     inputs.impermanence.nixosModules.impermanence
+    inputs.impermanence.nixosModules.home-manager.impermanence
   ];
 
   boot.initrd.availableKernelModules = [
@@ -25,22 +26,14 @@ in {
 
   hardware.enableAllFirmware = lib.mkDefault true;
 
-  boot.initrd = {
-    luks.devices."${luks_name}".device = "/dev/disk/by-partlabel/root";
-    # systemd.enable = true;
-  };
+  boot.initrd.luks.devices."${luks_name}".device = "/dev/disk/by-partlabel/root";
 
   fileSystems = {
     "/" = {
       device = "none";
       fsType = "tmpfs";
-      options = [ "size=4G" "mode=755" ];
+      options = [ "size=6G" "mode=755" ];
       neededForBoot = true;
-    };
-    "/home" = {
-      device = luks_device;
-      fsType = "btrfs";
-      options = [ "subvol=home" "compress=zstd" "noatime" ];
     };
     "/nix" = {
       device = luks_device;
@@ -80,25 +73,6 @@ in {
       { file = "/etc/nix/id_rsa"; parentDirectory = { mode = "u=rwx,g=,o="; }; }
     ];
   };
-
-    # users.talyz = {
-    #   directories = [
-    #     "Downloads"
-    #       "Music"
-    #       "Pictures"
-    #       "Documents"
-    #       "Videos"
-    #       "VirtualBox VMs"
-    #       { directory = ".gnupg"; mode = "0700"; }
-    #   { directory = ".ssh"; mode = "0700"; }
-    #   { directory = ".nixops"; mode = "0700"; }
-    #   { directory = ".local/share/keyrings"; mode = "0700"; }
-    #   ".local/share/direnv"
-    #   ];
-    #   files = [
-    #     ".screenrc"
-    #   ];
-    # };
 
   swapDevices = [
     {

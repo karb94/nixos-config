@@ -148,7 +148,6 @@
       printf "\n\nCreating btrfs subvolumes\n"
       btrfs subvolume create "$btrfs_top_level/nix"
       btrfs subvolume create "$btrfs_top_level/persist"
-      btrfs subvolume create "$btrfs_top_level/home"
       btrfs subvolume create "$btrfs_top_level/swap"
       printf "\n\nUnmounting top-level btrfs sub-volume\n"
       umount -v "$btrfs_top_level"
@@ -164,10 +163,9 @@
       mkdir -vp /mnt/boot
       mount -v "$boot_device" /mnt/boot
       printf "\n\nMounting BTRFS subvolumes\n"
-      mkdir -vp /mnt/{nix,persist,home,swap}
+      mkdir -vp /mnt/{nix,persist,swap}
       mount -vo subvol=nix,compress=zstd,noatime "$luks_device" /mnt/nix
       mount -vo subvol=persist,compress=zstd,noatime "$luks_device" /mnt/persist
-      mount -vo subvol=home,compress=zstd,noatime "$luks_device" /mnt/home
       mount -vo subvol=swap,compress=zstd,noatime "$luks_device" /mnt/swap
     }
 
@@ -180,10 +178,16 @@
     }
 
     create_passwords() {
-      # printf "\n\nset root password\n"
-      # mkpasswd -m sha-512 > /mnt/persist/system/passwords/root
       printf "\n\nSet \"carles\" user password\n"
       mkpasswd -m sha-512 > /mnt/persist/system/passwords/carles
+    }
+
+    clone_dotfiles() {
+      local dotfiles_path='/mnt/persist/home/carles/.config/dotfiles'
+      local dotfiles_repo='https://github.com/karb94/dotfiles.git' 
+      mkdir -vp "$dotfiles_path"
+      git clone "$dotfiles_repo" "$dotfiles_path"
+      chwon -cR 1000:100 "$dotfiles_path"
     }
 
     install_nixos() {
@@ -200,12 +204,10 @@
       format_partitions
       create_subvolumes
       mount_partitions
-      create_persists_dirs
+      # create_persists_dirs
       create_passwords
       install_nixos
     }
-
-    format_disk
     '';
   };
 

@@ -33,6 +33,8 @@
       jq
       lf
       libwebp
+      man-pages
+      man-pages-posix
       neovim
       newsboat
       python311

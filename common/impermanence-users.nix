@@ -7,7 +7,8 @@
     carles = {
       passwordFile = "/persist/system/passwords/carles";
       isNormalUser = true;
-      extraGroups = [ "wheel" "video" ];
+      extraGroups = [ "wheel" ];
+      uid = 1000;
     };
   };
 }

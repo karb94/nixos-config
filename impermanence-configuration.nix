@@ -11,8 +11,8 @@
     ./common/nix.nix
     ./common/packages.nix
     ./common/superuser.nix
-    ./desktop/home-manager.nix
     ./desktop/impermanence-hardware-configuration.nix
+    ./desktop/impermanence-home-manager.nix
     ./desktop/xorg.nix
   ];
 
