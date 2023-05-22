@@ -200,6 +200,7 @@
       create_subvolumes
       mount_partitions
       create_passwords
+      clone_dotfiles
       install_nixos
     }
     '';
