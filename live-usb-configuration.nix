@@ -167,27 +167,22 @@
       mount -vo subvol=nix,compress=zstd,noatime "$luks_device" /mnt/nix
       mount -vo subvol=persist,compress=zstd,noatime "$luks_device" /mnt/persist
       mount -vo subvol=swap,compress=zstd,noatime "$luks_device" /mnt/swap
-    }
-
-    create_persist_dirs() {
-      printf "\n\nCreating /persist directories\n"
-      mkdir -vp /mnt/persist/system/var/log
-      mkdir -vp /mnt/persist/system/var/lib/{nixos,bluetooth,systemd/coredump}
-      mkdir -vp /mnt/persist/system/etc/networkmanager/system-connections
-      mkdir -vp /mnt/persist/system/passwords
+      printf "\n\nCreating persist dirs\n"
+      mkdir -vp /mnt/persist/{system,home}
     }
 
     create_passwords() {
       printf "\n\nSet \"carles\" user password\n"
+      mkdir -vp /mnt/persist/system/passwords
       mkpasswd -m sha-512 > /mnt/persist/system/passwords/carles
     }
 
     clone_dotfiles() {
       local dotfiles_path='/mnt/persist/home/carles/.config/dotfiles'
       local dotfiles_repo='https://github.com/karb94/dotfiles.git' 
-      mkdir -vp "$dotfiles_path"
+      install -vd --owner=1000 --group=100 "$dotfiles_path"
       git clone "$dotfiles_repo" "$dotfiles_path"
-      chwon -cR 1000:100 "$dotfiles_path"
+      chown -cR 1000:100 "$dotfiles_path"
     }
 
     install_nixos() {
@@ -204,7 +199,6 @@
       format_partitions
       create_subvolumes
       mount_partitions
-      # create_persists_dirs
       create_passwords
       install_nixos
     }

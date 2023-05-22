@@ -75,7 +75,7 @@ in {
   xdg.configFile = configSources;
   xdg.dataFile = desktopAppsSources;
 
-  home.persistence."/persistent/home/carles" = {
+  home.persistence."/persist/home/carles" = {
     directories = [
       ".config/dotfiles"
       ".ssh"
