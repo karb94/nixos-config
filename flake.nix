@@ -46,6 +46,8 @@
     dotfiles.url = "github:karb94/dotfiles/nixos";
     dotfiles.flake = false;
 
+    citrix_workspace_2302 = "https://downloads.citrix.com/21641/linuxx64-23.2.0.10.tar.gz?__gda__=exp=1684881251~acl=/*~hmac=f37429dfa2fd8cd56f2640cf19ffe2b8e058e79350ec81b6daa4ddbca303e410";
+
   };
 
   outputs = { self, nixpkgs, ... }@inputs: {

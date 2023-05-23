@@ -180,9 +180,8 @@
     clone_dotfiles() {
       local dotfiles_path='/mnt/persist/home/carles/.config/dotfiles'
       local dotfiles_repo='https://github.com/karb94/dotfiles.git' 
-      install -vd --owner=1000 --group=100 "$dotfiles_path"
-      git clone "$dotfiles_repo" "$dotfiles_path"
-      chown -cR 1000:100 "$dotfiles_path"
+      mkdir -vp "$dotfiles_path"
+      git clone -b nixos --single-branch "$dotfiles_repo" "$dotfiles_path"
     }
 
     install_nixos() {
@@ -201,6 +200,7 @@
       mount_partitions
       create_passwords
       clone_dotfiles
+      chown -R 1000:100 /persist/home/carles
       install_nixos
     }
     '';
