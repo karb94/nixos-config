@@ -16,7 +16,6 @@
 # chmod 0600 /mnt/.swapfile
 # mkswap /mnt/.swapfile -L swap
 # swapon /mnt/.swapfile
-
 # NixOS configuration entrypoint
 # Available through:
 # doas nixos-rebuild switch --flake .#your-hostname (locally)
@@ -24,7 +23,6 @@
 # doas nixos-rebuild switch (if flake is in /etc/nixos)
 # install nixos with:
 # nix-shell -p nixUnstable --run 'sudo nixos-install --no-root-passwd --flake github:karb94/nixos-config#selrak'
-
 {
   description = "NixOS config";
 
@@ -46,38 +44,43 @@
     dotfiles.url = "github:karb94/dotfiles/nixos";
     dotfiles.flake = false;
 
-    citrix_workspace_2302 = "https://downloads.citrix.com/21641/linuxx64-23.2.0.10.tar.gz?__gda__=exp=1684881251~acl=/*~hmac=f37429dfa2fd8cd56f2640cf19ffe2b8e058e79350ec81b6daa4ddbca303e410";
-
+    # citrix_workspace_2302.url = "tarball+https://downloads.citrix.com/21641/linuxx64-23.2.0.10.tar.gz?__gda__=exp=1684881251~acl=/*~hmac=f37429dfa2fd8cd56f2640cf19ffe2b8e058e79350ec81b6daa4ddbca303e410";
+    # citrix_workspace_2302.flake = false;
+    # "https://downloads.citrix.com/21641/linuxx64-23.2.0.10.tar.gz?__gda__=exp=1684881251~acl=%2f*~hmac=f37429dfa2fd8cd56f2640cf19ffe2b8e058e79350ec81b6daa4ddbca303e410"
+    # "https://downloads.citrix.com/21641/linuxx64-23.2.0.10.tar.gz?__gda__=exp=1684881251~acl=/*~hmac=f37429dfa2fd8cd56f2640cf19ffe2b8e058e79350ec81b6daa4ddbca303e410"
   };
 
-  outputs = { self, nixpkgs, ... }@inputs: {
-
+  outputs = {
+    self,
+    nixpkgs,
+    ...
+  } @ inputs: {
     nixosConfigurations = {
       # FIXME replace with your hostname
       selrak = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        specialArgs = { inherit inputs; }; # Pass flake inputs to our config
-        modules = [ ./desktop-configuration.nix ];
+        specialArgs = {inherit inputs;}; # Pass flake inputs to our config
+        modules = [./desktop-configuration.nix];
       };
 
       impermanence = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        specialArgs = { inherit inputs; };
-          modules = [ ./impermanence-configuration.nix ];
+        specialArgs = {inherit inputs;};
+        modules = [./impermanence-configuration.nix];
       };
 
       # Build ISO image with the following command:
       # nix build .#nixosConfigurations.live-usb.config.system.build.isoImage --impure
+      # doas dd if=result/iso/id-live.iso of=/dev/sdb bs=4M conv=fsync
       live-usb = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        modules = [ ./live-usb-configuration.nix ];
+        modules = [./live-usb-configuration.nix];
       };
 
       # libvirt_vm = nixpkgs.lib.nixosSystem {
       #   specialArgs = { inherit inputs; }; # Pass flake inputs to our config
       #   modules = [ ./configuration.nix ];
       # };
-
     };
   };
 }
