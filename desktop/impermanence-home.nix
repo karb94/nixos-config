@@ -80,10 +80,7 @@ in {
       ".config/dotfiles"
       ".ssh"
       ".local/share/icons"
-      {
-        directory = ".local/share/Steam";
-        method = "symlink";
-      }
+      ".config/BraveSoftware/Brave-Browser"
     ];
     files = [
       ".local/share/bash/history"

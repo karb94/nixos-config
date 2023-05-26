@@ -14,50 +14,51 @@ with pkgs; let
     oldAttrs: {src = citrix_workspace_2302_src;}
   );
   general_pkgs = [
-    alacritty
-    brave
-    citrix_workspace_ovr
-    flameshot
-    freetube
-    mpv
-    spotify
-    tor
-    zathura
+    alacritty            # Terminal emulator
+    brave                # Web browser
+    citrix_workspace_ovr # Remote desktop
+    flameshot            # Screenshot tool
+    freetube             # FOSS youtube front-end
+    mpv                  # Video player
+    spotify              # Music player
+    tor                  # Secure and private internet browser
+    zathura              # PDF viewer
   ];
 
   cli_pkgs = [
-    alejandra
-    bash
-    bashInteractive
-    bottom
-    clang
-    cmake
-    coreutils
-    cryptsetup
-    fd
-    file
-    findutils
-    fzf
-    git
-    gnumake
-    gptfdisk
-    jq
-    lf
-    libwebp
-    man-pages
-    man-pages-posix
-    neovim
-    newsboat
-    python311
-    ripgrep
-    tree
-    yt-dlp
+    bash            # Shell interpreter
+    bashInteractive # Shell interpreter
+    bitwarden-cli   # Password manager
+    bottom          # Computer resource monitor
+    clang           # C/C++ compiler
+    cmake           # Crossplatform project builder
+    coreutils       # GNU core utils
+    cryptsetup      # Tool to manage encrypted devices (LUKS)
+    fd              # Better `find` command
+    file            # Tool to check the type of a file
+    findutils       # GNU `find` and `xargs` commands
+    fzf             # Fuzzy finder
+    git             # Version control
+    gnumake         # `make` command
+    gptfdisk        # `gdisk` and `sgdisk` disk management tools
+    jq              # JSON parser
+    lf              # Terminal file manager
+    libwebp         # Tool to convert webp image format to png/jpg
+    man-pages       # Man pages
+    man-pages-posix # Posix man pages
+    newsboat        # Terminal RSS feed manager
+    python311       # Python 3.11
+    ripgrep         # Better `grep` command
+    tree            # Tree representation of a directory
+    yt-dlp          # Youtube video downloader
   ];
 
   neovim_pkgs = [
-    nil
-    tree-sitter
-    nodePackages.bash-language-server
+    neovim                            # Terminal editor
+    alejandra                         # Nix formatter
+    nil                               # Nix language server
+    tree-sitter                       # Code parser
+    nodePackages.bash-language-server # Bash language server
   ];
 in {
   environment.systemPackages = general_pkgs ++ cli_pkgs ++ neovim_pkgs;
