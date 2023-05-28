@@ -78,9 +78,9 @@ in {
   home.persistence."/persist/home/carles" = {
     directories = [
       ".config/dotfiles"
-      ".ssh"
       ".local/share/icons"
       ".config/BraveSoftware/Brave-Browser"
+      { directory = ".ssh"; mode = "0700"; }
     ];
     files = [
       ".local/share/bash/history"

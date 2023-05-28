@@ -125,6 +125,19 @@ partition_disk() {
     git clone -b nixos --single-branch "$dotfiles_repo" "$dotfiles_path"
   }
 
+  get_ssh_key() {
+    local bw_session=$(bw unlock --raw)
+    local id_ed25519_pub="/mnt/persist/home/carles/.ssh/id_ed25519.pub"
+    local id_ed25519="/mnt/persist/home/carles/.ssh/id_ed25519"
+    bw get notes "id_ed25519.pub" --session "$(bw_session)" > "$id_ed25519_pub"
+    bw get notes "id_ed25519" --session "$(bw_session)" > "$id_ed25519"
+    bw lock
+    chown 1000:100 "$id_ed25519_pub"
+    chown 1000:100 "$id_ed25519"
+    chmod 644 "$id_ed25519_pub"
+    chmod 600 "$id_ed25519"
+  }
+
   install_nixos() {
     printf "\n\nInstalling nixos\n"
     nixos-install --no-root-passwd --flake 'github:karb94/nixos-config#impermanence'
@@ -141,6 +154,7 @@ partition_disk() {
     mount_partitions
     create_passwords
     clone_dotfiles
+    get_ssh_keys
     chown -R 1000:100 /persist/home/carles
     install_nixos
   }
