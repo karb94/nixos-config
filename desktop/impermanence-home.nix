@@ -80,7 +80,7 @@ in {
       ".config/dotfiles"
       ".local/share/icons"
       ".config/BraveSoftware/Brave-Browser"
-      { directory = ".ssh"; mode = "0700"; }
+      ".ssh"
     ];
     files = [
       ".local/share/bash/history"
