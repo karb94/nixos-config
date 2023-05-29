@@ -16,7 +16,7 @@ with pkgs; let
   general_pkgs = [
     alacritty            # Terminal emulator
     brave                # Web browser
-    citrix_workspace_ovr # Remote desktop
+    # citrix_workspace_ovr # Remote desktop
     flameshot            # Screenshot tool
     freetube             # FOSS youtube front-end
     mpv                  # Video player
