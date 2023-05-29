@@ -36,7 +36,7 @@
     "newsboat"
     "nvim/after"
     # "nvim/init.vim"
-    "nvim/lua"
+    # "nvim/lua"
     "picom"
     "rofi"
     "sxhkd"
