@@ -35,7 +35,7 @@
     "newsboat"
     "newsboat"
     "nvim/after"
-    "nvim/init.vim"
+    # "nvim/init.vim"
     "nvim/lua"
     "picom"
     "rofi"
