@@ -5,18 +5,10 @@
   ...
 }:
 with pkgs; let
-  citrix_workspace_2302_src = fetchurl {
-    url = "https://downloads.citrix.com/21641/linuxx64-23.2.0.10.tar.gz?__gda__=exp=1685116280~acl=/*~hmac=44a44d5e5f6479108953b43f87dfb9916f75c65439a2414297a2062ee1bff32e";
-    name = "linuxx64-23.2.0.10.tar.gz";
-    sha256 = "d0030a4782ba4b2628139635a12a7de044a4eb36906ef1eadb05b6ea77c1a7bc";
-  };
-  citrix_workspace_ovr = citrix_workspace.overrideAttrs (
-    oldAttrs: {src = citrix_workspace_2302_src;}
-  );
   general_pkgs = [
     alacritty            # Terminal emulator
     brave                # Web browser
-    # citrix_workspace_ovr # Remote desktop
+    citrix_workspace     # Remote desktop
     flameshot            # Screenshot tool
     freetube             # FOSS youtube front-end
     mpv                  # Video player
