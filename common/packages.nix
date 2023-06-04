@@ -5,27 +5,13 @@
   ...
 }:
 with pkgs; let
-  general_pkgs = [
-    alacritty            # Terminal emulator
-    brave                # Web browser
-    citrix_workspace     # Remote desktop
-    flameshot            # Screenshot tool
-    freetube             # FOSS youtube front-end
-    mpv                  # Video player
-    spotify              # Music player
-    tor                  # Secure and private internet browser
-    zathura              # PDF viewer
-  ];
-
   cli_pkgs = [
     bash            # Bash scripting language
     bashInteractive # Bash shell interpreter
     complete-alias  # Bash alias completion
-    bitwarden-cli   # Password manager
     bottom          # Computer resource monitor
-    #clang           # C/C++ compiler
-    gcc           # C/C++ compiler
-    libcxx          # C++ standard library (needed to compile software)
+    clang           # C/C++ compiler
+    gcc             # C/C++ compiler
     cmake           # Crossplatform project builder
     coreutils       # GNU core utils
     cryptsetup      # Tool to manage encrypted devices (LUKS)
@@ -45,7 +31,6 @@ with pkgs; let
     python311       # Python 3.11
     ripgrep         # Better `grep` command
     tree            # Tree representation of a directory
-    yt-dlp          # Youtube video downloader
   ];
 
   neovim_pkgs = [
@@ -58,24 +43,7 @@ with pkgs; let
     lua-language-server               # Lua language server
   ];
 in {
-  environment.systemPackages = general_pkgs ++ cli_pkgs ++ neovim_pkgs;
-
   nixpkgs.config.allowUnfree = true;
 
-  programs.chromium = {
-    enable = true;
-    extensions = [
-      "nngceckbapebfimnlniiiahkandclblb" # Bitwarden
-      "cjpalhdlnbpafiamejdnhcphjbkeiagm" # uBlock Origin
-      "dbepggeogbaibhgnhhndojpepiihcmeb" # Vimium
-      ( # Bypass paywalls
-        lib.strings.concatStrings [
-          "dcpihecpambacapedldabdbpakmachpb;"
-          "https://raw.githubusercontent.com/"
-          "iamadamdev/bypass-paywalls-chrome/"
-          "master/src/updates/updates.xml"
-        ]
-      )
-    ];
-  };
+  environment.systemPackages = cli_pkgs ++ neovim_pkgs;
 }

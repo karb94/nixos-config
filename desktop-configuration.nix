@@ -13,6 +13,7 @@
     ./common/users.nix
     ./desktop/hardware-configuration.nix
     ./desktop/home-manager.nix
+    ./desktop/packages.nix
     ./desktop/xorg.nix
   ];
 

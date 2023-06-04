@@ -34,7 +34,7 @@
     "mpv"
     "newsboat"
     "newsboat"
-    "nvim/after"
+    # "nvim/after"
     #"nvim/init.vim"
     #"nvim/lua"
     "picom"
@@ -68,7 +68,9 @@ in {
 
   home.file = homeSources;
   xdg.enable = true; # track XDG files and directories
-  xdg.configFile = configSources;
+  xdg.configFile = configSources // {
+    neovim = {source = "./.config"; recursive = true;};
+  };
   xdg.dataFile = desktopAppsSources;
 
 

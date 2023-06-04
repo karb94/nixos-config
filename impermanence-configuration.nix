@@ -13,6 +13,7 @@
     ./common/superuser.nix
     ./desktop/impermanence-hardware-configuration.nix
     ./desktop/impermanence-home-manager.nix
+    ./desktop/packages.nix
     ./desktop/xorg.nix
   ];
 
