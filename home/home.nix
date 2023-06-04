@@ -66,15 +66,13 @@ in {
   home.username = "carles";
   home.homeDirectory = "/home/carles";
 
-  home.file = homeSources // {
-    dotfiles = {source = ./.config; target = ".config"; recursive = true;};
-  };
+  home.file = homeSources;
 #   home.file = {
 #     dotfiles = {source = ./.config; target = ".config"; recursive = true;};
 # };
   xdg.enable = true; # track XDG files and directories
-  xdg.configFile = configSources;
+  xdg.configFile = configSources // {
+    nvim = {source = ./dotfiles/.config/nvim; recursive = true;};
+  };
   xdg.dataFile = desktopAppsSources;
-
-
 }

@@ -9,7 +9,7 @@ local get_opts = function()
       -- ["<ESC>"] = function(fallback) if cmp.visible() then cmp.abort() else fallback() end end,
       ["<C-e>"] = cmp.mapping.abort(),
       -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-      ["<C-i>"] = cmp.mapping.confirm({select = false, behavior = cmp.ConfirmBehavior.Replace}),
+      ["<C-i>"] = cmp.mapping.confirm({select = true, behavior = cmp.ConfirmBehavior.Replace}),
       ["<CR>"] = cmp.mapping.confirm({behavior = cmp.ConfirmBehavior.Replace}),
     }),
     -- REQUIRED - you must specify a snippet engine
