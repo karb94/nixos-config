@@ -1,6 +1,5 @@
 # Packages to install
 {
-  lib,
   pkgs,
   ...
 }:

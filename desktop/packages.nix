@@ -22,9 +22,16 @@ with pkgs; let
     yt-dlp          # Youtube video downloader
   ];
 
+  shell_scripts = [
+    "dy"
+  ];
+  bin_pkgs = let
+    mkShellScript = import ./mkShellScript;
+  in map mkShellScript shell_scripts;
+
 in {
 
-  environment.systemPackages = general_pkgs ++ cli_pkgs;
+  environment.systemPackages = general_pkgs ++ cli_pkgs ++ bin_pkgs;
 
   programs.chromium = {
     enable = true;
