@@ -18,11 +18,14 @@ with pkgs; let
   ];
 
   cli_pkgs = [
-    bash            # Shell interpreter
-    bashInteractive # Shell interpreter
+    bash            # Bash scripting language
+    bashInteractive # Bash shell interpreter
+    complete-alias  # Bash alias completion
     bitwarden-cli   # Password manager
     bottom          # Computer resource monitor
-    clang           # C/C++ compiler
+    #clang           # C/C++ compiler
+    gcc           # C/C++ compiler
+    libcxx          # C++ standard library (needed to compile software)
     cmake           # Crossplatform project builder
     coreutils       # GNU core utils
     cryptsetup      # Tool to manage encrypted devices (LUKS)
@@ -51,6 +54,8 @@ with pkgs; let
     nil                               # Nix language server
     tree-sitter                       # Code parser
     nodePackages.bash-language-server # Bash language server
+    nodePackages.vim-language-server  # Vim language server
+    lua-language-server               # Lua language server
   ];
 in {
   environment.systemPackages = general_pkgs ++ cli_pkgs ++ neovim_pkgs;

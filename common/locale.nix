@@ -1,5 +1,6 @@
 # Locale
 {
+  time.timeZone = "Europe/London";
   i18n.supportedLocales = [
     "en_GB.UTF-8/UTF-8"
     "es_ES.UTF-8/UTF-8"
