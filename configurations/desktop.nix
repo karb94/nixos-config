@@ -12,7 +12,7 @@
     ./common/superuser.nix
     ./common/users.nix
     ./desktop/hardware-configuration.nix
-    ./desktop/home-manager.nix
+    ./home/home-manager.nix
     ./desktop/packages.nix
     ./desktop/xorg.nix
   ];

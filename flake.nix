@@ -60,13 +60,13 @@
       selrak = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = {inherit inputs;}; # Pass flake inputs to our config
-        modules = [./desktop-configuration.nix];
+        modules = [configurations/desktop.nix];
       };
 
       impermanence = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = {inherit inputs;};
-        modules = [./impermanence-configuration.nix];
+        modules = [configurations/impermanence.nix];
       };
 
       # Build ISO image with the following command:
@@ -74,7 +74,7 @@
       # doas dd if=result/iso/id-live.iso of=/dev/sdb bs=4M conv=fsync
       live-usb = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        modules = [./live-usb-configuration.nix];
+        modules = [configurations/live-usb.nix];
       };
 
       # libvirt_vm = nixpkgs.lib.nixosSystem {
