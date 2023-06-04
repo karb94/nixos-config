@@ -1,7 +1,6 @@
-{name, dependencies, system ?  "x86_64-linux"}:
+pkgs: {name, dependencies, system ?  "x86_64-linux"}:
 let 
-  pkgs = import <nixpkgs> {system = system;};
-  src = builtins.readFile "bin/${name}";
+src = builtins.readFile (./bin + "/${name}");
   buildInputs = [dependencies];
   script = (pkgs.writeScriptBin name src).overrideAttrs(old: {
     buildCommand = "${old.buildCommand}\n patchShebangs $out";

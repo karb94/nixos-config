@@ -23,10 +23,10 @@ with pkgs; let
   ];
 
   shell_scripts = [
-    "dy"
+    {name = "dy"; dependencies = [];}
   ];
   bin_pkgs = let
-    mkShellScript = import ./mkShellScript;
+    mkShellScript = import ./mkShellScript.nix pkgs;
   in map mkShellScript shell_scripts;
 
 in {
