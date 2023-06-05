@@ -23,7 +23,7 @@ with pkgs; let
     gptfdisk        # `gdisk` and `sgdisk` disk management tools
     jq              # JSON parser
     lf              # Terminal file manager
-    libwebp         # Tool to convert webp image format to png/jpg
+             # Tool to convert webp image format to png/jpg
     man-pages       # Man pages
     man-pages-posix # Posix man pages
     newsboat        # Terminal RSS feed manager
