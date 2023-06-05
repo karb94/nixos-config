@@ -24,7 +24,7 @@ general_pkgs = with pkgs; [
   ];
 
   shell_scripts = with pkgs; [
-    {name = "dy"; dependencies =  [ yt-dlp mpv jq bspc libwebp curl file ];}
+    {name = "dy"; dependencies =  [ yt-dlp mpv jq bspwm libwebp curl file ];}
     {name = "link_handler"; dependencies =  [ curl gnused nsxiv zathura ];}
     {name = "pair_hp"; dependencies =  [ bluez ];}
     {name = "xob_volume"; dependencies =  [ xob wireplumber ];}
