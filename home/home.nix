@@ -2,6 +2,9 @@
   config,
   pkgs,
   lib,
+  inputs,
+  impermanence,
+  primaryUser,
   ...
 }: let
   repoName = "dotfiles";
@@ -62,14 +65,29 @@
     };
   in (lib.attrsets.mapAttrs' f desktopApps);
 in {
+
+  imports = [ inputs.impermanence.nixosModules.home-manager.impermanence ];
+
+  home.persistence = lib.mkIf impermanence {
+    "/persist/home/${primaryUser}" = {
+      directories = [
+        ".config/dotfiles"
+          ".local/share/icons"
+          ".config/BraveSoftware/Brave-Browser"
+          ".ssh"
+      ];
+      files = [
+        ".local/share/bash/history"
+          ".local/share/newsboat/cache.db"
+      ];
+    };
+  };
+
   home.stateVersion = "22.11";
-  home.username = "carles";
-  home.homeDirectory = "/home/carles";
+  home.username = primaryUser;
+  home.homeDirectory = "/home/${primaryUser}";
 
   home.file = homeSources;
-#   home.file = {
-#     dotfiles = {source = ./.config; target = ".config"; recursive = true;};
-# };
   xdg.enable = true; # track XDG files and directories
   xdg.configFile = configSources // {
     nvim = {source = ./dotfiles/.config/nvim; recursive = true;};

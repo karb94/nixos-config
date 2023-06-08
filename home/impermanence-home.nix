@@ -64,7 +64,7 @@
   in (lib.attrsets.mapAttrs' f desktopApps);
 in {
 
-  imports = [ inputs.impermanence.nixosModules.home-manager.impermanence ];
+  imports = [ ./impermanence.nix ];
   
   home.stateVersion = "22.11";
   home.username = "carles";

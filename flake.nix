@@ -55,17 +55,26 @@
     nixpkgs,
     ...
   } @ inputs: {
-    nixosConfigurations = {
-      # FIXME replace with your hostname
+    nixosConfigurations = let
+      primaryUser = "carles";
+      in {
       selrak = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        specialArgs = {inherit inputs;}; # Pass flake inputs to our config
+        specialArgs = {
+          inherit inputs;
+          impermanence = false;
+          primaryUser = primaryUser;
+        }; # Pass flake inputs to our config
         modules = [configurations/desktop.nix];
       };
 
       impermanence = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        specialArgs = {inherit inputs;};
+        specialArgs = {
+          inherit inputs;
+          impermanence = true;
+          primaryUser = primaryUser;
+        };
         modules = [configurations/impermanence.nix];
       };
 
