@@ -69,11 +69,21 @@ partition_disk() {
   format_luks() {
     printf "\n\nEncrypting root partition with luks\n"
     cryptsetup -v luksFormat "$root_device"
+    while [ $? -ne 0 ]
+    do
+      printf "\n\nIncorrect password. try again.\n"
+      cryptsetup -v luksFormat "$root_device"
+    done
   }
 
   open_luks() {
     printf "\n\nOpening encrypted partition and mapping it to "$luks_name"\n"
     cryptsetup -v open "$root_device" "$luks_name"
+    while [ $? -ne 0 ]
+    do
+      printf "\n\nIncorrect password. try again.\n"
+      cryptsetup -v open "$root_device" "$luks_name"
+    done
   }
 
   format_partitions() {
@@ -116,6 +126,11 @@ partition_disk() {
     printf "\n\nSet \"carles\" user password\n"
     mkdir -vp /mnt/persist/system/passwords
     mkpasswd -m sha-512 > /mnt/persist/system/passwords/carles
+    while [ $? -ne 0 ]
+    do
+      printf "\n\nIncorrect password. try again.\n"
+      mkpasswd -m sha-512 > /mnt/persist/system/passwords/carles
+    done
   }
 
   clone_dotfiles() {
@@ -154,7 +169,7 @@ partition_disk() {
     mount_partitions
     create_passwords
     clone_dotfiles
-    get_ssh_keys
+    get_ssh_key
     chown -R 1000:100 /persist/home/carles
     install_nixos
   }
