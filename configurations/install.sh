@@ -159,6 +159,6 @@ format_disk() {
   create_passwords
   clone_dotfiles
   get_ssh_key
-  chown -R 1000:100 /persist/home/carles
+  chown -R 1000:100 "/mnt/persist/home/carles"
   install_nixos
 }
