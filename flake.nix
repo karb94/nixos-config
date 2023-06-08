@@ -75,7 +75,7 @@
           impermanence = true;
           primaryUser = primaryUser;
         };
-        modules = [configurations/impermanence.nix];
+        modules = [configurations/desktop.nix];
       };
 
       # Build ISO image with the following command:

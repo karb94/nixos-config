@@ -14,12 +14,8 @@ btrfs_top_level="/tmp/root"
 # connect to the wifi network
 wifi_connect() {
   printf "\n\nConnecting to '3C9C 5Ghz' wifi\n"
-  nmcli --ask device wifi connect '3C9C 5Ghz'
-  while [ $? -ne 0 ]
-  do
-    printf "\n\nIncorrect password. try again.\n"
-    nmcli --ask device wifi connect '3C9C 5Ghz'
-  done
+  until nmcli --ask device wifi connect '3C9C 5Ghz'
+  do printf "\n\nIncorrect password. try again.\n"; done
 }
 
 # select a disk
@@ -43,7 +39,7 @@ choose_disk() {
       if [[ $reply =~ ^[yy]$ ]]; then break; fi;
       done
       echo "/dev/$disk"
-    }
+}
 
 # delete the partition table of a disk
 wipe_disk() {
@@ -66,110 +62,103 @@ partition_disk() {
     -p "$device"
   }
 
-  format_luks() {
-    printf "\n\nEncrypting root partition with luks\n"
-    cryptsetup -v luksFormat "$root_device"
-    while [ $? -ne 0 ]
-    do
-      printf "\n\nIncorrect password. try again.\n"
-      cryptsetup -v luksFormat "$root_device"
-    done
-  }
+format_luks() {
+  printf "\n\nEncrypting root partition with luks\n"
+  until cryptsetup -v luksFormat "$root_device"
+  do printf "\n\nIncorrect password. try again.\n"; done
+}
 
-  open_luks() {
-    printf "\n\nOpening encrypted partition and mapping it to "$luks_name"\n"
-    cryptsetup -v open "$root_device" "$luks_name"
-    while [ $? -ne 0 ]
-    do
-      printf "\n\nIncorrect password. try again.\n"
-      cryptsetup -v open "$root_device" "$luks_name"
-    done
-  }
+open_luks() {
+  printf "\n\nOpening encrypted partition and mapping it to "$luks_name"\n"
+  until cryptsetup -v open "$root_device" "$luks_name"
+  do printf "\n\nIncorrect password. try again.\n"; done
+}
 
-  format_partitions() {
-    printf "\n\nCreating FAT32 (boot) and BTRFS (root) filesystems\n"
-    mkfs.vfat "$boot_device"
-    mkfs.btrfs "$luks_device"
-  }
+format_partitions() {
+  printf "\n\nCreating FAT32 (boot) and BTRFS (root) filesystems\n"
+  mkfs.vfat "$boot_device"
+  mkfs.btrfs "$luks_device"
+}
 
-  create_subvolumes() {
-    printf "\n\nMounting top-level btrfs sub-volume to $btrfs_top_level\n"
-    mkdir -pv /tmp/root
-    mount "$luks_device" "$btrfs_top_level"
-    printf "\n\nCreating btrfs subvolumes\n"
-    btrfs subvolume create "$btrfs_top_level/nix"
-    btrfs subvolume create "$btrfs_top_level/persist"
-    btrfs subvolume create "$btrfs_top_level/swap"
-    printf "\n\nUnmounting top-level btrfs sub-volume\n"
-    umount -v "$btrfs_top_level"
-  }
+create_subvolumes() {
+  printf "\n\nMounting top-level btrfs sub-volume to $btrfs_top_level\n"
+  mkdir -pv /tmp/root
+  mount "$luks_device" "$btrfs_top_level"
+  printf "\n\nCreating btrfs subvolumes\n"
+  btrfs subvolume create "$btrfs_top_level/nix"
+  btrfs subvolume create "$btrfs_top_level/persist"
+  btrfs subvolume create "$btrfs_top_level/swap"
+  printf "\n\nUnmounting top-level btrfs sub-volume\n"
+  umount -v "$btrfs_top_level"
+}
 
-  mount_partitions() {
-    printf "\n\nMounting root tmpfs to /mnt\n"
-    mount -t tmpfs none /mnt
-    printf "\n\nMounting top-level btrfs sub-volume to $btrfs_top_level\n"
-    mkdir -pv /tmp/root
-    mount "$luks_device" "$btrfs_top_level"
-    printf "\n\nMounting boot partition\n"
-    mkdir -vp /mnt/boot
-    mount -v "$boot_device" /mnt/boot
-    printf "\n\nMounting BTRFS subvolumes\n"
-    mkdir -vp /mnt/{nix,persist,swap}
-    mount -vo subvol=nix,compress=zstd,noatime "$luks_device" /mnt/nix
-    mount -vo subvol=persist,compress=zstd,noatime "$luks_device" /mnt/persist
-    mount -vo subvol=swap,compress=zstd,noatime "$luks_device" /mnt/swap
-    printf "\n\nCreating persist dirs\n"
-    mkdir -vp /mnt/persist/{system,home}
-  }
+mount_partitions() {
+  printf "\n\nMounting root tmpfs to /mnt\n"
+  mount -t tmpfs none /mnt
+  printf "\n\nMounting top-level btrfs sub-volume to $btrfs_top_level\n"
+  mkdir -pv /tmp/root
+  mount "$luks_device" "$btrfs_top_level"
+  printf "\n\nMounting boot partition\n"
+  mkdir -vp /mnt/boot
+  mount -v "$boot_device" /mnt/boot
+  printf "\n\nMounting BTRFS subvolumes\n"
+  mkdir -vp /mnt/{nix,persist,swap}
+  mount -vo subvol=nix,compress=zstd,noatime "$luks_device" /mnt/nix
+  mount -vo subvol=persist,compress=zstd,noatime "$luks_device" /mnt/persist
+  mount -vo subvol=swap,compress=zstd,noatime "$luks_device" /mnt/swap
+  printf "\n\nCreating persist dirs\n"
+  mkdir -vp /mnt/persist/{system,home}
+}
 
-  create_passwords() {
-    printf "\n\nSet \"carles\" user password\n"
-    mkdir -vp /mnt/persist/system/passwords
+create_passwords() {
+  printf "\n\nSet \"carles\" user password\n"
+  mkdir -vp /mnt/persist/system/passwords
+  mkpasswd -m sha-512 > /mnt/persist/system/passwords/carles
+  while [ $? -ne 0 ]
+  do
+    printf "\n\nIncorrect password. try again.\n"
     mkpasswd -m sha-512 > /mnt/persist/system/passwords/carles
-    while [ $? -ne 0 ]
-    do
-      printf "\n\nIncorrect password. try again.\n"
-      mkpasswd -m sha-512 > /mnt/persist/system/passwords/carles
-    done
-  }
+  done
+}
 
-  clone_dotfiles() {
-    local dotfiles_path='/mnt/persist/home/carles/.config/dotfiles'
-    local dotfiles_repo='https://github.com/karb94/dotfiles.git' 
-    mkdir -vp "$dotfiles_path"
-    git clone -b nixos --single-branch "$dotfiles_repo" "$dotfiles_path"
-  }
+clone_dotfiles() {
+  local dotfiles_path='/mnt/persist/home/carles/.config/dotfiles'
+  local dotfiles_repo='https://github.com/karb94/dotfiles.git' 
+  mkdir -vp "$dotfiles_path"
+  git clone -b nixos --single-branch "$dotfiles_repo" "$dotfiles_path"
+}
 
-  get_ssh_key() {
-    local bw_session=$(bw unlock --raw)
-    local id_ed25519_pub="/mnt/persist/home/carles/.ssh/id_ed25519.pub"
-    local id_ed25519="/mnt/persist/home/carles/.ssh/id_ed25519"
-    bw get notes "id_ed25519.pub" --session "$(bw_session)" > "$id_ed25519_pub"
-    bw get notes "id_ed25519" --session "$(bw_session)" > "$id_ed25519"
-    bw lock
-    chown 1000:100 "$id_ed25519_pub"
-    chown 1000:100 "$id_ed25519"
-    chmod 644 "$id_ed25519_pub"
-    chmod 600 "$id_ed25519"
-  }
+get_ssh_key() {
+  local id_ed25519_pub="/mnt/persist/home/carles/.ssh/id_ed25519.pub"
+  local id_ed25519="/mnt/persist/home/carles/.ssh/id_ed25519"
+  mkdir -vp "/mnt/persist/home/carles/.ssh"
+  local bw_session=$(bw login --raw)
+  bw get notes "id_ed25519.pub" --session "$bw_session" > "$id_ed25519_pub"
+  bw get notes "id_ed25519" --session "$bw_session" > "$id_ed25519"
+  bw lock
+  chown 1000:100 "$id_ed25519_pub"
+  chown 1000:100 "$id_ed25519"
+  chmod 644 "$id_ed25519_pub"
+  chmod 600 "$id_ed25519"
+}
 
-  install_nixos() {
-    printf "\n\nInstalling nixos\n"
-    nixos-install --no-root-passwd --flake 'github:karb94/nixos-config#impermanence'
-  }
+install_nixos() {
+  printf "\n\nInstalling nixos\n"
+  nixos-install --no-root-passwd --flake 'github:karb94/nixos-config#impermanence'
+}
 
-  format_disk() {
-    local device=$1
-    wipe_disk "$device"
-    partition_disk "$device"
-    format_luks
-    open_luks
-    format_partitions
-    create_subvolumes
-    mount_partitions
-    create_passwords
-    clone_dotfiles
-    get_ssh_key
-    chown -R 1000:100 /persist/home/carles
-    install_nixos
-  }
+format_disk() {
+  local device=$1
+  wipe_disk "$device"
+  partition_disk "$device"
+  format_luks
+  open_luks
+  format_partitions
+  create_subvolumes
+  mount_partitions
+  create_passwords
+  clone_dotfiles
+  get_ssh_key
+  chown -R 1000:100 /persist/home/carles
+  install_nixos
+}
