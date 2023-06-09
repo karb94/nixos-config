@@ -63,6 +63,7 @@
         system = system;
         specialArgs = {
           inherit inputs;
+          hostname = "selrak";
           impermanence = false;
           primaryUser = primaryUser;
         }; # Pass flake inputs to our config
@@ -73,6 +74,7 @@
         system = system;
         specialArgs = {
           inherit inputs;
+          hostname = "brutus";
           impermanence = true;
           primaryUser = primaryUser;
         };

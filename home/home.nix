@@ -65,20 +65,20 @@
     };
   in (lib.attrsets.mapAttrs' f desktopApps);
 in {
-
-  imports = [ inputs.impermanence.nixosModules.home-manager.impermanence ];
+  imports = [inputs.impermanence.nixosModules.home-manager.impermanence];
 
   home.persistence = lib.mkIf impermanence {
     "/persist/home/${primaryUser}" = {
       directories = [
         ".config/dotfiles"
-          ".local/share/icons"
-          ".config/BraveSoftware/Brave-Browser"
-          ".ssh"
+        "nixos-config"
+        ".local/share/icons"
+        ".config/BraveSoftware/Brave-Browser"
+        ".ssh"
       ];
       files = [
         ".local/share/bash/history"
-          ".local/share/newsboat/cache.db"
+        ".local/share/newsboat/cache.db"
       ];
     };
   };
@@ -89,8 +89,13 @@ in {
 
   home.file = homeSources;
   xdg.enable = true; # track XDG files and directories
-  xdg.configFile = configSources // {
-    nvim = {source = ./dotfiles/.config/nvim; recursive = true;};
-  };
+  xdg.configFile =
+    configSources
+    // {
+      nvim = {
+        source = ./dotfiles/.config/nvim;
+        recursive = true;
+      };
+    };
   xdg.dataFile = desktopAppsSources;
 }

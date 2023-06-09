@@ -70,6 +70,7 @@ in {
             "/var/lib/bluetooth"
             "/var/lib/nixos"
             "/var/lib/systemd/coredump"
+            "/etc/nixos"
             "/etc/NetworkManager/system-connections"
           ];
           files = [
