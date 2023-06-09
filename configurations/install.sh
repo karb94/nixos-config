@@ -113,12 +113,7 @@ mount_partitions() {
 create_passwords() {
   printf "\n\nSet \"carles\" user password\n"
   mkdir -vp /mnt/persist/system/passwords
-  mkpasswd -m sha-512 > /mnt/persist/system/passwords/carles
-  while [ $? -ne 0 ]
-  do
-    printf "\n\nIncorrect password. try again.\n"
-    mkpasswd -m sha-512 > /mnt/persist/system/passwords/carles
-  done
+  mkpasswd --method=yescrypt --rounds=11 > /mnt/persist/system/passwords/carles
 }
 
 clone_dotfiles() {
@@ -133,8 +128,8 @@ get_ssh_key() {
   local id_ed25519="/mnt/persist/home/carles/.ssh/id_ed25519"
   mkdir -vp "/mnt/persist/home/carles/.ssh"
   local bw_session=$(bw login --raw)
-  bw get notes "id_ed25519.pub" --session "$bw_session" > "$id_ed25519_pub"
-  bw get notes "id_ed25519" --session "$bw_session" > "$id_ed25519"
+  bw get notes "London desktop ssh public key" --session "$bw_session" > "$id_ed25519_pub"
+  bw get notes "London desktop ssh private key" --session "$bw_session" > "$id_ed25519"
   bw lock
   chown 1000:100 "$id_ed25519_pub"
   chown 1000:100 "$id_ed25519"
@@ -149,6 +144,7 @@ install_nixos() {
 
 format_disk() {
   local device=$1
+  wifi_connect
   wipe_disk "$device"
   partition_disk "$device"
   format_luks

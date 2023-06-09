@@ -56,10 +56,11 @@
     ...
   } @ inputs: {
     nixosConfigurations = let
+      system = "x86_64-linux";
       primaryUser = "carles";
       in {
       selrak = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
+        system = system;
         specialArgs = {
           inherit inputs;
           impermanence = false;
@@ -68,8 +69,8 @@
         modules = [configurations/desktop.nix];
       };
 
-      impermanence = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
+      brutus = nixpkgs.lib.nixosSystem {
+        system = system;
         specialArgs = {
           inherit inputs;
           impermanence = true;
@@ -82,7 +83,7 @@
       # nix build .#nixosConfigurations.live-usb.config.system.build.isoImage --impure
       # doas dd if=result/iso/id-live.iso of=/dev/sdb bs=4M conv=fsync
       live-usb = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
+        system = system;
         modules = [configurations/live-usb.nix];
       };
 
