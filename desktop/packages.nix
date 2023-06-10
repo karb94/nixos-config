@@ -17,6 +17,7 @@ general_pkgs = with pkgs; [
     tor                  # Secure and private internet browser
     zathura              # PDF viewer
     networkmanagerapplet
+    logseq
   ];
 
   cli_pkgs = with pkgs; [

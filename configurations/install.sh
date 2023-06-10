@@ -118,13 +118,19 @@ create_passwords() {
 
 clone_repos() {
   local dotfiles_path='/mnt/persist/home/carles/.config/dotfiles'
-  local dotfiles_repo='https://github.com/karb94/dotfiles.git' 
-  local nixos_config_path='/mnt/persist/home/system/etc/nixos'
-  local nixos_config_repo='https://github.com/karb94/nixos-config.git' 
+  local dotfiles_repo='git@github.com:karb94/dotfiles.git' 
+  local dotfiles_ssh_repo='git@github.com:karb94/nixos-config.git'
   mkdir -vp "$dotfiles_path"
+  git clone -b nixos --single-branch "$dotfiles_https_repo" "$dotfiles_path"
+  git -C "$dotfiles_path" remote set-url origin "$dotfiles_ssh_repo"
+
+  local nixos_config_path='/mnt/persist/home/system/etc/nixos'
+  local nixos_config_https_repo='https://github.com/karb94/nixos-config.git' 
+  local nixos_config_ssh_repo='git@github.com:karb94/nixos-config.git'
   mkdir -vp "$nixos_config_path"
-  git clone -b nixos --single-branch "$dotfiles_repo" "$dotfiles_path"
-  git clone -b master --single-branch "$nixos_config_repo" "$nixos_config_path"
+  git clone -b master --single-branch "$nixos_config_https_repo" "$nixos_config_path"
+  git -C "$nixos_config_path" remote set-url origin "$nixos_config_ssh_repo"
+  chown -R 1000:100 "$nixos_config_path"
 }
 
 get_ssh_key() {
