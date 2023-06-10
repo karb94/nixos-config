@@ -71,7 +71,6 @@ in {
     "/persist/home/${primaryUser}" = {
       directories = [
         ".config/dotfiles"
-        "nixos-config"
         ".local/share/icons"
         ".config/BraveSoftware/Brave-Browser"
         ".ssh"

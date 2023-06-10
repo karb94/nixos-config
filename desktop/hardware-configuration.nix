@@ -70,6 +70,7 @@ in {
             "/var/lib/bluetooth"
             "/var/lib/nixos"
             "/var/lib/systemd/coredump"
+            "/var/lib/NetworkManager"
             "/etc/nixos"
             "/etc/NetworkManager/system-connections"
           ];

@@ -9,7 +9,7 @@ with pkgs; let
     bashInteractive # Bash shell interpreter
     complete-alias  # Bash alias completion
     bottom          # Computer resource monitor
-    clang           # C/C++ compiler
+    # clang           # C/C++ compiler
     gcc             # C/C++ compiler
     cmake           # Crossplatform project builder
     coreutils       # GNU core utils

@@ -116,11 +116,15 @@ create_passwords() {
   mkpasswd --method=yescrypt --rounds=11 > /mnt/persist/system/passwords/carles
 }
 
-clone_dotfiles() {
+clone_repos() {
   local dotfiles_path='/mnt/persist/home/carles/.config/dotfiles'
   local dotfiles_repo='https://github.com/karb94/dotfiles.git' 
+  local nixos_config_path='/mnt/persist/home/system/etc/nixos'
+  local nixos_config_repo='https://github.com/karb94/nixos-config.git' 
   mkdir -vp "$dotfiles_path"
+  mkdir -vp "$nixos_config_path"
   git clone -b nixos --single-branch "$dotfiles_repo" "$dotfiles_path"
+  git clone -b nixos --single-branch "$nixos_config_repo" "$nixos_config_path"
 }
 
 get_ssh_key() {
@@ -139,7 +143,7 @@ get_ssh_key() {
 
 install_nixos() {
   printf "\n\nInstalling nixos\n"
-  nixos-install --no-root-passwd --flake 'github:karb94/nixos-config#impermanence'
+  nixos-install --no-root-passwd --flake 'github:karb94/nixos-config#brutus'
 }
 
 format_disk() {
