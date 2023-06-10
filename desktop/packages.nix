@@ -16,6 +16,7 @@ general_pkgs = with pkgs; [
     spotify              # Music player
     tor                  # Secure and private internet browser
     zathura              # PDF viewer
+    networkmanagerapplet
   ];
 
   cli_pkgs = with pkgs; [

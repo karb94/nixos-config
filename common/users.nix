@@ -4,7 +4,7 @@
   config = lib.mkMerge [
     {
       # Deactivate root user
-      users.users.root.hashedPassword = "!";
+      # users.users.root.hashedPassword = "!";
       users.users."${primaryUser}" = {
         isNormalUser = true;
         extraGroups = [ "wheel" "video" ];

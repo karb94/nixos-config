@@ -72,6 +72,7 @@ in {
             "/var/lib/systemd/coredump"
             "/etc/nixos"
             "/etc/NetworkManager/system-connections"
+            "/var/lib/NetworkManager"
          ];
           files = [
             "/etc/machine-id"
