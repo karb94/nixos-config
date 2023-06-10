@@ -124,7 +124,7 @@ clone_repos() {
   mkdir -vp "$dotfiles_path"
   mkdir -vp "$nixos_config_path"
   git clone -b nixos --single-branch "$dotfiles_repo" "$dotfiles_path"
-  git clone -b nixos --single-branch "$nixos_config_repo" "$nixos_config_path"
+  git clone -b master --single-branch "$nixos_config_repo" "$nixos_config_path"
 }
 
 get_ssh_key() {
@@ -148,7 +148,6 @@ install_nixos() {
 
 format_disk() {
   local device=$1
-  wifi_connect
   wipe_disk "$device"
   partition_disk "$device"
   format_luks
@@ -157,7 +156,8 @@ format_disk() {
   create_subvolumes
   mount_partitions
   create_passwords
-  clone_dotfiles
+  wifi_connect
+  clone_repos
   get_ssh_key
   chown -R 1000:100 "/mnt/persist/home/carles"
   install_nixos
