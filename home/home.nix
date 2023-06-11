@@ -54,10 +54,12 @@
     freetube = "freetube";
     spotify = "spotify";
     zathura = "org.pwmt.zathura-pdf-mupdf";
+    # "dy.desktop" = "dy";
   };
   desktopAppsSources = let
     ln = config.lib.file.mkOutOfStoreSymlink;
-    f = pkgName: appName: let
+    f = pkgName: appName:
+    let
       appStorePath = pkgs."${pkgName}";
     in {
       name = "applications/${appName}.desktop";
@@ -97,7 +99,9 @@ in {
         recursive = true;
       };
     };
+
   xdg.dataFile = desktopAppsSources;
+
   
   # xdg.desktopEntries = {
   #   dy = {

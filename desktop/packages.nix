@@ -31,14 +31,6 @@ in {
 
   environment.systemPackages = general_pkgs ++ cli_pkgs ++ shell_scripts;
 
-  # pkgs.makeDesktopItem {
-  #   name = name;
-  #   exec = script;
-  #   # icon = "gkrellm";
-  #   desktopName = "${name}-generic";
-  #   genericName = "${name}-generic";
-  # }
-
   programs.chromium = {
     enable = true;
     extensions = [

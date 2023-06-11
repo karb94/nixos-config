@@ -1,18 +1,9 @@
 # Shell script derivations
 {lib, pkgs}: let
   shell_scripts = with pkgs; [
-    rec {
+    {
       name = "dy";
       dependencies = [yt-dlp mpv jq bspwm libwebp curl file xsel];
-      desktopItems = [
-        (pkgs.makeDesktopItem {
-         name = name;
-         exec = script;
-         # icon = "gkrellm";
-         desktopName = "dy";
-         genericName = "Youtube video downloader";
-         })
-      ];
     }
     {
       name = "link_handler";
