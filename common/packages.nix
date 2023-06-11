@@ -23,13 +23,13 @@ with pkgs; let
     gptfdisk        # `gdisk` and `sgdisk` disk management tools
     jq              # JSON parser
     lf              # Terminal file manager
-             # Tool to convert webp image format to png/jpg
     man-pages       # Man pages
     man-pages-posix # Posix man pages
     newsboat        # Terminal RSS feed manager
     python311       # Python 3.11
     ripgrep         # Better `grep` command
     tree            # Tree representation of a directory
+    nixos-option
   ];
 
   neovim_pkgs = [

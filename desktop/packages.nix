@@ -25,19 +25,19 @@ general_pkgs = with pkgs; [
     yt-dlp          # Youtube video downloader
   ];
 
-  shell_scripts = with pkgs; [
-    {name = "dy"; dependencies =  [ yt-dlp mpv jq bspwm libwebp curl file ];}
-    {name = "link_handler"; dependencies =  [ curl gnused nsxiv zathura ];}
-    {name = "pair_hp"; dependencies =  [ bluez ];}
-    {name = "xob_volume"; dependencies =  [ xob wireplumber ];}
-  ];
-  bin_pkgs = let
-    mkShellScript = import ./mkShellScript.nix pkgs;
-  in map mkShellScript shell_scripts;
+  shell_scripts = lib.attrValues (import ./shell_scripts.nix {inherit pkgs lib;});
 
 in {
 
-  environment.systemPackages = general_pkgs ++ cli_pkgs ++ bin_pkgs;
+  environment.systemPackages = general_pkgs ++ cli_pkgs ++ shell_scripts;
+
+  # pkgs.makeDesktopItem {
+  #   name = name;
+  #   exec = script;
+  #   # icon = "gkrellm";
+  #   desktopName = "${name}-generic";
+  #   genericName = "${name}-generic";
+  # }
 
   programs.chromium = {
     enable = true;

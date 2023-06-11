@@ -64,6 +64,7 @@
       value = {source = ln "${appStorePath}/share/applications/${appName}.desktop";};
     };
   in (lib.attrsets.mapAttrs' f desktopApps);
+  # shell_scripts = import ../desktop/shell_scripts.nix {inherit pkgs lib;};
 in {
   imports = [inputs.impermanence.nixosModules.home-manager.impermanence];
 
@@ -97,4 +98,12 @@ in {
       };
     };
   xdg.dataFile = desktopAppsSources;
+  
+  # xdg.desktopEntries = {
+  #   dy = {
+  #     name = "dy";
+  #     genericName = "Youtube video downloader";
+  #     exec = "${shell_scripts.dy}/bin/dy";
+  #   };
+  # };
 }
