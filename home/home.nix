@@ -49,21 +49,22 @@
   ];
   configSources = mkSymlinks ".config/" configFilesToSymlink;
 
-  shell_scripts = import ../desktop/shell_scripts.nix {inherit pkgs lib;};
-  dy_desktop = pkgs.makeDesktopItem {
-    name = "dy";
-    exec = "${shell_scripts.dy}/bin/dy";
-    icon = share/icons/dy.svg;
-    desktopName = "dy";
-    genericName = "Youtube video downloader";
-  };
+  desktopEntries = import share/applications/desktopEntries.nix {inherit pkgs lib;};
+  # dy_desktop = pkgs.makeDesktopItem {
+  #   name = "dy";
+  #   exec = "${shell_scripts.dy}/bin/dy";
+  #   icon = share/icons/dy.svg;
+  #   desktopName = "dy";
+  #   genericName = "Youtube video downloader";
+  # };
 
   desktopApps = with pkgs; {
     "brave-browser" = brave;
     "freetube" = freetube;
     "spotify" = spotify;
     "org.pwmt.zathura-pdf-mupdf" = zathura;
-    "dy" = dy_desktop;
+    "dy" = desktopEntries.dy;
+    "pair_hp" = desktopEntries.pair_hp;
     "logseq" = logseq;
   };
   desktopAppsSources = let
