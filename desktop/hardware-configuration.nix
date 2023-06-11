@@ -73,6 +73,7 @@ in {
             "/etc/nixos"
             "/etc/NetworkManager/system-connections"
             "/var/lib/NetworkManager"
+            "/var/lib/iwd"
          ];
           files = [
             "/etc/machine-id"
