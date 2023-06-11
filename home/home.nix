@@ -49,24 +49,31 @@
   ];
   configSources = mkSymlinks ".config/" configFilesToSymlink;
 
-  desktopApps = {
-    brave = "brave-browser";
-    freetube = "freetube";
-    spotify = "spotify";
-    zathura = "org.pwmt.zathura-pdf-mupdf";
-    # "dy.desktop" = "dy";
+  shell_scripts = import ../desktop/shell_scripts.nix {inherit pkgs lib;};
+  dy_desktop = pkgs.makeDesktopItem {
+    name = "dy";
+    exec = "${shell_scripts.dy}/bin/dy";
+    icon = share/icons/dy.svg;
+    desktopName = "dy";
+    genericName = "Youtube video downloader";
+  };
+
+  desktopApps = with pkgs; {
+    "brave-browser" = brave;
+    "freetube" = freetube;
+    "spotify" = spotify;
+    "org.pwmt.zathura-pdf-mupdf" = zathura;
+    "dy" = dy_desktop;
+    "logseq" = logseq;
   };
   desktopAppsSources = let
     ln = config.lib.file.mkOutOfStoreSymlink;
-    f = pkgName: appName:
-    let
-      appStorePath = pkgs."${pkgName}";
-    in {
+    f = appName: deriv:
+    {
       name = "applications/${appName}.desktop";
-      value = {source = ln "${appStorePath}/share/applications/${appName}.desktop";};
+      value = {source = ln "${deriv}/share/applications/${appName}.desktop";};
     };
   in (lib.attrsets.mapAttrs' f desktopApps);
-  # shell_scripts = import ../desktop/shell_scripts.nix {inherit pkgs lib;};
 in {
   imports = [inputs.impermanence.nixosModules.home-manager.impermanence];
 
