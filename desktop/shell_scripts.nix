@@ -17,6 +17,10 @@
       name = "xob_volume";
       dependencies = [xob wireplumber];
     }
+    {
+      name = "swallow";
+      dependencies = [bspwm];
+    }
   ];
   mkShellScript = import ./mkShellScript.nix pkgs lib;
   f = shell_script: lib.attrsets.nameValuePair shell_script.name (mkShellScript shell_script);
