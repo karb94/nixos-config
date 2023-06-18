@@ -26,5 +26,11 @@
     };
   };
   environment.systemPackages = [ pkgs.podman-compose ];
-  # networking.firewall.interfaces."wlan0".allowedTCPPorts = [2283];
+
+  # Open ports for used apps in your local network
+  # https://discourse.nixos.org/t/open-firewall-ports-only-towards-local-network/13037/2
+  # Immich
+  networking.firewall.extraCommands = ''
+    iptables -A nixos-fw -p tcp --source 192.168.1.1/24 --dport 2283 -j nixos-fw-accept
+'';
 }
