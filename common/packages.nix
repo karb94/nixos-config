@@ -5,19 +5,20 @@
 }:
 with pkgs; let
   cli_pkgs = [
+    # clang           # C/C++ compiler
     bash            # Bash scripting language
     bashInteractive # Bash shell interpreter
-    complete-alias  # Bash alias completion
     bottom          # Computer resource monitor
-    # clang           # C/C++ compiler
-    gcc             # C/C++ compiler
+    btrfs           # Linux file system
     cmake           # Crossplatform project builder
+    complete-alias  # Bash alias completion
     coreutils       # GNU core utils
     cryptsetup      # Tool to manage encrypted devices (LUKS)
     fd              # Better `find` command
     file            # Tool to check the type of a file
     findutils       # GNU `find` and `xargs` commands
     fzf             # Fuzzy finder
+    gcc             # C/C++ compiler
     git             # Version control
     gnumake         # `make` command
     gptfdisk        # `gdisk` and `sgdisk` disk management tools
@@ -26,10 +27,10 @@ with pkgs; let
     man-pages       # Man pages
     man-pages-posix # Posix man pages
     newsboat        # Terminal RSS feed manager
+    nixos-option    # Inspect the value of nixOS configuration options
     python311       # Python 3.11
     ripgrep         # Better `grep` command
     tree            # Tree representation of a directory
-    nixos-option
   ];
 
   neovim_pkgs = [
