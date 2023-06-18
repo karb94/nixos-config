@@ -9,7 +9,7 @@ with pkgs; let
     bash            # Bash scripting language
     bashInteractive # Bash shell interpreter
     bottom          # Computer resource monitor
-    btrfs           # Linux file system
+    btrfs-progs     # Linux file system
     cmake           # Crossplatform project builder
     complete-alias  # Bash alias completion
     coreutils       # GNU core utils
