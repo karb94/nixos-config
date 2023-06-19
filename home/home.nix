@@ -81,6 +81,7 @@ in {
   home.persistence = lib.mkIf impermanence {
     "/persist/home/${primaryUser}" = {
       directories = [
+        "projects"
         ".config/dotfiles"
         ".local/share/nvim"
         ".config/BraveSoftware/Brave-Browser"
