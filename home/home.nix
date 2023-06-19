@@ -82,7 +82,7 @@ in {
     "/persist/home/${primaryUser}" = {
       directories = [
         ".config/dotfiles"
-        ".local/share/icons"
+        ".local/share/nvim"
         ".config/BraveSoftware/Brave-Browser"
         ".ssh"
       ];
