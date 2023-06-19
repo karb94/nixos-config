@@ -24,7 +24,7 @@ vim.opt.completeopt    = {                           -- Better popup menu
   'noinsert',
   'noselect',
 }
-vim.opt.python3_host_prog = "/run/current-system/sw/bin/python"
+-- vim.opt.python3_host_prog = "/run/current-system/sw/bin/python"
 -- vim.opt.cmdheight      = 0
 -- vim.opt.wildcharm      = '<C-z>' -- Only accepts number for now. See #18000
 

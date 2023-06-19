@@ -82,7 +82,7 @@ format_partitions() {
 
 create_subvolumes() {
   printf "\n\nMounting top-level btrfs sub-volume to $btrfs_top_level\n"
-  mkdir -pv /tmp/root
+  mkdir -pv "$btrfs_top_level"
   mount "$luks_device" "$btrfs_top_level"
   printf "\n\nCreating btrfs subvolumes\n"
   btrfs subvolume create "$btrfs_top_level/nix"
