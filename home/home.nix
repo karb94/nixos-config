@@ -84,6 +84,7 @@ in {
         "projects"
         ".config/dotfiles"
         ".local/share/nvim"
+        ".local/share/containers"
         ".config/BraveSoftware/Brave-Browser"
         ".ssh"
       ];
@@ -91,6 +92,7 @@ in {
         ".local/share/bash/history"
         ".local/share/newsboat/cache.db"
       ];
+      allowOther = true;
     };
   };
 
