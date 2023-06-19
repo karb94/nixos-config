@@ -18,29 +18,6 @@ wifi_connect() {
   do printf "\n\nIncorrect password. try again.\n"; done
 }
 
-# select a disk
-choose_disk() {
-  # capture disk names into the "disks" bash array
-  mapfile -t disks < <(
-  lsblk --output name,type --noheadings --list |
-    awk '$2 == "disk" {print $1}'
-  )
-  while true
-  do
-    # print device information
-    lsblk -o name,size,label,partlabel,fstype,mountpoints
-    # prompt the selection of the device
-    ps3="Select a disk: "
-    select disk in ''${disks[@]}; do break; done;
-      # prompt confirmation
-      printf "\nYou selected disk \"$disk\"\n\n"
-      lsblk -o name,size,label,partlabel,fstype,mountpoints "/dev/$disk"
-      printf "\n"; read -p "confirm your selection (y/n): " -n 1 -r; printf "\n\n"
-      if [[ $reply =~ ^[yy]$ ]]; then break; fi;
-      done
-      echo "/dev/$disk"
-}
-
 # delete the partition table of a disk
 wipe_disk() {
   local device="$1"
@@ -118,7 +95,7 @@ create_passwords() {
 
 clone_repos() {
   local dotfiles_path='/mnt/persist/home/carles/.config/dotfiles'
-  local dotfiles_repo='git@github.com:karb94/dotfiles.git' 
+  local dotfiles_https_repo='https://github.com/karb94/dotfiles.git' 
   local dotfiles_ssh_repo='git@github.com:karb94/nixos-config.git'
   mkdir -vp "$dotfiles_path"
   git clone -b nixos --single-branch "$dotfiles_https_repo" "$dotfiles_path"
@@ -130,7 +107,7 @@ clone_repos() {
   mkdir -vp "$nixos_config_path"
   git clone -b master --single-branch "$nixos_config_https_repo" "$nixos_config_path"
   git -C "$nixos_config_path" remote set-url origin "$nixos_config_ssh_repo"
-  chown -R 1000:100 "$nixos_config_path"
+  chown -R 1000:1000 "$nixos_config_path"
 }
 
 get_ssh_key() {
@@ -141,8 +118,8 @@ get_ssh_key() {
   bw get notes "London desktop ssh public key" --session "$bw_session" > "$id_ed25519_pub"
   bw get notes "London desktop ssh private key" --session "$bw_session" > "$id_ed25519"
   bw lock
-  chown 1000:100 "$id_ed25519_pub"
-  chown 1000:100 "$id_ed25519"
+  chown 1000:1000 "$id_ed25519_pub"
+  chown 1000:1000 "$id_ed25519"
   chmod 644 "$id_ed25519_pub"
   chmod 600 "$id_ed25519"
 }
@@ -165,6 +142,7 @@ format_disk() {
   wifi_connect
   clone_repos
   get_ssh_key
-  chown -R 1000:100 "/mnt/persist/home/carles"
+  chown 1000:100 "/mnt/persist/home"
+  chown -R 1000:1000 "/mnt/persist/home/carles"
   install_nixos
 }
