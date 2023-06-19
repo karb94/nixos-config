@@ -11,7 +11,7 @@
     ../common/packages.nix
     ../common/superuser.nix
     ../common/users.nix
-    ../common/docker.nix
+    ../common/containers.nix
     ../desktop/hardware-configuration.nix
     ../home/home-manager.nix
     ../desktop/packages.nix
