@@ -84,7 +84,7 @@ in {
         "projects"
         ".config/dotfiles"
         ".local/share/nvim"
-        ".local/share/containers"
+        { directory = ".local/share/containers"; method = "symlink"; }
         ".config/BraveSoftware/Brave-Browser"
         ".ssh"
       ];

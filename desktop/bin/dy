@@ -3,7 +3,9 @@
 # Script to download videos form youtube with notification popup
 
 # Redirect all standard error to log file
-exec 2>> $HOME/.local/state/dy/dy.log 
+log_path="$HOME/.local/state/dy/dy.log"
+mkdir -p $(dirname "$log_path")
+exec 2>> "$log_path"
 
 config="$HOME/.config/youtube-dl/config"
 

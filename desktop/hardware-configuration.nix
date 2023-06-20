@@ -96,6 +96,8 @@ in {
             }
           ];
         };
+        # programs.fuse = lib.mkIf impermanence {userAllowOther = true;};
+        programs.fuse.userAllowOther = true;
         swapDevices = [
           {
             device = "/swap/swapfile";
