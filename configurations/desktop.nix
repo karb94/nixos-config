@@ -16,17 +16,18 @@
     ../home/home-manager.nix
     ../desktop/packages.nix
     ../desktop/xorg.nix
+    ../desktop/wayland.nix
   ];
 
-  # Home-manager setup script
-  environment.etc.link_config = {
-    enable = true;
-    user = "carles";
-    mode = "0700";
-    text = ''
-      ln -s ${inputs.dotfiles} /home/carles/.config/dotfiles
-    '';
-  };
+  # # Home-manager setup script
+  # environment.etc.link_config = {
+  #   enable = true;
+  #   user = "carles";
+  #   mode = "0700";
+  #   text = ''
+  #     ln -s ${inputs.dotfiles} /home/carles/.config/dotfiles
+  #   '';
+  # };
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "23.05";

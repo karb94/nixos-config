@@ -32,19 +32,20 @@
     "bspwm"
     "dunst"
     "git"
+    "hypr"
     "lf"
     "mpv"
     "newsboat"
     "newsboat"
-    # "nvim/after"
-    #"nvim/init.vim"
-    #"nvim/lua"
     "picom"
     "rofi"
     "sxhkd"
     "xob"
     "youtube-dl"
     "zathura"
+    # "nvim/after"
+    #"nvim/init.vim"
+    #"nvim/lua"
   ];
   configSources = mkSymlinks ".config/" configFilesToSymlink;
 
@@ -68,7 +69,10 @@
     };
   in (lib.attrsets.mapAttrs' f desktopApps);
 in {
-  imports = [inputs.impermanence.nixosModules.home-manager.impermanence];
+  imports = [
+    inputs.impermanence.nixosModules.home-manager.impermanence
+    ./hyprland.nix
+  ];
 
   home.persistence = lib.mkIf impermanence {
     "/persist/home/${primaryUser}" = {

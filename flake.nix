@@ -44,6 +44,8 @@
     dotfiles.url = "github:karb94/dotfiles/nixos";
     dotfiles.flake = false;
 
+    hyprland.url = "github:hyprwm/Hyprland";
+
     # citrix_workspace_2302.url = "tarball+https://downloads.citrix.com/21641/linuxx64-23.2.0.10.tar.gz?__gda__=exp=1684881251~acl=/*~hmac=f37429dfa2fd8cd56f2640cf19ffe2b8e058e79350ec81b6daa4ddbca303e410";
     # citrix_workspace_2302.flake = false;
     # "https://downloads.citrix.com/21641/linuxx64-23.2.0.10.tar.gz?__gda__=exp=1684881251~acl=%2f*~hmac=f37429dfa2fd8cd56f2640cf19ffe2b8e058e79350ec81b6daa4ddbca303e410"
