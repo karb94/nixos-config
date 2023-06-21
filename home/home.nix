@@ -24,7 +24,6 @@
     ".profile"
     ".profile_extra"
     ".xinitrc"
-    # ".local/bin"
   ];
   homeSources = mkSymlinks "" homeFilesToSymlink;
   configFilesToSymlink = [
@@ -50,13 +49,6 @@
   configSources = mkSymlinks ".config/" configFilesToSymlink;
 
   desktopEntries = import share/applications/desktopEntries.nix {inherit pkgs lib;};
-  # dy_desktop = pkgs.makeDesktopItem {
-  #   name = "dy";
-  #   exec = "${shell_scripts.dy}/bin/dy";
-  #   icon = share/icons/dy.svg;
-  #   desktopName = "dy";
-  #   genericName = "Youtube video downloader";
-  # };
 
   desktopApps = with pkgs; {
     "brave-browser" = brave;
@@ -66,7 +58,6 @@
     "dy" = desktopEntries.dy;
     "pair_hp" = desktopEntries.pair_hp;
     "logseq" = logseq;
-    "wfica" = citrix-workspace;
   };
   desktopAppsSources = let
     ln = config.lib.file.mkOutOfStoreSymlink;
