@@ -66,6 +66,7 @@
     "dy" = desktopEntries.dy;
     "pair_hp" = desktopEntries.pair_hp;
     "logseq" = logseq;
+    "wfica" = citrix-workspace;
   };
   desktopAppsSources = let
     ln = config.lib.file.mkOutOfStoreSymlink;

@@ -71,6 +71,11 @@ in {
             fsType = "btrfs";
             options = ["subvol=immich" "compress=zstd" "noatime"];
           };
+          "/data/paperless" = {
+            device = luks_data1_device;
+            fsType = "btrfs";
+            options = ["subvol=paperless" "compress=zstd" "noatime"];
+          };
           "/boot" = {
             device = "/dev/disk/by-partlabel/boot";
             fsType = "vfat";

@@ -10,6 +10,7 @@
         extraGroups = [ "wheel" "video" ];
         uid = 1000;
       };
+      services.getty.autologinUser = primaryUser;
     }
     (
       lib.mkIf impermanence {
