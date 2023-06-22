@@ -2,7 +2,7 @@
 
   programs.hyprland = {
     enable = true;
-    xwayland.hidpi = true;
+    # xwayland.hidpi = true;
   };
   # programs.hyprland.package = let
   #   system = pkgs.stdenv.hostPlatform.system;
