@@ -17,7 +17,7 @@
       rofi
       # sxhkd
       # unclutter
-      # xob
+      wob
       # xsel
   ];
 

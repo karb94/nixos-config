@@ -6,6 +6,6 @@
     # Deduplicate and optimize nix store
     # auto-optimise-store = true;
     # Conform to the XDG Base Directory Specification
-    # use-xdg-base-directories = true;
+    use-xdg-base-directories = true;
   };
 }

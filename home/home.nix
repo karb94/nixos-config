@@ -88,7 +88,7 @@ in {
         ".local/share/bash/history"
         ".local/share/newsboat/cache.db"
       ];
-      allowOther = true;
+      allowOther = false;
     };
   };
 

@@ -95,13 +95,13 @@ in {
          ];
           files = [
             "/etc/machine-id"
-            {
-              file = "/etc/nix/id_rsa";
-              parentDirectory = {mode = "u=rwx,g=,o=";};
-            }
+            "/etc/nix/id_rsa"
+            # {
+            #   parentDirectory = "/etc/nix/id_rsa";
+            #   parentDirectory = {mode = "u=rwx,g=,o=";};
+            # }
           ];
         };
-        systemd.tmpfiles.rules = [ "d /etc/nix/ 0755 root root" ];
         swapDevices = [
           {
             device = "/swap/swapfile";
