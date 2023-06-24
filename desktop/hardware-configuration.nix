@@ -101,8 +101,7 @@ in {
             }
           ];
         };
-        # programs.fuse = lib.mkIf impermanence {userAllowOther = true;};
-        programs.fuse.userAllowOther = true;
+        systemd.tmpfiles.rules = [ "d /etc/nix/ 0755 root root" ];
         swapDevices = [
           {
             device = "/swap/swapfile";
