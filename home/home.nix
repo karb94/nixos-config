@@ -82,6 +82,7 @@ in {
         ".local/share/nvim"
         { directory = ".local/share/containers"; method = "symlink"; }
         ".config/BraveSoftware/Brave-Browser"
+        ".config/Logseq"
         ".ssh"
       ];
       files = [

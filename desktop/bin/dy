@@ -10,11 +10,12 @@ exec 2>> "$log_path"
 config="$HOME/.config/youtube-dl/config"
 
 floating_rule() {
-  bspc rule \
-    --add mpv \
-    --one-shot \
-    desktop="$(bspc query -D -d focused)" \
-    state=floating
+  :
+  # bspc rule \
+  #   --add mpv \
+  #   --one-shot \
+  #   desktop="$(bspc query -D -d focused)" \
+  #   state=floating
 }
 
 # If no url was passed get it from the clipboard
@@ -35,7 +36,7 @@ else
       --keepaspect-window \
       --geometry=70% \
       --no-terminal \
-      --ytdl
+      --ytdl \
       --input-ipc-server=$HOME/.local/fifo/mpv \
         "$url" || exit 1
   fi

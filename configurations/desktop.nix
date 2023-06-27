@@ -4,6 +4,7 @@
   imports = [
     ../common/audio.nix
     ../common/bootloader.nix
+    ../common/containers.nix
     ../common/fonts.nix
     ../common/locale.nix
     ../common/networking.nix
@@ -11,12 +12,12 @@
     ../common/packages.nix
     ../common/superuser.nix
     ../common/users.nix
-    ../common/containers.nix
     ../desktop/hardware-configuration.nix
-    ../home/home-manager.nix
     ../desktop/packages.nix
-    ../desktop/xorg.nix
     ../desktop/wayland.nix
+    ../desktop/xdg.nix
+    ../desktop/xorg.nix
+    ../home/home-manager.nix
   ];
 
   # # Home-manager setup script
