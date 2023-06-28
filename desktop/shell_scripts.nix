@@ -18,6 +18,10 @@
       dependencies = [xob wireplumber];
     }
     {
+      name = "wob_volume";
+      dependencies = [wob wireplumber];
+    }
+    {
       name = "swallow";
       dependencies = [bspwm];
     }

@@ -40,6 +40,7 @@
     "picom"
     "rofi"
     "sxhkd"
+    "wob"
     "xob"
     "youtube-dl"
     "zathura"
