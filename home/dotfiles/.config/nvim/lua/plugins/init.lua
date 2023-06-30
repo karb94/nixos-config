@@ -4,4 +4,5 @@ return {
   {"lukas-reineke/indent-blankline.nvim", opts = {char = '┊', show_current_context = false}},
   {"norcalli/nvim-colorizer.lua", config = true},
   {"lewis6991/gitsigns.nvim", config = true},
+  {"chaoren/vim-wordmotion"},
 }

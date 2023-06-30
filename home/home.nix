@@ -72,7 +72,7 @@
 in {
   imports = [
     inputs.impermanence.nixosModules.home-manager.impermanence
-    ./hyprland.nix
+    # ./hyprland.nix
   ];
 
   home.persistence = lib.mkIf impermanence {
