@@ -8,17 +8,14 @@
   # in inputs.hyprland.packages.${system}.hyprland;
 
   environment.systemPackages = with pkgs; [
-    # bspwm
-    # hyprland
-    dunst
     # hsetroot
     # nsxiv
-    # picom
-    rofi
-    # sxhkd
     # unclutter
+    dunst
+    rofi
+    wf-recorder
+    wl-clipboard
     wob
-    # xsel
   ];
 
   systemd.user.services.wob_volume = {

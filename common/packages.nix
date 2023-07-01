@@ -46,4 +46,9 @@ in {
   nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = cli_pkgs ++ neovim_pkgs;
+  programs.neovim = {
+    defaultEditor = true;
+    withPython3 = true;
+    withNodeJs = true;
+  };
 }
