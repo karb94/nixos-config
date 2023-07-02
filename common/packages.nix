@@ -31,6 +31,7 @@ with pkgs; let
     python311       # Python 3.11
     ripgrep         # Better `grep` command
     tree            # Tree representation of a directory
+    zellij          # Terminal multiplexer
   ];
 
   neovim_pkgs = [

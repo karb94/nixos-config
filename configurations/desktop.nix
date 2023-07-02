@@ -6,6 +6,7 @@
     ../common/bootloader.nix
     ../common/containers.nix
     ../common/fonts.nix
+    ../common/keyboard.nix
     ../common/locale.nix
     ../common/networking.nix
     ../common/nix.nix
