@@ -32,6 +32,7 @@ with pkgs; let
     ripgrep         # Better `grep` command
     tree            # Tree representation of a directory
     zellij          # Terminal multiplexer
+    texlive.combined.scheme-full
   ];
 
   neovim_pkgs = [

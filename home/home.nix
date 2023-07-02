@@ -44,9 +44,9 @@
     "xob"
     "youtube-dl"
     "zathura"
-    # "nvim/after"
-    #"nvim/init.vim"
-    #"nvim/lua"
+    "nvim/after"
+    "nvim/init.lua"
+    "nvim/lua"
   ];
   configSources = mkSymlinks ".config/" configFilesToSymlink;
 
@@ -100,14 +100,15 @@ in {
 
   home.file = homeSources;
   xdg.enable = true; # track XDG files and directories
-  xdg.configFile =
-    configSources
-    // {
-      nvim = {
-        source = ./dotfiles/.config/nvim;
-        recursive = true;
-      };
-    };
+  xdg.configFile = configSources;
+  # xdg.configFile =
+  #   configSources
+  #   // {
+  #     nvim = {
+  #       source = ./dotfiles/.config/nvim;
+  #       recursive = true;
+  #     };
+  #   };
 
   xdg.dataFile = desktopAppsSources;
 
