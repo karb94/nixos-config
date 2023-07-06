@@ -31,6 +31,7 @@ in {
         "usb_storage"
       ];
       boot.kernelModules = ["kvm-amd"];
+      boot.supportedFilesystems = [ "ntfs" ];
 
       hardware.enableAllFirmware = lib.mkDefault true;
     }
