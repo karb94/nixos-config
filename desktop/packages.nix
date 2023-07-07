@@ -6,16 +6,16 @@
 }:
 let
 general_pkgs = with pkgs; [
-    alacritty            # Terminal emulator
-    brave                # Web browser
-    citrix_workspace     # Remote desktop
-    flameshot            # Screenshot tool
-    freetube             # FOSS youtube front-end
-    nsxiv                # Image viewer
-    mpv                  # Video player
-    spotify              # Music player
-    tor                  # Secure and private internet browser
-    zathura              # PDF viewer
+    alacritty              # Terminal emulator
+    brave                  # Web browser
+    citrix_workspace       # Remote desktop
+    flameshot              # Screenshot tool
+    freetube               # FOSS youtube front-end
+    nsxiv                  # Image viewer
+    mpv                    # Video player
+    spotify                # Music player
+    tor-browser-bundle-bin # Secure and private internet browser
+    zathura                # PDF viewer
     networkmanagerapplet
     logseq
   ];
