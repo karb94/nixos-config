@@ -31,6 +31,7 @@ with pkgs; let
     python311       # Python 3.11
     ripgrep         # Better `grep` command
     tree            # Tree representation of a directory
+    unzip           # Extraction utility for .zip archives
     zellij          # Terminal multiplexer
     texlive.combined.scheme-full
   ];
