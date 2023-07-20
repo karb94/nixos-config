@@ -39,7 +39,7 @@ with pkgs; let
   neovim_pkgs = [
     neovim                            # Terminal editor
     alejandra                         # Nix formatter
-    nil                               # Nix language server
+    nixd                              # Nix language server
     tree-sitter                       # Code parser
     nodePackages.bash-language-server # Bash language server
     nodePackages.vim-language-server  # Vim language server

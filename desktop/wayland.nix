@@ -18,7 +18,7 @@
     wob
   ];
 
-  systemd.user.services.wob_volume = {
+  systemd.user.services.wob_volume = lib.mkIf (builtins.elem pkgs.wob config.environment.systemPackages) {
     description = "A lightweight overlay bar for Wayland";
     documentation = [ "man:wob(1)" ];
     partOf = [ "graphical-session.target" ];
