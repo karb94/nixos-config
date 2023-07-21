@@ -10,7 +10,7 @@ in {
   };
   pair_hp = pkgs.makeDesktopItem {
     name = "pair_hp";
-    exec = "${shell_scripts.pair_hp}/bin/dy";
+    exec = "${shell_scripts.pair_hp}/bin/pair_hp";
     icon = ../icons/pair_hp.svg;
     desktopName = "Pair headphones";
     genericName = "Sony WH-1000XM5";
