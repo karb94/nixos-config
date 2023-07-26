@@ -19,6 +19,7 @@ with pkgs; let
     findutils       # GNU `find` and `xargs` commands
     fzf             # Fuzzy finder
     gcc             # C/C++ compiler
+    # gh              # GitHub CLI
     git             # Version control
     gnumake         # `make` command
     gptfdisk        # `gdisk` and `sgdisk` disk management tools
@@ -26,6 +27,7 @@ with pkgs; let
     lf              # Terminal file manager
     man-pages       # Man pages
     man-pages-posix # Posix man pages
+    ncdu            # Disk usage analyzer
     newsboat        # Terminal RSS feed manager
     nixos-option    # Inspect the value of nixOS configuration options
     python311       # Python 3.11
