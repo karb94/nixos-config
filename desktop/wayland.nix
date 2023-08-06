@@ -13,6 +13,7 @@
     # unclutter
     dunst
     rofi
+    slurp
     wf-recorder
     wl-clipboard
     wob
