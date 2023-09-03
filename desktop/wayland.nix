@@ -1,6 +1,7 @@
 { inputs, lib, config, pkgs, ... }: {
 
   programs.hyprland.enable = true;
+  programs.hyprland.package = inputs.hyprland.packages.${pkgs.system}.hyprland;
   #   # xwayland.hidpi = true;
   # };
   # programs.hyprland.package = let
