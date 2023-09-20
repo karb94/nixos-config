@@ -16,7 +16,7 @@
       lib.mkIf impermanence {
         # Users and user settings cannot be modified
         users.mutableUsers = false;
-        users.users."${primaryUser}".passwordFile = "/persist/system/passwords/${primaryUser}";
+        users.users."${primaryUser}".hashedPasswordFile = "/persist/system/passwords/${primaryUser}";
       }
     )
     (
