@@ -161,7 +161,8 @@ fi
 
 if [ -f "$video_path" ]; then
   action=$(dunstify \
-    --timeout=1000000 \
+    --timeout=0 \
+    # --timeout=1000000 \
     --icon="$thumbnail" \
     --action=play,label \
     --hints=string:x-dunst-stack-tag:"${video_id}" \
