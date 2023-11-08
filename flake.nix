@@ -29,6 +29,8 @@
   inputs = {
     # Nixpkgs
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    # rofi 1.7.4 (bug in 1.7.5)
+    nixpkgs-rofi174.url = "github:nixos/nixpkgs/6c6409e965a6c883677be7b9d87a95fab6c3472e";
 
     # Home manager
     home-manager.url = "github:nix-community/home-manager";
@@ -60,6 +62,10 @@
     nixosConfigurations = let
       system = "x86_64-linux";
       primaryUser = "carles";
+      pkgs-rofi174 = import inputs.nixpkgs-rofi174 {
+        system = system;
+        config.allowUnfree = true;
+      };
       in {
       selrak = nixpkgs.lib.nixosSystem {
         system = system;
@@ -76,6 +82,7 @@
         system = system;
         specialArgs = {
           inherit inputs;
+          rofi174 = pkgs-rofi174.rofi;
           hostname = "brutus";
           impermanence = true;
           primaryUser = primaryUser;

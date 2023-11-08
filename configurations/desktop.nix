@@ -17,7 +17,7 @@
     ../desktop/packages.nix
     ../desktop/wayland.nix
     ../desktop/xdg.nix
-    ../desktop/xorg.nix
+    # ../desktop/xorg.nix
     ../home/home-manager.nix
   ];
 

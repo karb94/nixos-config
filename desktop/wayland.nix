@@ -1,4 +1,4 @@
-{ inputs, lib, config, pkgs, ... }: {
+{ inputs, lib, config, pkgs, rofi174, ... }: {
 
   programs.hyprland.enable = true;
   programs.hyprland.package = inputs.hyprland.packages.${pkgs.system}.hyprland;
@@ -9,11 +9,8 @@
   # in inputs.hyprland.packages.${system}.hyprland;
 
   environment.systemPackages = with pkgs; [
-    # hsetroot
-    # nsxiv
-    # unclutter
     dunst
-    rofi
+    rofi174
     slurp
     wf-recorder
     wl-clipboard
