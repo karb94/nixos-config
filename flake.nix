@@ -29,8 +29,6 @@
   inputs = {
     # Nixpkgs
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    # rofi 1.7.4 (bug in 1.7.5)
-    nixpkgs-rofi174.url = "github:nixos/nixpkgs/6c6409e965a6c883677be7b9d87a95fab6c3472e";
 
     # Home manager
     home-manager.url = "github:nix-community/home-manager";
@@ -47,11 +45,6 @@
     dotfiles.flake = false;
 
     hyprland.url = "github:hyprwm/Hyprland";
-
-    # citrix_workspace_2302.url = "tarball+https://downloads.citrix.com/21641/linuxx64-23.2.0.10.tar.gz?__gda__=exp=1684881251~acl=/*~hmac=f37429dfa2fd8cd56f2640cf19ffe2b8e058e79350ec81b6daa4ddbca303e410";
-    # citrix_workspace_2302.flake = false;
-    # "https://downloads.citrix.com/21641/linuxx64-23.2.0.10.tar.gz?__gda__=exp=1684881251~acl=%2f*~hmac=f37429dfa2fd8cd56f2640cf19ffe2b8e058e79350ec81b6daa4ddbca303e410"
-    # "https://downloads.citrix.com/21641/linuxx64-23.2.0.10.tar.gz?__gda__=exp=1684881251~acl=/*~hmac=f37429dfa2fd8cd56f2640cf19ffe2b8e058e79350ec81b6daa4ddbca303e410"
   };
 
   outputs = {
@@ -62,10 +55,10 @@
     nixosConfigurations = let
       system = "x86_64-linux";
       primaryUser = "carles";
-      pkgs-rofi174 = import inputs.nixpkgs-rofi174 {
-        system = system;
-        config.allowUnfree = true;
-      };
+      # pkgs-rofi174 = import inputs.nixpkgs-rofi174 {
+      #   system = system;
+      #   config.allowUnfree = true;
+      # };
       in {
       selrak = nixpkgs.lib.nixosSystem {
         system = system;
@@ -82,7 +75,6 @@
         system = system;
         specialArgs = {
           inherit inputs;
-          rofi174 = pkgs-rofi174.rofi;
           hostname = "brutus";
           impermanence = true;
           primaryUser = primaryUser;
