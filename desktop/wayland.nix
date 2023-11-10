@@ -10,7 +10,8 @@
 
   environment.systemPackages = with pkgs; [
     dunst
-    rofi174
+    nsxiv
+    rofi-wayland
     slurp
     wf-recorder
     wl-clipboard
