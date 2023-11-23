@@ -16,6 +16,7 @@
     wf-recorder
     wl-clipboard
     wob
+    xdg-utils
   ];
 
   systemd.user.services.wob_volume = lib.mkIf (builtins.elem pkgs.wob config.environment.systemPackages) {
