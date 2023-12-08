@@ -14,6 +14,7 @@ with pkgs; let
     complete-alias  # Bash alias completion
     coreutils       # GNU core utils
     cryptsetup      # Tool to manage encrypted devices (LUKS)
+    delta           # Diff tool
     fd              # Better `find` command
     file            # Tool to check the type of a file
     findutils       # GNU `find` and `xargs` commands
