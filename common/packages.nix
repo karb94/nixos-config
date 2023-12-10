@@ -55,6 +55,5 @@ in {
   programs.neovim = {
     defaultEditor = true;
     withPython3 = true;
-    withNodeJs = true;
   };
 }
