@@ -9,15 +9,6 @@ exec 2>> "$log_path"
 
 config="$HOME/.config/youtube-dl/config"
 
-floating_rule() {
-  :
-  # bspc rule \
-  #   --add mpv \
-  #   --one-shot \
-  #   desktop="$(bspc query -D -d focused)" \
-  #   state=floating
-}
-
 # If no url was passed get it from the clipboard
 test -n "$1" && export url="$1" || export url=$(xsel -p)
 
@@ -36,6 +27,7 @@ else
       --keepaspect-window \
       --geometry=70% \
       --no-terminal \
+      --cursor-autohide=no \
       --ytdl \
       --input-ipc-server=$HOME/.local/fifo/mpv \
         "$url" || exit 1
@@ -72,6 +64,7 @@ if jq --exit-status '.is_live' "$metadata" >/dev/null; then
     floating_rule
     mpv \
       --no-terminal \
+      --cursor-autohide=no \
       --ytdl \
       "$url" || exit 1
   fi
@@ -173,6 +166,7 @@ if [ -f "$video_path" ]; then
       --keepaspect-window \
       --geometry=70% \
       --no-terminal \
+      --cursor-autohide=no \
       --input-ipc-server=$HOME/.local/fifo/mpv \
       "$video_path" &&
     rm -f "$thumbnail" "${video_path%.*}"*
