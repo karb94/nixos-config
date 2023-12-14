@@ -22,7 +22,6 @@ else
     --action=play,label \
     "Unkown video")
   if [ "$action" = "play" ]; then
-    floating_rule
     mpv \
       --keepaspect-window \
       --geometry=70% \
@@ -61,7 +60,6 @@ if jq --exit-status '.is_live' "$metadata" >/dev/null; then
     --hints=string:x-dunst-stack-tag:"$video_id" \
     "$creator [LIVE]" "$title")
   if [ "$action" = "play" ]; then
-    floating_rule
     mpv \
       --no-terminal \
       --cursor-autohide=no \
@@ -161,7 +159,6 @@ if [ -f "$video_path" ]; then
     "$creator [READY]" "$title")
 
   [ "$action" = "play" ] &&
-    floating_rule &&
     mpv \
       --keepaspect-window \
       --geometry=70% \
