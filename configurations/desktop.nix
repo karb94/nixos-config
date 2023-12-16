@@ -1,5 +1,5 @@
 # General configuration
-{ inputs, ... }: {
+{ inputs, pkgs, ... }: {
 
   imports = [
     ../common/audio.nix
@@ -13,23 +13,21 @@
     ../common/packages.nix
     ../common/superuser.nix
     ../common/users.nix
-    ../desktop/hardware-configuration.nix
+    ../common/hardware-configuration.nix
     ../desktop/packages.nix
     ../desktop/wayland.nix
     ../desktop/xdg.nix
-    # ../desktop/xorg.nix
     ../home/home-manager.nix
   ];
 
-  # # Home-manager setup script
-  # environment.etc.link_config = {
-  #   enable = true;
-  #   user = "carles";
-  #   mode = "0700";
-  #   text = ''
-  #     ln -s ${inputs.dotfiles} /home/carles/.config/dotfiles
-  #   '';
-  # };
+  nixpkgs.config.permittedInsecurePackages = [ "electron-25.9.0" ];
+  # nixpkgs.overlays = let
+  #   makeShellScript = import ../utils/makeShellScript.nix;
+  #   filePath = ../desktop/bin/dy;
+  #   dependencies = with pkgs; [gnugrep coreutils dunst yt-dlp mpv jq bspwm libwebp curl file xsel];
+  #   in [
+  #     (self: super: {dy = pkgs.callPackage makeShellScript {inherit filePath dependencies;};})
+  #   ];
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "23.05";

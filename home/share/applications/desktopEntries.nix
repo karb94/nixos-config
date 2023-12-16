@@ -1,5 +1,5 @@
 {pkgs, lib}: let
-  shell_scripts = import ../../../desktop/shell_scripts.nix {inherit pkgs lib;};
+  shell_scripts = import ../../../desktop/scripts pkgs;
 in {
   dy = pkgs.makeDesktopItem {
     name = "dy";
