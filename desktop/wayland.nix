@@ -15,6 +15,7 @@
     nsxiv
     rofi-wayland
     slurp
+    swaybg
     wf-recorder
     wl-clipboard
     wob

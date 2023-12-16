@@ -1,11 +1,10 @@
 pkgs:
-let
-  makeShellScript = pkgs.callPackage (import ../../utils/makeShellScript.nix);
-in
-with pkgs; rec {
+let makeShellScript = pkgs.callPackage (import ../../utils/makeShellScript.nix);
+in with pkgs; rec {
   dy = makeShellScript {
     filePath = ./dy;
-    dependencies = [ gnugrep coreutils dunst yt-dlp mpv jq bspwm libwebp curl file xsel ];
+    dependencies =
+      [ gnugrep coreutils dunst yt-dlp mpv jq bspwm libwebp curl file xsel ];
   };
   link_handler = makeShellScript {
     filePath = ./link_handler;
