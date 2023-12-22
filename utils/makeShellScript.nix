@@ -7,14 +7,13 @@
   runCommand,
   makeWrapper,
   ...
-}: let
-  src = builtins.readFile filePath;
+}:
+let
   name = baseNameOf filePath;
-  pathEnvVar = lib.makeBinPath dependencies;
-  script = (writeScriptBin name src).overrideAttrs (old: {
-    buildCommand = "${old.buildCommand}\n patchShebangs $out";
-  });
-  scriptBin = "${script}/bin/${name}";
-  command = "makeWrapper ${scriptBin} $out/bin/${name} --set PATH ${pathEnvVar}";
 in
-  runCommand "${name}-wrapped" { buildInputs = [makeWrapper]; } command
+runCommand "${name}-wrapped" { nativeBuildInputs = [makeWrapper]; } ''
+  script=$out/bin/${name}
+  install -Dm 0755 ${filePath} $script
+  patchShebangs $script
+  wrapProgram $script --set PATH ${lib.makeBinPath dependencies}
+''
