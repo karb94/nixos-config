@@ -44,6 +44,7 @@ let
     nodePackages.bash-language-server # Bash language server
     nodePackages.vim-language-server # Vim language server
     lua-language-server # Lua language server
+    nodePackages.pyright # Python language server
   ];
 in {
   nixpkgs.config.allowUnfree = true;
