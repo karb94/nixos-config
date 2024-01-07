@@ -2,7 +2,7 @@ pkgs:
 let makeShellScript = pkgs.callPackage (import ../../utils/makeShellScript.nix);
 in with pkgs; rec {
   dy = pkgs.resholve.writeScriptBin "dy" {
-    inputs = [ gnugrep coreutils dunst yt-dlp mpv jq bspwm libwebp curl file xsel procps ];
+    inputs = [ gnugrep coreutils dunst yt-dlp mpv jq bspwm libwebp curl file wl-clipboard procps ];
     interpreter = "${bash}/bin/bash";
     execer = [
       "cannot:${yt-dlp}/bin/yt-dlp"

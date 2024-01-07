@@ -10,7 +10,7 @@ exec 2>> "$log_path"
 config="$HOME/.config/youtube-dl/config"
 
 # If no url was passed get it from the clipboard
-test -n "$1" && export url="$1" || export url=$(xsel -p)
+test -n "$1" && export url="$1" || export url=$(wl-paste)
 
 metadata=$(mktemp)
 if yt-dlp --config-location "$config" -J "$url" >"$metadata" 2>/dev/null; then
