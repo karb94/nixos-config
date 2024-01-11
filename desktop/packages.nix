@@ -10,7 +10,6 @@ generalPkgs = with pkgs; [
     alacritty              # Terminal emulator
     brave                  # Web browser
     citrix_workspace       # Remote desktop
-    flameshot              # Screenshot tool
     freetube               # FOSS youtube front-end
     nsxiv                  # Image viewer
     mpv                    # Video player
