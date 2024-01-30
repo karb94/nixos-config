@@ -47,6 +47,7 @@
     "nvim/after"
     "nvim/init.lua"
     "nvim/lua"
+    "nvim/compiler"
   ];
   configSources = mkSymlinks ".config/" configFilesToSymlink;
 

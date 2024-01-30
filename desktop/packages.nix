@@ -9,14 +9,16 @@ let
 generalPkgs = with pkgs; [
     alacritty              # Terminal emulator
     brave                  # Web browser
-    citrix_workspace       # Remote desktop
+    citrix_workspace_23_09_0 # Remote desktop
+    # citrix_workspace       # Remote desktop
     freetube               # FOSS youtube front-end
-    nsxiv                  # Image viewer
+    logseq                 # Note taking app
     mpv                    # Video player
+    nsxiv                  # Image viewer
+    okular
     spotify                # Music player
     tor-browser-bundle-bin # Secure and private internet browser
     zathura                # PDF viewer
-    logseq                 # Note taking app
   ];
 
   cliPkgs = with pkgs; [
