@@ -13,6 +13,7 @@ let
     coreutils # GNU core utils
     cryptsetup # Tool to manage encrypted devices (LUKS)
     delta # Diff tool
+    eza # A modern ls replacement
     fd # Better `find` command
     file # Tool to check the type of a file
     findutils # GNU `find` and `xargs` commands
