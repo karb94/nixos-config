@@ -4,6 +4,7 @@ with pkgs;
 let
   cli_pkgs = [
     # clang # C/C++ compiler
+    # gh              # GitHub CLI
     bash # Bash scripting language
     bashInteractive # Bash shell interpreter
     bottom # Computer resource monitor
@@ -19,7 +20,6 @@ let
     findutils # GNU `find` and `xargs` commands
     fzf # Fuzzy finder
     gcc # C/C++ compiler
-    # gh              # GitHub CLI
     git # Version control
     gnumake # `make` command
     gptfdisk # `gdisk` and `sgdisk` disk management tools
@@ -32,10 +32,11 @@ let
     nixos-option # Inspect the value of nixOS configuration options
     python311 # Python 3.11
     ripgrep # Better `grep` command
+    texlive.combined.scheme-full
     tree # Tree representation of a directory
     unzip # Extraction utility for .zip archives
     zellij # Terminal multiplexer
-    texlive.combined.scheme-full
+    zoxide # A modern cd
   ];
   neovim_pkgs = [
     neovim # Terminal editor
