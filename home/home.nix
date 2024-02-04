@@ -83,6 +83,7 @@ in {
         ".config/dotfiles"
         ".local/share/nvim"
         ".local/share/hyprland"
+        ".local/share/zoxide"
         { directory = ".local/share/containers"; method = "symlink"; }
         ".config/BraveSoftware/Brave-Browser"
         ".config/Logseq"

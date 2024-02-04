@@ -35,6 +35,7 @@ let
     texlive.combined.scheme-full
     tree # Tree representation of a directory
     unzip # Extraction utility for .zip archives
+    usbutils # Tools for working with USB devices, such as lsusb
     zellij # Terminal multiplexer
     zoxide # A modern cd
   ];
