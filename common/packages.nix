@@ -7,6 +7,7 @@ let
     # gh              # GitHub CLI
     bash # Bash scripting language
     bashInteractive # Bash shell interpreter
+    bat # cat clone with syntax highlighting and Git integration
     bottom # Computer resource monitor
     btrfs-progs # Linux file system
     cmake # Crossplatform project builder
@@ -41,7 +42,8 @@ let
   ];
   neovim_pkgs = [
     neovim # Terminal editor
-    nixfmt # Nix formatter
+    # nixfmt # Nix formatter
+    nixfmt-rfc-style # NixPkgs official formatter
     nixd # Nix language server
     tree-sitter # Code parser
     nodePackages.bash-language-server # Bash language server
