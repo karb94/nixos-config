@@ -12,6 +12,7 @@ generalPkgs = with pkgs; [
     citrix_workspace_23_09_0 # Remote desktop
     # citrix_workspace       # Remote desktop
     freetube               # FOSS youtube front-end
+    ledger-live-desktop    # Crypto wallet
     logseq                 # Note taking app
     mpv                    # Video player
     nsxiv                  # Image viewer
