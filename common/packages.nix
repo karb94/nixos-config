@@ -31,6 +31,7 @@ let
     ncdu # Disk usage analyzer
     newsboat # Terminal RSS feed manager
     nixos-option # Inspect the value of nixOS configuration options
+    openssl # Cryptographic library
     python311 # Python 3.11
     ripgrep # Better `grep` command
     texlive.combined.scheme-full
