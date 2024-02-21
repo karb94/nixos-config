@@ -3,13 +3,23 @@
 # exit when any command fails
 set -e
 
-boot_device="/dev/disk/by-partlabel/boot"
-root_device="/dev/disk/by-partlabel/root"
+root_label="root"
+boot_label="boot"
+nix_label="nix"
+persist_label="persist"
+swap_label="swap"
+boot_device="/dev/disk/by-partlabel/$boot_label"
+root_device="/dev/disk/by-partlabel/$root_label"
 boot_part_num=1
 root_part_num=2
+tmp_mount_point="/mnt"
+boot_mount_point="${tmp_mount_point}/${boot_label}"
+nix_mount_point="${tmp_mount_point}/${nix_label}"
+persist_mount_point="${tmp_mount_point}/${persist_label}"
+swap_mount_point="${tmp_mount_point}/${swap_label}"
 luks_name="luksroot"
 luks_device="/dev/mapper/$luks_name"
-btrfs_top_level="/tmp/root"
+btrfs_top_level="/tmp/$root_label"
 
 # connect to the wifi network
 wifi_connect() {
@@ -21,21 +31,21 @@ wifi_connect() {
 # delete the partition table of a disk
 wipe_disk() {
   local device="$1"
-  printf "\n\nWiping $device disk\n"
+  printf "\n\nWiping %s disk\n" "$device"
   wipefs --all --force "$device"
 }
 
 # create boot and root partitions and add correct types and partlabels
 partition_disk() {
   local device="$1"
-  printf "\n\nCreating boot and root partitions in $device\n"
+  printf "\n\nCreating boot and root partitions in %s\n" "$device"
   sgdisk \
     -n "$boot_part_num"::+500m \
     -t "$boot_part_num":ef00   \
-    -c "$boot_part_num":"boot" \
+    -c "$boot_part_num":"$boot_label" \
     -n "$root_part_num"::0     \
     -t "$root_part_num":8304   \
-    -c "$root_part_num":"root" \
+    -c "$root_part_num":"$root_label" \
     -p "$device"
   }
 
@@ -46,7 +56,7 @@ format_luks() {
 }
 
 open_luks() {
-  printf "\n\nOpening encrypted partition and mapping it to "$luks_name"\n"
+  printf "\n\nOpening encrypted partition and mapping it to \"%s\"\n" "$luks_name"
   until cryptsetup -v open "$root_device" "$luks_name"
   do printf "\n\nIncorrect password. try again.\n"; done
 }
@@ -58,33 +68,33 @@ format_partitions() {
 }
 
 create_subvolumes() {
-  printf "\n\nMounting top-level btrfs sub-volume to $btrfs_top_level\n"
+  printf "\n\nMounting top-level btrfs sub-volume to %s\n" "$btrfs_top_level"
   mkdir -pv "$btrfs_top_level"
   mount "$luks_device" "$btrfs_top_level"
   printf "\n\nCreating btrfs subvolumes\n"
-  btrfs subvolume create "$btrfs_top_level/nix"
-  btrfs subvolume create "$btrfs_top_level/persist"
-  btrfs subvolume create "$btrfs_top_level/swap"
+  btrfs subvolume create "${btrfs_top_level}/${nix_label}"
+  btrfs subvolume create "${btrfs_top_level}/${persist_label}"
+  btrfs subvolume create "${btrfs_top_level}/${swap_label}"
   printf "\n\nUnmounting top-level btrfs sub-volume\n"
   umount -v "$btrfs_top_level"
 }
 
 mount_partitions() {
   printf "\n\nMounting root tmpfs to /mnt\n"
-  mount -t tmpfs none /mnt
-  printf "\n\nMounting top-level btrfs sub-volume to $btrfs_top_level\n"
-  mkdir -pv /tmp/root
+  mount -t tmpfs none "$tmp_mount_point"
+  printf "\n\nMounting top-level btrfs sub-volume to %s\n" "$btrfs_top_level"
+  mkdir -pv "$btrfs_top_level"
   mount "$luks_device" "$btrfs_top_level"
   printf "\n\nMounting boot partition\n"
-  mkdir -vp /mnt/boot
-  mount -v "$boot_device" /mnt/boot
+  mkdir -vp "$boot_mount_point"
+  mount -v "$boot_device" "$boot_mount_point"
   printf "\n\nMounting BTRFS subvolumes\n"
-  mkdir -vp /mnt/{nix,persist,swap}
-  mount -vo subvol=nix,compress=zstd,noatime "$luks_device" /mnt/nix
-  mount -vo subvol=persist,compress=zstd,noatime "$luks_device" /mnt/persist
-  mount -vo subvol=swap,compress=zstd,noatime "$luks_device" /mnt/swap
+  mkdir -vp "${tmp_mount_point}"/{"${nix_label}","${persist_label}","${swap_label}"}
+  mount -vo "subvol=${nix_label},compress=zstd,noatime" "$luks_device" "$nix_mount_point"
+  mount -vo "subvol=${persist_label},compress=zstd,noatime" "$luks_device" "$persist_mount_point"
+  mount -vo "subvol=${swap_label},compress=zstd,noatime" "$luks_device" "$swap_mount_point"
   printf "\n\nCreating persist dirs\n"
-  mkdir -vp /mnt/persist/{system,home}
+  mkdir -vp "${persist_mount_point}"/{system,home}
 }
 
 create_passwords() {
