@@ -52,7 +52,8 @@ let
     lua-language-server # Lua language server
     nodePackages.pyright # Python language server
   ];
-in {
+in
+{
   nixpkgs.config.allowUnfree = true;
   environment.systemPackages = cli_pkgs ++ neovim_pkgs;
   programs.neovim = {

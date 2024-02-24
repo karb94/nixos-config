@@ -97,10 +97,6 @@ in {
           files = [
             "/etc/machine-id"
             "/etc/nix/id_rsa"
-            # {
-            #   parentDirectory = "/etc/nix/id_rsa";
-            #   parentDirectory = {mode = "u=rwx,g=,o=";};
-            # }
           ];
         };
         swapDevices = [
