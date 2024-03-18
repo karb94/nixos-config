@@ -45,7 +45,7 @@ let
     neovim # Terminal editor
     # nixfmt # Nix formatter
     nixfmt-rfc-style # NixPkgs official formatter
-    nixd # Nix language server
+    # nixd # Nix language server
     tree-sitter # Code parser
     nodePackages.bash-language-server # Bash language server
     nodePackages.vim-language-server # Vim language server
