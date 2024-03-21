@@ -32,6 +32,8 @@ let
     newsboat # Terminal RSS feed manager
     nixos-option # Inspect the value of nixOS configuration options
     openssl # Cryptographic library
+    pandoc # Conversion between documentation formats
+    libreoffice-fresh # Office suite
     python311 # Python 3.11
     ripgrep # Better `grep` command
     texlive.combined.scheme-full
