@@ -25,6 +25,7 @@ let
     gnumake # `make` command
     gptfdisk # `gdisk` and `sgdisk` disk management tools
     jq # JSON parser
+    just # Command runner
     lf # Terminal file manager
     man-pages # Man pages
     man-pages-posix # Posix man pages

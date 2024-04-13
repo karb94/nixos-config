@@ -46,7 +46,7 @@ in {
           "/" = {
             device = "none";
             fsType = "tmpfs";
-            options = ["size=6G" "mode=755"];
+            options = ["size=12G" "mode=755"];
             neededForBoot = true;
           };
           "/nix" = {
@@ -93,6 +93,7 @@ in {
             "/etc/NetworkManager/system-connections"
             "/var/lib/NetworkManager"
             "/var/lib/iwd"
+            # "/tmp"  # Uncomment for big rebuilds to avoid running out of space
          ];
           files = [
             "/etc/machine-id"

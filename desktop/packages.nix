@@ -7,6 +7,7 @@
 }:
 let
 generalPkgs = with pkgs; [
+    kitty              # Terminal emulator
     alacritty              # Terminal emulator
     brave                  # Web browser
     # citrix_workspace_23_09_0 # Remote desktop

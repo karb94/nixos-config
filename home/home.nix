@@ -24,6 +24,7 @@
     ".profile"
     ".profile_extra"
     ".xinitrc"
+    ".logseq"
   ];
   homeSources = mkSymlinks "" homeFilesToSymlink;
   configFilesToSymlink = [
