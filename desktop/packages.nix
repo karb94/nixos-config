@@ -7,10 +7,8 @@
 }:
 let
 generalPkgs = with pkgs; [
-    kitty              # Terminal emulator
     alacritty              # Terminal emulator
     brave                  # Web browser
-    # citrix_workspace_23_09_0 # Remote desktop
     citrix_workspace       # Remote desktop
     freetube               # FOSS youtube front-end
     ledger-live-desktop    # Crypto wallet
@@ -28,7 +26,6 @@ generalPkgs = with pkgs; [
     yt-dlp          # Youtube video downloader
   ];
 
-  # shell_scripts = lib.attrValues (import ./shell_scripts.nix {inherit pkgs lib;});
   shellScripts = import ./scripts pkgs;
 
 in {
