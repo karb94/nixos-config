@@ -45,15 +45,16 @@ let
     zoxide # A modern cd
   ];
   neovim_pkgs = [
-    neovim # Terminal editor
     # nixfmt # Nix formatter
-    nixfmt-rfc-style # NixPkgs official formatter
-    nixd # Nix language server
-    tree-sitter # Code parser
-    nodePackages.bash-language-server # Bash language server
-    nodePackages.vim-language-server # Vim language server
     lua-language-server # Lua language server
+    neovim # Terminal editor
+    nixd # Nix language server
+    nixfmt-rfc-style # NixPkgs official formatter
+    nodePackages.bash-language-server # Bash language server
     nodePackages.pyright # Python language server
+    nodePackages.vim-language-server # Vim language server
+    stylua # An opinionated Lua code formatter
+    tree-sitter # Code parser
   ];
 in
 {
