@@ -20,7 +20,7 @@
     dotfiles.url = "github:karb94/dotfiles/nixos";
     dotfiles.flake = false;
 
-    hyprland.url = "github:hyprwm/Hyprland";
+    # hyprland.url = "github:hyprwm/Hyprland";
   };
 
   outputs = {
