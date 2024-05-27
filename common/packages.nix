@@ -1,8 +1,7 @@
 # Packages to install
 { pkgs, ... }:
-with pkgs;
 let
-  cli_pkgs = [
+  cli_pkgs = with pkgs; [
     # clang # C/C++ compiler
     # gh              # GitHub CLI
     bash # Bash scripting language
@@ -37,6 +36,7 @@ let
     libreoffice-fresh # Office suite
     python311 # Python 3.11
     ripgrep # Better `grep` command
+    lm_sensors # Tools for reading hardware sensors
     texlive.combined.scheme-full
     tree # Tree representation of a directory
     unzip # Extraction utility for .zip archives
@@ -44,7 +44,7 @@ let
     zellij # Terminal multiplexer
     zoxide # A modern cd
   ];
-  neovim_pkgs = [
+  neovim_pkgs = with pkgs; [
     # nixfmt # Nix formatter
     lua-language-server # Lua language server
     neovim # Terminal editor
