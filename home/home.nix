@@ -64,17 +64,17 @@
   };
   desktopAppsSources = let
     ln = config.lib.file.mkOutOfStoreSymlink;
-    f = appName: deriv:
+    f = appName: drv:
     {
       name = "applications/${appName}.desktop";
-      value = {source = ln "${deriv}/share/applications/${appName}.desktop";};
+      value = {source = ln "${drv}/share/applications/${appName}.desktop";};
     };
   in (lib.attrsets.mapAttrs' f desktopApps);
 in {
   imports = [
     inputs.impermanence.nixosModules.home-manager.impermanence
-    # ./hyprland.nix
   ];
+  services.syncthing.enable = true;
 
   home.persistence = lib.mkIf impermanence {
     "/persist/home/${primaryUser}" = {
@@ -84,6 +84,7 @@ in {
         ".local/share/nvim"
         ".local/share/hyprland"
         ".local/share/zoxide"
+        ".local/state/syncthing"
         { directory = ".local/share/containers"; method = "symlink"; }
         ".config/BraveSoftware/Brave-Browser"
         ".config/Logseq"
@@ -104,23 +105,6 @@ in {
   home.file = homeSources;
   xdg.enable = true; # track XDG files and directories
   xdg.configFile = configSources;
-  # xdg.configFile =
-  #   configSources
-  #   // {
-  #     nvim = {
-  #       source = ./dotfiles/.config/nvim;
-  #       recursive = true;
-  #     };
-  #   };
 
   xdg.dataFile = desktopAppsSources;
-
-  
-  # xdg.desktopEntries = {
-  #   dy = {
-  #     name = "dy";
-  #     genericName = "Youtube video downloader";
-  #     exec = "${shell_scripts.dy}/bin/dy";
-  #   };
-  # };
 }

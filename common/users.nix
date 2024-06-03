@@ -7,7 +7,7 @@
       # users.users.root.hashedPassword = "!";
       users.users."${primaryUser}" = {
         isNormalUser = true;
-        extraGroups = [ "wheel" "video" ];
+        extraGroups = [ "wheel" "video" "syncthing" ];
         uid = 1000;
       };
       services.getty.autologinUser = primaryUser;

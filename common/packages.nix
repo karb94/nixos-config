@@ -1,5 +1,5 @@
 # Packages to install
-{ pkgs, ... }:
+{ pkgs, primaryUser, ... }:
 let
   cli_pkgs = with pkgs; [
     # clang # C/C++ compiler
@@ -26,6 +26,7 @@ let
     jq # JSON parser
     just # Command runner
     lf # Terminal file manager
+    lm_sensors # Tools for reading hardware sensors
     man-pages # Man pages
     man-pages-posix # Posix man pages
     ncdu # Disk usage analyzer
@@ -36,8 +37,8 @@ let
     libreoffice-fresh # Office suite
     python311 # Python 3.11
     ripgrep # Better `grep` command
-    lm_sensors # Tools for reading hardware sensors
-    texlive.combined.scheme-full
+    syncthing # Continuous file synchronization
+    texlive.combined.scheme-full # Latex suite
     tree # Tree representation of a directory
     unzip # Extraction utility for .zip archives
     usbutils # Tools for working with USB devices, such as lsusb
@@ -64,4 +65,18 @@ in
     defaultEditor = true;
     withPython3 = true;
   };
+
+  # services.syncthing = {
+  #   enable = true;
+  #   settings.devices = {
+  #     "Phone" = { id = "O4ZT4IN-JJRM5B2-T3VOH2P-PPAEAAJ-YJDWXEN-EQQAURH-W2WFLKO-TSPABQ7"; };
+  #   };
+  #   settings.folders = {
+  #     "/home/${primaryUser}/projects/logseq" = {
+  #       id = "logseq";
+  #       devices = [ "Phone" ];
+  #       label = "Logseq";
+  #     };
+  #   };
+  # };
 }

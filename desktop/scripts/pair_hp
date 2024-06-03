@@ -1,6 +1,10 @@
 #! /bin/sh
 
+headphones=88:C9:E8:06:FD:4F
 bluetoothctl power on
 bluetoothctl agent on
-# bluetoothctl pair 88:C9:E8:06:FD:4F
-bluetoothctl connect 88:C9:E8:06:FD:4F
+
+if ! bluetoothctl connect "$headphones"; then
+  bluetoothctl remove "$headphones"
+  bluetoothctl pair "$headphones"
+fi
