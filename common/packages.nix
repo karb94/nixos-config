@@ -51,9 +51,9 @@ let
     neovim # Terminal editor
     nixd # Nix language server
     nixfmt-rfc-style # NixPkgs official formatter
-    nodePackages.bash-language-server # Bash language server
-    nodePackages.pyright # Python language server
-    nodePackages.vim-language-server # Vim language server
+    bash-language-server # Bash language server
+    pyright # Python language server
+    vim-language-server # Vim language server
     stylua # An opinionated Lua code formatter
     tree-sitter # Code parser
   ];

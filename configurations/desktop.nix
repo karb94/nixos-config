@@ -20,7 +20,7 @@
     ../home/home-manager.nix
   ];
 
-  nixpkgs.config.permittedInsecurePackages = [ "electron-25.9.0" ];
+  nixpkgs.config.permittedInsecurePackages = [ "electron-27.3.11" ];
   # nixpkgs.overlays = let
   #   makeShellScript = import ../utils/makeShellScript.nix;
   #   filePath = ../desktop/bin/dy;
