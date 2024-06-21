@@ -4,7 +4,7 @@
   inputs = {
     # Nixpkgs
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    # nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable-small";
+    # nixpkgs-bluez572.url = "github:nixos/nixpkgs/e89cf1c932006531f454de7d652163a9a5c86668";
 
     # Home manager
     home-manager.url = "github:nix-community/home-manager";
@@ -31,31 +31,20 @@
     nixosConfigurations = let
       system = "x86_64-linux";
       primaryUser = "carles";
-      # pkgs-rofi174 = import inputs.nixpkgs-rofi174 {
+      # pkgs-bluez572 = import inputs.nixpkgs-bluez572 {
       #   system = system;
       #   config.allowUnfree = true;
       # };
-      in {
-      selrak = nixpkgs.lib.nixosSystem {
-        system = system;
-        specialArgs = {
-          inherit inputs;
-          hostname = "selrak";
-          impermanence = false;
-          primaryUser = primaryUser;
-        }; # Pass flake inputs to our config
-        modules = [configurations/desktop.nix];
-      };
-
+    in {
       brutus = nixpkgs.lib.nixosSystem {
         system = system;
         specialArgs = {
-          inherit inputs;
+          inherit inputs; # pkgs-bluez572;
           hostname = "brutus";
           impermanence = true;
           primaryUser = primaryUser;
         };
-        modules = [configurations/desktop.nix];
+        modules = [configurations/desktop.nix (import ./overlays.nix)];
       };
 
       # Build ISO image with the following command:
