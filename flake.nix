@@ -44,7 +44,7 @@
           impermanence = true;
           primaryUser = primaryUser;
         };
-        modules = [configurations/desktop.nix (import ./overlays.nix)];
+        modules = [configurations/desktop.nix]; #./overlays.nix];
       };
 
       # Build ISO image with the following command:

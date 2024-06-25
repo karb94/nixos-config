@@ -21,6 +21,7 @@ let
     fzf # Fuzzy finder
     gcc # C/C++ compiler
     git # Version control
+    glibc
     gnumake # `make` command
     gptfdisk # `gdisk` and `sgdisk` disk management tools
     jq # JSON parser

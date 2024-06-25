@@ -1,8 +1,8 @@
-{pkgs-bluez572, ...}:
+{pkgs, ...}:
 {
   nixpkgs.overlays = [
     (self: super: {
-      bluez = pkgs-bluez572.bluez;
+      bluez = pkgs.callPackage ./bluez576.nix {};
     })
   ];
 }
