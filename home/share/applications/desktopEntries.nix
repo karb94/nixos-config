@@ -1,4 +1,4 @@
-{pkgs, lib}: let
+{pkgs, ...}: let
   shell_scripts = import ../../../desktop/scripts pkgs;
 in {
   dy = pkgs.makeDesktopItem {
@@ -14,5 +14,12 @@ in {
     icon = ../icons/pair_hp.svg;
     desktopName = "Pair headphones";
     genericName = "Sony WH-1000XM5";
+  };
+  shutdown = pkgs.makeDesktopItem {
+    name = "shutdown";
+    exec = "${pkgs.systemd}/bin/shutdown";
+    icon = ../icons/shutdown.svg;
+    desktopName = "Shutdown";
+    genericName = "Shutdown PC";
   };
 }

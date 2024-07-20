@@ -53,14 +53,16 @@
 
   desktopEntries = import share/applications/desktopEntries.nix {inherit pkgs lib;};
 
-  desktopApps = with pkgs; {
-    "brave-browser" = brave;
-    "freetube" = freetube;
-    "spotify" = spotify;
-    "org.pwmt.zathura-pdf-mupdf" = zathura;
+  desktopApps = {
+    "brave-browser" = pkgs.brave;
+    "freetube" = pkgs.freetube;
+    "spotify" = pkgs.spotify;
+    "org.pwmt.zathura-pdf-mupdf" = pkgs.zathura;
+    "logseq" = pkgs.logseq;
+    "torbrowser" = pkgs.tor-browser;
     "dy" = desktopEntries.dy;
     "pair_hp" = desktopEntries.pair_hp;
-    "logseq" = logseq;
+    "shutdown" = desktopEntries.shutdown;
   };
   desktopAppsSources = let
     ln = config.lib.file.mkOutOfStoreSymlink;
