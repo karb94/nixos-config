@@ -17,9 +17,16 @@ in {
   };
   shutdown = pkgs.makeDesktopItem {
     name = "shutdown";
-    exec = "${pkgs.systemd}/bin/shutdown";
+    exec = "${pkgs.systemd}/bin/systemctl poweroff";
     icon = ../icons/shutdown.svg;
     desktopName = "Shutdown";
     genericName = "Shutdown PC";
+  };
+  reboot = pkgs.makeDesktopItem {
+    name = "reboot";
+    exec = "${pkgs.systemd}/bin/systemctl reboot";
+    icon = ../icons/restart.svg;
+    desktopName = "Reboot";
+    genericName = "Reboot PC";
   };
 }

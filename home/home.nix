@@ -63,6 +63,7 @@
     "dy" = desktopEntries.dy;
     "pair_hp" = desktopEntries.pair_hp;
     "shutdown" = desktopEntries.shutdown;
+    "reboot" = desktopEntries.reboot;
   };
   desktopAppsSources = let
     ln = config.lib.file.mkOutOfStoreSymlink;
