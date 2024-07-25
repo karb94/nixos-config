@@ -26,7 +26,14 @@ in {
     name = "reboot";
     exec = "${pkgs.systemd}/bin/systemctl reboot";
     icon = ../icons/restart.svg;
-    desktopName = "Reboot";
+    desktopName = "Restart";
     genericName = "Reboot PC";
+  };
+  suspend = pkgs.makeDesktopItem {
+    name = "suspend";
+    exec = "${pkgs.systemd}/bin/systemctl suspend";
+    icon = ../icons/suspend.svg;
+    desktopName = "Suspend";
+    genericName = "Suspend PC";
   };
 }
