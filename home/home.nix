@@ -51,7 +51,7 @@
   ];
   configSources = mkSymlinks ".config/" configFilesToSymlink;
 
-  desktopEntries = import share/applications/desktopEntries.nix {inherit pkgs lib;};
+  desktopEntries = pkgs.callPackage share/applications/desktopEntries.nix {};
 
   desktopApps = {
     "brave-browser" = pkgs.brave;
@@ -64,6 +64,7 @@
     "pair_hp" = desktopEntries.pair_hp;
     "shutdown" = desktopEntries.shutdown;
     "reboot" = desktopEntries.reboot;
+    "suspend" = desktopEntries.suspend;
   };
   desktopAppsSources = let
     ln = config.lib.file.mkOutOfStoreSymlink;

@@ -32,7 +32,7 @@ in {
   suspend = pkgs.makeDesktopItem {
     name = "suspend";
     exec = "${pkgs.systemd}/bin/systemctl suspend";
-    icon = ../icons/suspend.svg;
+    icon = ../icons/suspend.png;
     desktopName = "Suspend";
     genericName = "Suspend PC";
   };
