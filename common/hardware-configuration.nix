@@ -17,7 +17,7 @@ in {
     inputs.hardware.nixosModules.common-hidpi
     inputs.hardware.nixosModules.common-pc
     inputs.hardware.nixosModules.common-pc-ssd
-    inputs.impermanence.nixosModules.impermanence
+    # inputs.impermanence.nixosModules.impermanence
   ];
 
   config = lib.mkMerge [
@@ -81,24 +81,6 @@ in {
             device = "/dev/disk/by-partlabel/boot";
             fsType = "vfat";
           };
-        };
-        environment.persistence."/persist/system" = {
-          hideMounts = true;
-          directories = [
-            "/var/log"
-            "/var/lib/bluetooth"
-            "/var/lib/nixos"
-            "/var/lib/systemd/coredump"
-            "/etc/nixos"
-            "/etc/NetworkManager/system-connections"
-            "/var/lib/NetworkManager"
-            "/var/lib/iwd"
-            # "/tmp"  # Uncomment for big rebuilds to avoid running out of space
-         ];
-          files = [
-            "/etc/machine-id"
-            "/etc/nix/id_rsa"
-          ];
         };
         swapDevices = [
           {

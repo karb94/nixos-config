@@ -21,16 +21,11 @@ generalPkgs = with pkgs; [
     zathura                # PDF viewer
   ];
 
-  cliPkgs = with pkgs; [
-    newsboat        # Terminal RSS feed manager
-    yt-dlp          # Youtube video downloader
-  ];
-
   shellScripts = import ./scripts pkgs;
 
 in {
 
-  environment.systemPackages = generalPkgs ++ cliPkgs ++ ( lib.attrValues shellScripts );
+  environment.systemPackages = generalPkgs ++ ( lib.attrValues shellScripts );
 
   systemd.user.services.wob_volume =
     let

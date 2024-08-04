@@ -1,13 +1,16 @@
 # General configuration
-{ inputs, pkgs, ... }: {
-
+{ inputs, ... }:
+{
   imports = [
+    inputs.impermanence.nixosModules.impermanence
+    ../common/impermanence.nix
     ../common/audio.nix
     ../common/bootloader.nix
     ../common/containers.nix
     ../common/fonts.nix
     ../common/keyboard.nix
     ../common/locale.nix
+    ../common/tpm.nix
     ../common/networking.nix
     ../common/nix.nix
     ../common/packages.nix
@@ -21,6 +24,11 @@
   ];
 
   nixpkgs.config.permittedInsecurePackages = [ "electron-27.3.11" ];
+  impermanence = {
+    enable = true;
+    systemDir = "/persist/system";
+  };
+  # environment.persistence.main.files = [ "/etc/foo" ];
   # nixpkgs.overlays = let
   #   makeShellScript = import ../utils/makeShellScript.nix;
   #   filePath = ../desktop/bin/dy;

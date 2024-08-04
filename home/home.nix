@@ -78,37 +78,41 @@ in {
   imports = [
     inputs.impermanence.nixosModules.home-manager.impermanence
   ];
-  services.syncthing.enable = true;
 
-  home.persistence = lib.mkIf impermanence {
-    "/persist/home/${primaryUser}" = {
-      directories = [
-        "projects"
-        ".config/dotfiles"
-        ".local/share/nvim"
-        ".local/share/hyprland"
-        ".local/share/zoxide"
-        ".local/state/syncthing"
-        { directory = ".local/share/containers"; method = "symlink"; }
-        ".config/BraveSoftware/Brave-Browser"
-        ".config/Logseq"
-        ".ssh"
-      ];
-      files = [
-        ".local/share/bash/history"
-        ".local/share/newsboat/cache.db"
-      ];
-      allowOther = false;
+  home = {
+    stateVersion = "22.11";
+    username = primaryUser;
+    homeDirectory = "/home/${primaryUser}";
+    file = homeSources;
+    persistence = lib.mkIf impermanence {
+      "/persist/home/${primaryUser}" = {
+        directories = [
+          "projects"
+          ".config/dotfiles"
+          ".local/share/nvim"
+          ".local/share/hyprland"
+          ".local/share/zoxide"
+          ".local/state/syncthing"
+          { directory = ".local/share/containers"; method = "symlink"; }
+          ".config/BraveSoftware/Brave-Browser"
+          ".config/Logseq"
+          ".ssh"
+        ];
+        files = [
+          ".local/share/bash/history"
+          ".local/share/newsboat/cache.db"
+        ];
+        allowOther = false;
+      };
     };
   };
 
-  home.stateVersion = "22.11";
-  home.username = primaryUser;
-  home.homeDirectory = "/home/${primaryUser}";
+  xdg = {
+    enable = true; # track XDG files and directories
+    configFile = configSources;
+    dataFile = desktopAppsSources;
+  };
 
-  home.file = homeSources;
-  xdg.enable = true; # track XDG files and directories
-  xdg.configFile = configSources;
+  services.syncthing.enable = true;
 
-  xdg.dataFile = desktopAppsSources;
 }

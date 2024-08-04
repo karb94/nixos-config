@@ -1,6 +1,6 @@
 # Audio
 {
-  pkgs,
+  config,
   ...
 }:
 {
@@ -13,6 +13,7 @@
     pulse.enable = true;
   };
   hardware.bluetooth.enable = true;
+  environment.persistence.system.directories = [ "/var/lib/bluetooth" ];
 
   # environment.etc = {
   #   "wireplumber/bluetooth.lua.d/51-bluez-config.lua".text = ''

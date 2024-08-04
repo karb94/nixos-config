@@ -1,9 +1,9 @@
 # Packages to install
-{ pkgs, primaryUser, ... }:
+{ pkgs, ... }:
 let
   cli_pkgs = with pkgs; [
     # clang # C/C++ compiler
-    # gh              # GitHub CLI
+    # gh # GitHub CLI
     bash # Bash scripting language
     bashInteractive # Bash shell interpreter
     bat # cat clone with syntax highlighting and Git integration
@@ -27,6 +27,7 @@ let
     jq # JSON parser
     just # Command runner
     lf # Terminal file manager
+    libreoffice-fresh # Office suite
     lm_sensors # Tools for reading hardware sensors
     man-pages # Man pages
     man-pages-posix # Posix man pages
@@ -35,7 +36,6 @@ let
     nixos-option # Inspect the value of nixOS configuration options
     openssl # Cryptographic library
     pandoc # Conversion between documentation formats
-    libreoffice-fresh # Office suite
     python311 # Python 3.11
     ripgrep # Better `grep` command
     syncthing # Continuous file synchronization
@@ -43,6 +43,7 @@ let
     tree # Tree representation of a directory
     unzip # Extraction utility for .zip archives
     usbutils # Tools for working with USB devices, such as lsusb
+    yt-dlp          # Youtube video downloader
     zellij # Terminal multiplexer
     zoxide # A modern cd
   ];
