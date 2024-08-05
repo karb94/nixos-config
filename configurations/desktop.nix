@@ -17,6 +17,7 @@
     ../common/superuser.nix
     ../common/users.nix
     ../common/hardware-configuration.nix
+    ../common/services/nixos_flake_update.nix
     ../desktop/packages.nix
     ../desktop/wayland.nix
     ../desktop/xdg.nix
