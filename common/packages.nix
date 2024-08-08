@@ -54,7 +54,7 @@ let
     nixd # Nix language server
     nixfmt-rfc-style # NixPkgs official formatter
     bash-language-server # Bash language server
-    pyright # Python language server
+    ruff # Python language server
     vim-language-server # Vim language server
     stylua # An opinionated Lua code formatter
     tree-sitter # Code parser
