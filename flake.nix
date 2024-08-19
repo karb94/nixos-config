@@ -4,6 +4,7 @@
   inputs = {
     # Nixpkgs
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
     # nixpkgs-bluez572.url = "github:nixos/nixpkgs/e89cf1c932006531f454de7d652163a9a5c86668";
 
     # Home manager
@@ -31,6 +32,10 @@
     nixosConfigurations = let
       system = "x86_64-linux";
       primaryUser = "carles";
+      pkgs-stable = import inputs.nixpkgs-stable {
+        system = system;
+        config.allowUnfree = true;
+      };
       # pkgs-bluez572 = import inputs.nixpkgs-bluez572 {
       #   system = system;
       #   config.allowUnfree = true;
@@ -39,7 +44,7 @@
       brutus = nixpkgs.lib.nixosSystem {
         system = system;
         specialArgs = {
-          inherit inputs; # pkgs-bluez572;
+          inherit inputs pkgs-stable; # pkgs-bluez572;
           hostname = "brutus";
           impermanence = true;
           primaryUser = primaryUser;

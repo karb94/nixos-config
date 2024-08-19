@@ -1,5 +1,5 @@
 # Packages to install
-{ pkgs, ... }:
+{ pkgs, pkgs-stable, ... }:
 let
   cli_pkgs = with pkgs; [
     # clang # C/C++ compiler
@@ -13,7 +13,7 @@ let
     complete-alias # Bash alias completion
     coreutils # GNU core utils
     cryptsetup # Tool to manage encrypted devices (LUKS)
-    delta # Diff tool
+    pkgs-stable.delta # Diff tool
     eza # A modern ls replacement
     fd # Better `find` command
     file # Tool to check the type of a file
@@ -54,7 +54,9 @@ let
     nixd # Nix language server
     nixfmt-rfc-style # NixPkgs official formatter
     bash-language-server # Bash language server
-    ruff # Python language server
+    ruff # Python linter
+    isort # Python imports formatter
+    pyright # Python language server
     vim-language-server # Vim language server
     stylua # An opinionated Lua code formatter
     tree-sitter # Code parser
