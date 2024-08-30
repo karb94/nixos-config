@@ -13,7 +13,8 @@ let
     complete-alias # Bash alias completion
     coreutils # GNU core utils
     cryptsetup # Tool to manage encrypted devices (LUKS)
-    pkgs-stable.delta # Diff tool
+    delta # Diff tool
+    expect # Tool for automating interactive applications
     eza # A modern ls replacement
     fd # Better `find` command
     file # Tool to check the type of a file

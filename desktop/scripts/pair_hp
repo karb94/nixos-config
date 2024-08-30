@@ -1,10 +1,14 @@
-#! /bin/sh
+#! /bin/bash
 
 headphones=88:C9:E8:06:FD:4F
 bluetoothctl power on
 bluetoothctl agent on
+bluetoothctl discoverable on
+bluetoothctl pairable on
+grep "$headphones" -m 1 <(stdbuf -oL bluetoothctl --timeout 3 scan on)
+bluetoothctl connect "$headphones"
 
-if ! bluetoothctl connect "$headphones"; then
-  bluetoothctl remove "$headphones"
-  bluetoothctl pair "$headphones"
-fi
+# if ! bluetoothctl connect "$headphones"; then
+#   bluetoothctl remove "$headphones"
+#   bluetoothctl pair "$headphones"
+# fi

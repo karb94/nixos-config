@@ -24,7 +24,7 @@ with pkgs; rec {
     ];
   } (builtins.readFile ./link_handler);
   pair_hp = pkgs.resholve.writeScriptBin "pair_hp" {
-    inputs = [ bluez ];
+    inputs = [ bluez coreutils  gnugrep ];
     interpreter = "${bash}/bin/sh";
   } (builtins.readFile ./pair_hp);
   wob_volume = pkgs.resholve.writeScriptBin "wob_volume" {
