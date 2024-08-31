@@ -18,17 +18,19 @@
     ../common/users.nix
     ../common/hardware-configuration.nix
     ../common/services/nixos_flake_update.nix
+    ../common/services/NetworkManager-wait-online.nix
     ../desktop/packages.nix
     ../desktop/wayland.nix
     ../desktop/xdg.nix
     ../home/home-manager.nix
   ];
 
+  # Logseq currently uses a version of Electron that has reached end-of-life
   nixpkgs.config.permittedInsecurePackages = [ "electron-27.3.11" ];
-  impermanence = {
-    enable = true;
-    systemDir = "/persist/system";
-  };
+  # impermanence = {
+  #   enable = true;
+  #   systemDir = "/persist/system";
+  # };
   # environment.persistence.main.files = [ "/etc/foo" ];
   # nixpkgs.overlays = let
   #   makeShellScript = import ../utils/makeShellScript.nix;
@@ -37,6 +39,7 @@
   #   in [
   #     (self: super: {dy = pkgs.callPackage makeShellScript {inherit filePath dependencies;};})
   #   ];
+
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "23.05";
