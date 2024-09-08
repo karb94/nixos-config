@@ -1,6 +1,6 @@
 {
   inputs,
-  impermanence,
+  config,
   primaryUser,
   ...
 }: {
@@ -8,5 +8,8 @@
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
   home-manager.users."${primaryUser}" = import ./home.nix;
-  home-manager.extraSpecialArgs = { inherit inputs impermanence primaryUser; };
+  home-manager.extraSpecialArgs = {
+    inherit inputs primaryUser;
+    impermanence = config.impermanence.enable;
+  };
 }

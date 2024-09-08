@@ -27,10 +27,12 @@
 
   # Logseq currently uses a version of Electron that has reached end-of-life
   nixpkgs.config.permittedInsecurePackages = [ "electron-27.3.11" ];
-  # impermanence = {
-  #   enable = true;
-  #   systemDir = "/persist/system";
-  # };
+
+  # Use impermanence
+  impermanence = {
+    enable = true;
+    systemDir = "/persist/system";
+  };
   # environment.persistence.main.files = [ "/etc/foo" ];
   # nixpkgs.overlays = let
   #   makeShellScript = import ../utils/makeShellScript.nix;
