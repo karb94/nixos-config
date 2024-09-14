@@ -14,10 +14,12 @@
   # qmk-udev-rules requires the plugdev group
   users.groups.plugdev = {};
 
-  services.xserver = {
-    enable = true;
-    exportConfiguration = true;
-    layout = "us,ru";
-    xkbOptions = "grp:alt_space_toggle";
-  };
+  # services.xserver = {
+  #   # enable = true;
+  #   exportConfiguration = true;
+  #   xkb = {
+  #     layout = "us,ru";
+  #     options = "grp:alt_space_toggle";
+  #   };
+  # };
 }

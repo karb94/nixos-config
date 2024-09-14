@@ -35,6 +35,7 @@
       pkgs-stable = import inputs.nixpkgs-stable {
         system = system;
         config.allowUnfree = true;
+        config.permittedInsecurePackages = [ "electron-27.3.11" ];
       };
       # pkgs-bluez572 = import inputs.nixpkgs-bluez572 {
       #   system = system;

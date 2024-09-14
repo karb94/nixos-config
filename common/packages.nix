@@ -40,12 +40,12 @@ let
     python311 # Python 3.11
     ripgrep # Better `grep` command
     syncthing # Continuous file synchronization
-    texlive.combined.scheme-full # Latex suite
+    # texlive.combined.scheme-full # Latex suite
     tree # Tree representation of a directory
     unzip # Extraction utility for .zip archives
     usbutils # Tools for working with USB devices, such as lsusb
     yt-dlp          # Youtube video downloader
-    zellij # Terminal multiplexer
+    # zellij # Terminal multiplexer
     zoxide # A modern cd
   ];
   neovim_pkgs = with pkgs; [

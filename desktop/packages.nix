@@ -2,6 +2,7 @@
 {
   lib,
   pkgs,
+  pkgs-stable,
   config,
   ...
 }:
@@ -12,7 +13,7 @@ generalPkgs = with pkgs; [
     citrix_workspace       # Remote desktop
     freetube               # FOSS youtube front-end
     ledger-live-desktop    # Crypto wallet
-    logseq                 # Note taking app
+    pkgs-stable.logseq     # Note taking app
     mpv                    # Video player
     nsxiv                  # Image viewer
     okular
