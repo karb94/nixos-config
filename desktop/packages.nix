@@ -10,7 +10,7 @@ let
 generalPkgs = with pkgs; [
     alacritty              # Terminal emulator
     brave                  # Web browser
-    citrix_workspace       # Remote desktop
+    pkgs-stable.citrix_workspace       # Remote desktop
     freetube               # FOSS youtube front-end
     ledger-live-desktop    # Crypto wallet
     pkgs-stable.logseq     # Note taking app
