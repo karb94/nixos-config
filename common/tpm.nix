@@ -8,7 +8,7 @@
   users.users."${primaryUser}".extraGroups = [ "tss" ];  # tss group has access to TPM devices
   # Fix fapi errors from https://github.com/NixOS/nixpkgs/pull/240803
   # Will be fixed here: https://github.com/NixOS/nixpkgs/pull/277023
-  security.tpm2.pkcs11.package = pkgs.tpm2-pkcs11.overrideAttrs {
-    configureFlags = [ "--with-fapi=no" ];
+  security.tpm2.pkcs11.package = pkgs.tpm2-pkcs11.override {
+    fapiSupport = false;
   };
 }
