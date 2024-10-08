@@ -35,6 +35,7 @@ let
     ncdu # Disk usage analyzer
     newsboat # Terminal RSS feed manager
     nixos-option # Inspect the value of nixOS configuration options
+    nushell # A modern shell written in Rust
     openssl # Cryptographic library
     pandoc # Conversion between documentation formats
     python311 # Python 3.11
