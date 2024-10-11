@@ -1,7 +1,19 @@
-pkgs:
-with pkgs; rec {
+pkgs: with pkgs; rec {
   dy = pkgs.resholve.writeScriptBin "dy" {
-    inputs = [ gnugrep coreutils dunst yt-dlp mpv jq bspwm libwebp curl file wl-clipboard procps ];
+    inputs = [
+      gnugrep
+      coreutils
+      dunst
+      yt-dlp
+      mpv
+      jq
+      bspwm
+      libwebp
+      curl
+      file
+      wl-clipboard
+      procps
+    ];
     interpreter = "${bash}/bin/bash";
     execer = [
       "cannot:${yt-dlp}/bin/yt-dlp"
@@ -11,7 +23,15 @@ with pkgs; rec {
     ];
   } (builtins.readFile ./dy);
   link_handler = pkgs.resholve.writeScriptBin "link_handler" {
-    inputs = [ dy util-linux gnused curl gnused nsxiv zathura ];
+    inputs = [
+      dy
+      util-linux
+      gnused
+      curl
+      gnused
+      nsxiv
+      zathura
+    ];
     interpreter = "${bash}/bin/bash";
     keep = {
       "$BROWSER" = true;
@@ -24,11 +44,11 @@ with pkgs; rec {
     ];
   } (builtins.readFile ./link_handler);
   pair_hp = pkgs.resholve.writeScriptBin "pair_hp" {
-    inputs = [ bluez coreutils  gnugrep ];
+    inputs = [
+      bluez
+      coreutils
+      gnugrep
+    ];
     interpreter = "${bash}/bin/sh";
   } (builtins.readFile ./pair_hp);
-  wob_volume = pkgs.resholve.writeScriptBin "wob_volume" {
-    inputs = [ coreutils wob wireplumber ];
-    interpreter = "${bash}/bin/bash";
-  } (builtins.readFile ./wob_volume);
 }

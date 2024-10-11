@@ -19,7 +19,7 @@
     ../common/hardware-configuration.nix
     ../common/services/nixos_flake_update.nix
     ../common/services/NetworkManager-wait-online.nix
-    ../desktop/packages.nix
+    ../desktop/apps/default.nix
     ../desktop/wayland.nix
     ../desktop/xdg.nix
     ../home/home-manager.nix

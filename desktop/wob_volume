@@ -1,6 +1,6 @@
 #! /usr/bin/env bash
 
-fifo_path="/run/user/$(id -u)/wob_volume.sock"
+fifo_path="${XDG_RUNTIME_DIR}/wob_volume.sock"
 raw_volume=$(wpctl get-volume @DEFAULT_AUDIO_SINK@)
 shopt -s extglob
 volume_with_dot=${raw_volume##Volume: ?(0)}

@@ -1,8 +1,6 @@
+{ pkgs, ... }:
 {
-  inputs,
-  pkgs,
-  ...
-}: {
+  imports = [ ./wob.nix ];
 
   programs.hyprland = {
     enable = true;
@@ -17,7 +15,6 @@
     swaybg
     wf-recorder
     wl-clipboard
-    wob
     xdg-utils
   ];
 

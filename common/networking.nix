@@ -13,16 +13,4 @@
     "/var/lib/NetworkManager"
     "/var/lib/iwd"
   ];
-
-  # Syncthing
-  # networking.nat = {
-  #   enable = true;
-  #   forwardPorts = [
-  #     {
-  #       sourcePort = 22000;
-  #       proto = "tcp";
-  #       destination = "88.98.205.86:22000";
-  #     }
-  #   ];
-  # };
 }
