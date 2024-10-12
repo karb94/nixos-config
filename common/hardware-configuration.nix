@@ -67,6 +67,11 @@ in {
             options = ["subvol=swap" "compress=zstd" "noatime"];
             neededForBoot = true;
           };
+          "/data/documents" = {
+            device = luks_data1_device;
+            fsType = "btrfs";
+            options = ["subvol=documents" "compress=zstd" "noatime"];
+          };
           "/data/immich" = {
             device = luks_data1_device;
             fsType = "btrfs";
@@ -80,6 +85,7 @@ in {
           "/boot" = {
             device = "/dev/disk/by-partlabel/boot";
             fsType = "vfat";
+            options = [ "umask=0077" ];
           };
         };
         swapDevices = [

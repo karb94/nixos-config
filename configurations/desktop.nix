@@ -7,6 +7,7 @@
     ../common/audio.nix
     ../common/bootloader.nix
     ../common/containers.nix
+    ../common/database.nix
     ../common/fonts.nix
     ../common/keyboard.nix
     ../common/locale.nix

@@ -3,6 +3,7 @@
   lib,
   pkgs,
   pkgs-stable,
+  config,
   ...
 }:
 let
@@ -23,6 +24,8 @@ let
   shellScripts = lib.attrValues (import ../scripts pkgs);
 in
 {
+  imports = [ ./paperless.nix ];
+
   environment.systemPackages = generalPkgs ++ shellScripts;
 
   programs.chromium = {
