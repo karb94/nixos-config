@@ -1,5 +1,5 @@
 # paperless-ngx
-{ primaryUser, ... }:
+{ lib, primaryUser, ... }:
 {
   services.postgresql = {
     enable = true;
@@ -27,8 +27,32 @@
           # Disable login for the web interface
           PAPERLESS_AUTO_LOGIN_USERNAME = primaryUser;
           PAPERLESS_OCR_LANGUAGE = "eng+spa+cat";
+          PAPERLESS_OCR_USER_ARGS = {
+            optimize = 1;
+            pdfa_image_compression = "lossless";
+            invalidate_digital_signatures = true;
+          };
+          PAPERLESS_FILENAME_FORMAT = "{tag_list}/{title}";
         };
       };
   };
+
+  # Do not start the services on startup
+  systemd.services.paperless-scheduler = {
+    wantedBy = lib.mkForce [];
+    wants = lib.mkForce [];
+    requires = lib.mkForce [
+      "paperless-consumer.service"
+      "paperless-web.service"
+      "paperless-task-queue.service"
+    ];
+  };
+  # Let users in the paperless group access the app and directories
+  # systemd.services.paperless-scheduler.serviceConfig.UMask = lib.mkForce "0026";
+  # systemd.services.paperless-web.serviceConfig.UMask = lib.mkForce "0026";
+  systemd.services.paperless-task-queue.serviceConfig.UMask = lib.mkForce "0026";
+  # systemd.services.paperless-consumer.serviceConfig.UMask = "0026";
+
   users.users."${primaryUser}".extraGroups = [ "paperless" ];
+  users.users.paperless.extraGroups = [ "redis-paperless" ];
 }

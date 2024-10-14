@@ -5,7 +5,5 @@
     package = pkgs.postgresql_16_jit;
     enableJIT = true;
   };
-  systemd.tmpfiles.rules = [
-    "d ${config.services.postgresql.dataDir} 0750 postgres postgres"
-  ];
+  environment.persistence.system.directories = [config.services.postgresql.dataDir];
 }
