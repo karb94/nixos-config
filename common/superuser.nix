@@ -1,4 +1,5 @@
 # Superuser configuration
+{ pkgs, ... }:
 {
   # Enable doas instead of sudo
   security.doas.enable = true;
@@ -18,6 +19,7 @@
     {
       groups = ["wheel"];
       cmd = "nix-collect-garbage";
+      args = [];
       noPass = true;
       keepEnv = true;
     }

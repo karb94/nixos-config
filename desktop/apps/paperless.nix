@@ -1,22 +1,34 @@
 # paperless-ngx
-{ lib, primaryUser, ... }:
 {
-  services.postgresql = {
-    enable = true;
-    ensureDatabases = [ "paperless" ];
-    ensureUsers = [
-      {
-        name = "paperless";
-        ensureDBOwnership = true;
-      }
-    ];
+  pkgs,
+  lib,
+  primaryUser,
+  ...
+}:
+{
+  options = {
+    services.paperless.desktopItem = lib.mkOption {
+      # type = lib.types.desktopItem;
+      description = "Desktop entry to launch the paperless service";
+    };
   };
-  services = {
-    paperless =
+
+  config = {
+    services.postgresql = {
+      enable = true;
+      ensureDatabases = [ "paperless" ];
+      ensureUsers = [
+        {
+          name = "paperless";
+          ensureDBOwnership = true;
+        }
+      ];
+    };
+    services.paperless =
       let
         paperlessDir = "/data/documents/paperless";
       in
-        {
+      {
         enable = true;
         mediaDir = "${paperlessDir}/media";
         consumptionDir = "${paperlessDir}/consume";
@@ -34,25 +46,48 @@
           };
           PAPERLESS_FILENAME_FORMAT = "{tag_list}/{title}";
         };
+        # Create a desktop entry to launch the service
+        desktopItem = pkgs.makeDesktopItem {
+          name = "paperless";
+          exec = "${pkgs.systemd}/bin/systemctl start paperless-scheduler.service";
+          icon = ./paperless.svg;
+          desktopName = "Paperless";
+          genericName = "Launch Paperless";
+        };
       };
-  };
 
-  # Do not start the services on startup
-  systemd.services.paperless-scheduler = {
-    wantedBy = lib.mkForce [];
-    wants = lib.mkForce [];
-    requires = lib.mkForce [
-      "paperless-consumer.service"
-      "paperless-web.service"
-      "paperless-task-queue.service"
+    # Do not start the services on startup
+    systemd.services.paperless-scheduler = {
+      wantedBy = lib.mkForce [ ];
+      wants = lib.mkForce [ ];
+      requires = lib.mkForce [
+        "paperless-consumer.service"
+        "paperless-web.service"
+        "paperless-task-queue.service"
+      ];
+    };
+    # Allow users in the paperless group to start the service
+    security.doas.extraRules = [
+      {
+        groups = [ "paperless" ];
+        cmd = "${pkgs.systemd}/bin/systemctl";
+        args = [
+          "start"
+          "paperless-scheduler.service"
+        ];
+        noPass = true;
+        keepEnv = true;
+      }
     ];
-  };
-  # Let users in the paperless group access the app and directories
-  # systemd.services.paperless-scheduler.serviceConfig.UMask = lib.mkForce "0026";
-  # systemd.services.paperless-web.serviceConfig.UMask = lib.mkForce "0026";
-  systemd.services.paperless-task-queue.serviceConfig.UMask = lib.mkForce "0026";
-  # systemd.services.paperless-consumer.serviceConfig.UMask = "0026";
 
-  users.users."${primaryUser}".extraGroups = [ "paperless" ];
-  users.users.paperless.extraGroups = [ "redis-paperless" ];
+    # Let users in the paperless group access the app and directories
+    systemd.services.paperless-task-queue.serviceConfig.UMask = lib.mkForce "0026";
+    # The other services do not create files so no changes needed
+    # systemd.services.paperless-scheduler.serviceConfig.UMask = lib.mkForce "0026";
+    # systemd.services.paperless-web.serviceConfig.UMask = lib.mkForce "0026";
+    # systemd.services.paperless-consumer.serviceConfig.UMask = "0026";
+
+    users.users."${primaryUser}".extraGroups = [ "paperless" ];
+    users.users.paperless.extraGroups = [ "redis-paperless" ];
+  };
 }

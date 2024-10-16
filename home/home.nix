@@ -5,6 +5,7 @@
   inputs,
   impermanence,
   primaryUser,
+  osConfig,
   ...
 }: let
   repoName = "dotfiles";
@@ -65,6 +66,7 @@
     "shutdown" = desktopEntries.shutdown;
     "reboot" = desktopEntries.reboot;
     "suspend" = desktopEntries.suspend;
+    "paperless" = osConfig.services.paperless.desktopItem;
   };
   desktopAppsSources = let
     ln = config.lib.file.mkOutOfStoreSymlink;

@@ -8,6 +8,13 @@
     alsa.support32Bit = true;
     pulse.enable = true;
   };
-  hardware.bluetooth.enable = true;
+  hardware.bluetooth = {
+    enable = true;
+    settings = {
+      General = {
+        FastConnectable = true;
+      };
+    };
+  };
   environment.persistence.system.directories = [ "/var/lib/bluetooth" ];
 }

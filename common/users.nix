@@ -1,31 +1,16 @@
 # User configuration
-{ lib, impermanence, primaryUser, ... }:
+{ config, primaryUser, ... }:
 {
-  config = lib.mkMerge [
-    {
-      # Deactivate root user
-      # users.users.root.hashedPassword = "!";
-      users.users."${primaryUser}" = {
-        isNormalUser = true;
-        extraGroups = [ "wheel" "video" "syncthing" ];
-        uid = 1000;
-      };
-      services.getty.autologinUser = primaryUser;
-    }
-    (
-      lib.mkIf impermanence {
-        # Users and user settings cannot be modified
-        users.mutableUsers = false;
-        users.users."${primaryUser}".hashedPasswordFile = "/persist/system/passwords/${primaryUser}";
-      }
-    )
-    (
-      lib.mkIf (! impermanence) {
-        # Users and user settings can be modified
-        users.mutableUsers = true;
-        users.users."${primaryUser}".initialPassword = "d";
-      }
-    )
-  ];
-
+  users.users."${primaryUser}" = {
+    isNormalUser = true;
+    extraGroups = [
+      "wheel"
+      "video"
+      "syncthing"
+    ];
+    uid = 1000;
+    hashedPasswordFile = "${config.impermanence.systemDir}/passwords/${primaryUser}";
+  };
+  services.getty.autologinUser = primaryUser;
+  users.mutableUsers = false;
 }

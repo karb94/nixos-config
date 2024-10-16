@@ -36,11 +36,4 @@ in {
     desktopName = "Suspend";
     genericName = "Suspend PC";
   };
-  paperless = pkgs.makeDesktopItem {
-    name = "paperless";
-    exec = "${pkgs.systemd}/bin/systemctl start paperless-scheduler.service";
-    icon = ../icons/paperless.png;
-    desktopName = "Paperless";
-    genericName = "Launch Paperless";
-  };
 }
