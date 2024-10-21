@@ -64,21 +64,25 @@
         "paperless-consumer.service"
         "paperless-web.service"
         "paperless-task-queue.service"
+        "redis-paperless.service"
       ];
     };
+    systemd.services.redis-paperless.wantedBy = lib.mkForce [ ];
+
     # Allow users in the paperless group to start the service
-    security.doas.extraRules = [
-      {
-        groups = [ "paperless" ];
-        cmd = "${pkgs.systemd}/bin/systemctl";
-        args = [
-          "start"
-          "paperless-scheduler.service"
-        ];
-        noPass = true;
-        keepEnv = true;
+    security.polkit.extraConfig = ''
+    polkit.addRule(function(action, subject) {
+      if (action.id == "org.freedesktop.systemd1.manage-units"
+      && subject.isInGroup("paperless")) {
+        if (action.lookup("unit") == "paperless-scheduler.service") {
+          var verb = action.lookup("verb");
+          if (verb == "start" || verb == "stop" || verb == "restart") {
+            return polkit.Result.YES;
+          }
+        }
       }
-    ];
+    });
+    '';
 
     # Let users in the paperless group access the app and directories
     systemd.services.paperless-task-queue.serviceConfig.UMask = lib.mkForce "0026";
