@@ -8,7 +8,7 @@
     path = [ pkgs.gitMinimal ];
     serviceConfig = {
       ExecStartPre = "${pkgs.networkmanager}/bin/nm-online";
-      ExecStart = "${pkgs.nix}/bin/nix flake update -vvv /etc/nixos";
+      ExecStart = "${pkgs.nix}/bin/nix flake update -vvv --flake /etc/nixos";
     };
   };
   systemd.timers.nixos-flake-update = {
