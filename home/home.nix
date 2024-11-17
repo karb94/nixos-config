@@ -29,6 +29,7 @@
   ];
   homeSources = mkSymlinks "" homeFilesToSymlink;
   configFilesToSymlink = [
+    "FreeTube"
     "alacritty"
     "bash"
     "bspwm"
@@ -38,6 +39,10 @@
     "lf"
     "mpv"
     "newsboat"
+    "nvim/after"
+    "nvim/compiler"
+    "nvim/init.lua"
+    "nvim/lua"
     "picom"
     "rofi"
     "sxhkd"
@@ -45,10 +50,6 @@
     "youtube-dl"
     "yrp"
     "zathura"
-    "nvim/after"
-    "nvim/init.lua"
-    "nvim/lua"
-    "nvim/compiler"
   ];
   configSources = mkSymlinks ".config/" configFilesToSymlink;
 

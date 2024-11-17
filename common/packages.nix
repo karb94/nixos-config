@@ -36,6 +36,7 @@ let
     newsboat # Terminal RSS feed manager
     nixos-option # Inspect the value of nixOS configuration options
     nushell # A modern shell written in Rust
+    oath-toolkit # One-time password authentication tool
     openssl # Cryptographic library
     pandoc # Conversion between documentation formats
     python311 # Python 3.11
