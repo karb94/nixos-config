@@ -28,12 +28,13 @@ let
     jq # JSON parser
     just # Command runner
     lf # Terminal file manager
-    libreoffice-fresh # Office suite
+    # libreoffice-fresh # Office suite
     lm_sensors # Tools for reading hardware sensors
     man-pages # Man pages
     man-pages-posix # Posix man pages
     ncdu # Disk usage analyzer
     newsboat # Terminal RSS feed manager
+    nh # Nix CLI helper
     nixos-option # Inspect the value of nixOS configuration options
     nushell # A modern shell written in Rust
     oath-toolkit # One-time password authentication tool
