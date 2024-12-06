@@ -6,6 +6,7 @@
     wantedBy = [ "network.target" ];
     path = [ pkgs.gitMinimal ];
     serviceConfig = {
+      ExecStart = "${pkgs.coreutils}/bin/true";
       RemainAfterExit = true;
       ExecStop = "${pkgs.nix}/bin/nix flake update -vvv --flake /etc/nixos";
     };

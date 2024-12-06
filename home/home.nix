@@ -21,11 +21,12 @@
 
   homeFilesToSymlink = [
     ".bashrc"
+    ".q3a"
     ".inputrc"
+    ".logseq"
     ".profile"
     ".profile_extra"
     ".xinitrc"
-    ".logseq"
   ];
   homeSources = mkSymlinks "" homeFilesToSymlink;
   configFilesToSymlink = [
@@ -57,17 +58,18 @@
 
   desktopApps = {
     "brave-browser" = pkgs.brave;
-    "freetube" = pkgs.freetube;
-    "spotify" = pkgs.spotify;
-    "org.pwmt.zathura-pdf-mupdf" = pkgs.zathura;
-    "logseq" = pkgs.logseq;
-    "torbrowser" = pkgs.tor-browser;
     "dy" = desktopEntries.dy;
+    "freetube" = pkgs.freetube;
+    "immich" = osConfig.services.immich.desktopItem;
+    "logseq" = pkgs.logseq;
+    "org.pwmt.zathura-pdf-mupdf" = pkgs.zathura;
     "pair_hp" = desktopEntries.pair_hp;
-    "shutdown" = desktopEntries.shutdown;
-    "reboot" = desktopEntries.reboot;
-    "suspend" = desktopEntries.suspend;
     "paperless" = osConfig.services.paperless.desktopItem;
+    "reboot" = desktopEntries.reboot;
+    "shutdown" = desktopEntries.shutdown;
+    "spotify" = pkgs.spotify;
+    "suspend" = desktopEntries.suspend;
+    "torbrowser" = pkgs.tor-browser;
   };
   desktopAppsSources = let
     ln = config.lib.file.mkOutOfStoreSymlink;

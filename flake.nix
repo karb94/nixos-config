@@ -3,12 +3,12 @@
 
   inputs = {
     # Nixpkgs
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     # nixpkgs-bluez572.url = "github:nixos/nixpkgs/e89cf1c932006531f454de7d652163a9a5c86668";
 
     # Home manager
-    home-manager.url = "github:nix-community/home-manager";
+    home-manager.url = "github:nix-community/home-manager/release-24.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     # Impermanence
@@ -24,15 +24,11 @@
     # hyprland.url = "github:hyprwm/Hyprland";
   };
 
-  outputs = {
-    self,
-    nixpkgs,
-    ...
-  } @ inputs: {
+  outputs = { nixpkgs, ... } @ inputs: {
     nixosConfigurations = let
       system = "x86_64-linux";
       primaryUser = "carles";
-      pkgs-stable = import inputs.nixpkgs-stable {
+      pkgs-unstable = import inputs.nixpkgs-unstable {
         system = system;
         config.allowUnfree = true;
         config.permittedInsecurePackages = [ "electron-27.3.11" ];
@@ -45,7 +41,7 @@
       brutus = nixpkgs.lib.nixosSystem {
         system = system;
         specialArgs = {
-          inherit inputs pkgs-stable; # pkgs-bluez572;
+          inherit inputs pkgs-unstable; # pkgs-bluez572;
           hostname = "brutus";
           impermanence = true;
           primaryUser = primaryUser;

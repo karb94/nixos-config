@@ -1,5 +1,5 @@
 # Packages to install
-{ pkgs, pkgs-stable, ... }:
+{ pkgs, pkgs-unstable, ... }:
 let
   cli_pkgs = with pkgs; [
     # clang # C/C++ compiler
@@ -35,6 +35,7 @@ let
     ncdu # Disk usage analyzer
     newsboat # Terminal RSS feed manager
     nh # Nix CLI helper
+    nix-weather # Check cache availability of NixOS configuration
     nixos-option # Inspect the value of nixOS configuration options
     nushell # A modern shell written in Rust
     oath-toolkit # One-time password authentication tool

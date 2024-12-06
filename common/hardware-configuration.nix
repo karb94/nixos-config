@@ -72,6 +72,11 @@ in {
             fsType = "btrfs";
             options = ["subvol=documents" "compress=zstd" "noatime"];
           };
+          "/data/media" = {
+            device = luks_data1_device;
+            fsType = "btrfs";
+            options = ["subvol=media" "compress=zstd" "noatime"];
+          };
           "/data/immich" = {
             device = luks_data1_device;
             fsType = "btrfs";

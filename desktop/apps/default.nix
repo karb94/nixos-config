@@ -2,29 +2,33 @@
 {
   lib,
   pkgs,
-  pkgs-stable,
-  config,
+  pkgs-unstable,
+  primaryUser,
   ...
 }:
 let
   generalPkgs = with pkgs; [
     alacritty # Terminal emulator
     brave # Web browser
-    pkgs-stable.citrix_workspace # Remote desktop
+    citrix_workspace # Remote desktop
     freetube # FOSS youtube front-end
     ledger-live-desktop # Crypto wallet
-    pkgs-stable.logseq # Note taking app
+    logseq # Note taking app
     mpv # Video player
     nsxiv # Image viewer
     okular
     spotify # Music player
     tor-browser-bundle-bin # Secure and private internet browser
     zathura # PDF viewer
+    ioquake3
   ];
   shellScripts = lib.attrValues (import ../scripts pkgs);
 in
 {
-  imports = [ ./paperless.nix ];
+  imports = [
+    ./immich.nix
+    ./paperless.nix
+  ];
 
   environment.systemPackages = generalPkgs ++ shellScripts;
 
