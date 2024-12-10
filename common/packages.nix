@@ -3,7 +3,10 @@
 let
   cli_pkgs = with pkgs; [
     # clang # C/C++ compiler
-    # gh # GitHub CLI
+    gh # GitHub CLI
+    age
+    age-plugin-tpm
+    age-plugin-yubikey
     bash # Bash scripting language
     bashInteractive # Bash shell interpreter
     bat # cat clone with syntax highlighting and Git integration
