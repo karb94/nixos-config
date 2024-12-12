@@ -52,6 +52,7 @@ let
     unzip # Extraction utility for .zip archives
     usbutils # Tools for working with USB devices, such as lsusb
     yt-dlp          # Youtube video downloader
+    yubikey-manager # Command line tool for configuring any YubiKey 
     # zellij # Terminal multiplexer
     zoxide # A modern cd
   ];
@@ -78,17 +79,5 @@ in
     withPython3 = true;
   };
 
-  # services.syncthing = {
-  #   enable = true;
-  #   settings.devices = {
-  #     "Phone" = { id = "O4ZT4IN-JJRM5B2-T3VOH2P-PPAEAAJ-YJDWXEN-EQQAURH-W2WFLKO-TSPABQ7"; };
-  #   };
-  #   settings.folders = {
-  #     "/home/${primaryUser}/projects/logseq" = {
-  #       id = "logseq";
-  #       devices = [ "Phone" ];
-  #       label = "Logseq";
-  #     };
-  #   };
-  # };
+  services.pcscd.enable = true;
 }
