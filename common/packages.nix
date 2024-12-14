@@ -6,7 +6,6 @@ let
     gh # GitHub CLI
     age
     age-plugin-tpm
-    age-plugin-yubikey
     bash # Bash scripting language
     bashInteractive # Bash shell interpreter
     bat # cat clone with syntax highlighting and Git integration
@@ -52,7 +51,6 @@ let
     unzip # Extraction utility for .zip archives
     usbutils # Tools for working with USB devices, such as lsusb
     yt-dlp          # Youtube video downloader
-    yubikey-manager # Command line tool for configuring any YubiKey 
     # zellij # Terminal multiplexer
     zoxide # A modern cd
   ];
@@ -78,6 +76,4 @@ in
     defaultEditor = true;
     withPython3 = true;
   };
-
-  services.pcscd.enable = true;
 }

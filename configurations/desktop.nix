@@ -3,23 +3,24 @@
 {
   imports = [
     inputs.impermanence.nixosModules.impermanence
-    ../common/impermanence.nix
     ../common/audio.nix
     ../common/bootloader.nix
     ../common/containers.nix
     ../common/database.nix
     ../common/fonts.nix
+    ../common/hardware-configuration.nix
+    ../common/impermanence.nix
     ../common/keyboard.nix
     ../common/locale.nix
-    ../common/tpm.nix
     ../common/networking.nix
     ../common/nix.nix
     ../common/packages.nix
-    ../common/superuser.nix
-    ../common/users.nix
-    ../common/hardware-configuration.nix
-    ../common/services/nixos_flake_update.nix
     ../common/services/NetworkManager-wait-online.nix
+    ../common/services/nixos_flake_update.nix
+    ../common/superuser.nix
+    ../common/tpm.nix
+    ../common/users.nix
+    ../common/yubico.nix
     ../desktop/apps/default.nix
     ../desktop/wayland.nix
     ../desktop/xdg.nix
