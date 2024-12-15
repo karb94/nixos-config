@@ -1,13 +1,5 @@
-# Audio
+# Bluetooth
 {
-  # Bluetooth
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-  };
   hardware.bluetooth = {
     enable = true;
     settings = {
@@ -16,5 +8,6 @@
       };
     };
   };
+  # Persist directory of trusted devices
   environment.persistence.system.directories = [ "/var/lib/bluetooth" ];
 }

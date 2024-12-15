@@ -1,5 +1,5 @@
 {pkgs, ...}: let
-  shell_scripts = import ../../../desktop/scripts pkgs;
+  shell_scripts = import ../../../graphical/scripts pkgs;
 in {
   dy = pkgs.makeDesktopItem {
     name = "dy";
