@@ -31,6 +31,9 @@
     '';
 
     # Do not start the services on startup
+    systemd.services.redis-immich.wantedBy = lib.mkForce [ ];
+    systemd.services.immich-machine-learning.wantedBy = lib.mkForce [ ];
+    # Start all required services by starting the immich-server service
     systemd.services.immich-server = {
       wantedBy = lib.mkForce [ ];
       wants = lib.mkForce [ ];
@@ -39,7 +42,6 @@
         "redis-immich.service"
       ];
     };
-    systemd.services.redis-immich.wantedBy = lib.mkForce [ ];
 
     # Allow users in the immich group to start the service
     security.polkit.extraConfig = ''

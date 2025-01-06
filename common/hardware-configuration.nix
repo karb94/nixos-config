@@ -22,17 +22,18 @@ in {
 
   config = lib.mkMerge [
     {
-      boot.initrd.availableKernelModules = [
-        "ahci"
-        "xhci_pci"
-        "nvme"
-        "sd_mod"
-        "usbhid"
-        "usb_storage"
-      ];
-      boot.kernelModules = ["kvm-amd"];
-      boot.supportedFilesystems = [ "ntfs" ];
-
+      boot = {
+        initrd.availableKernelModules = [
+          "ahci"
+          "xhci_pci"
+          "nvme"
+          "sd_mod"
+          "usbhid"
+          "usb_storage"
+        ];
+        kernelModules = [ "kvm-amd"];
+        supportedFilesystems = [ "ntfs" ];
+      };
       hardware.enableAllFirmware = lib.mkDefault true;
     }
     (
