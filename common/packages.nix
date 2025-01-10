@@ -72,8 +72,13 @@ in
 {
   nixpkgs.config.allowUnfree = true;
   environment.systemPackages = cli_pkgs ++ neovim_pkgs;
-  programs.neovim = {
-    defaultEditor = true;
-    withPython3 = true;
+  programs = {
+    neovim = {
+      defaultEditor = true;
+      withPython3 = true;
+    };
+    git.config = {
+      safe.directory = "/etc/nixos";
+    };
   };
 }
