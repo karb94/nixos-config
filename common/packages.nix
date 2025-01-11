@@ -77,8 +77,11 @@ in
       defaultEditor = true;
       withPython3 = true;
     };
-    git.config = {
-      safe.directory = "/etc/nixos";
+    git = {
+      enable = true;
+      config = {
+        safe.directory = "/etc/nixos";
+      };
     };
   };
 }
