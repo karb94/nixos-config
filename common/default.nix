@@ -15,6 +15,7 @@
     ./packages.nix
     ./services/nixos_flake_update.nix
     ./superuser.nix
+    ./systemd.nix
     ./tpm.nix
     ./users.nix
     ./yubico.nix
