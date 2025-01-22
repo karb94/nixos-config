@@ -3,14 +3,13 @@
   lib,
   pkgs,
   pkgs-unstable,
-  primaryUser,
   ...
 }:
 let
   generalPkgs = with pkgs; [
     alacritty # Terminal emulator
     brave # Web browser
-    citrix_workspace # Remote desktop
+    pkgs-unstable.citrix_workspace # Remote desktop
     freetube # FOSS youtube front-end
     ledger-live-desktop # Crypto wallet
     logseq # Note taking app
