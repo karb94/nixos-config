@@ -27,6 +27,7 @@ in
   imports = [
     ./immich.nix
     ./paperless.nix
+    ./ollama.nix
   ];
 
   environment.systemPackages = generalPkgs ++ shellScripts;

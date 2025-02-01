@@ -14,6 +14,7 @@ in {
   # Import generic hardware configuration
   imports = [
     inputs.hardware.nixosModules.common-cpu-amd
+    inputs.hardware.nixosModules.common-gpu-amd
     inputs.hardware.nixosModules.common-hidpi
     inputs.hardware.nixosModules.common-pc
     inputs.hardware.nixosModules.common-pc-ssd
