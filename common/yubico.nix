@@ -11,6 +11,10 @@
   services.pcscd.enable = true;
 
   # Authenticate super-user using the yubikey
+  # https://joinemm.dev/blog/yubikey-nixos-guide
+  # https://developers.yubico.com/pam-u2f/
+  # https://wildwolf.name/how-to-enable-two-factor-authentication-with-pam-u2f/
+  # How to not fall back to password if yubikey is plugged in?
   security.pam.services = {
     login.u2fAuth = true;
     # sudo.u2fAuth = true;
