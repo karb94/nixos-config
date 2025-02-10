@@ -38,6 +38,7 @@ let
     ncdu # Disk usage analyzer
     newsboat # Terminal RSS feed manager
     nh # Nix CLI helper
+    nix-index # Files database for nixpkgs
     nixos-option # Inspect the value of nixOS configuration options
     nushell # A modern shell written in Rust
     oath-toolkit # One-time password authentication tool
