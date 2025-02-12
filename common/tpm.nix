@@ -2,6 +2,7 @@
 {pkgs, primaryUser, ... }:
 {
   # How to create an tpm2 ssh key
+  # tpm2_ptool init
   # tpm2_ptool addtoken --pid=1 --label=ssh --userpin=USERPIN --sopin=ADMINPIN
   # tpm2_ptool addkey --algorithm=ecc256 --label=ssh --userpin=USERPIN
   security.tpm2 = {
@@ -19,7 +20,9 @@
   # tss group has access to TPM devices
   users.users."${primaryUser}".extraGroups = [ "tss" ];
   # Persist tpm2_pkcs11 store in /etc/tpm2_pkcs11
-  environment.persistence.system.directories = [ "/etc/tpm2_pkcs11" ];
+  environment.persistence.system.directories = [
+    { directory = "/etc/tpm2_pkcs11"; group = "users"; mode = "0750";}
+  ];
 
   # Use TPM as a WebAuthn token
   environment.systemPackages = [ pkgs.tpm-fido pkgs.pinentry-qt ];

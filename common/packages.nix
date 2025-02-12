@@ -51,7 +51,8 @@ let
     tree # Tree representation of a directory
     unzip # Extraction utility for .zip archives
     usbutils # Tools for working with USB devices, such as lsusb
-    yt-dlp          # Youtube video downloader
+    uv # Python package resolver and installer
+    yt-dlp # Youtube video downloader
     # zellij # Terminal multiplexer
     zoxide # A modern cd
   ];
