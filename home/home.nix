@@ -102,6 +102,7 @@ in {
           ".config/BraveSoftware/Brave-Browser"
           ".config/Logseq"
           ".ssh"
+          # ".tpm2_pkcs11"
         ];
         files = [
           ".local/share/bash/history"
