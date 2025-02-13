@@ -30,7 +30,7 @@ in
         "/var/lib/systemd"
         "/var/log/journal"
         "/etc/nixos"
-        # "/tmp"  # Uncomment for big rebuilds to avoid running out of space
+        "/tmp"  # Uncomment for big rebuilds to avoid running out of space
       ];
       files = [ "/etc/machine-id" ];
     };
