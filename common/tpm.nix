@@ -22,7 +22,8 @@
   # tss group has access to TPM devices
   users.users."${primaryUser}".extraGroups = [ "tss" ];
   # Persist tpm2_pkcs11 store in /etc/tpm2_pkcs11
-  environment.persistence.system.directories = [ "/etc/tpm2_pkcs11" ];
+  # environment.persistence.system.directories = [ "/etc/tpm2_pkcs11" ];
+  # environment.variables = { PKCS11_SQL_LOCK = "/run/pkcs11_sql_locks"; };
 
   # Use TPM as a WebAuthn token
   environment.systemPackages = [ pkgs.tpm-fido pkgs.pinentry-qt ];
