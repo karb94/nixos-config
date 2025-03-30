@@ -21,6 +21,7 @@
   };
   nix.extraOptions = ''
     bash-prompt-prefix = \n[nix develop]
+    build-dir = /persist/tmpbuild
   '';
 
   # Use the system's nixpkgs when using nix commands. E.g., nix run nixpkgs#hello

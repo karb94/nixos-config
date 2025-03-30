@@ -63,12 +63,6 @@ in {
             options = ["subvol=persist" "compress=zstd" "noatime"];
             neededForBoot = true;
           };
-          "/swap" = {
-            device = luks_root_device;
-            fsType = "btrfs";
-            options = ["subvol=swap" "compress=zstd" "noatime"];
-            neededForBoot = true;
-          };
           "/data/documents" = {
             device = luks_data1_device;
             fsType = "btrfs";
@@ -79,28 +73,26 @@ in {
             fsType = "btrfs";
             options = ["subvol=media" "compress=zstd" "noatime"];
           };
-          "/data/immich" = {
-            device = luks_data1_device;
-            fsType = "btrfs";
-            options = ["subvol=immich" "compress=zstd" "noatime"];
-          };
-          "/data/paperless" = {
-            device = luks_data1_device;
-            fsType = "btrfs";
-            options = ["subvol=paperless" "compress=zstd" "noatime"];
-          };
+          # "/data/immich" = {
+          #   device = luks_data1_device;
+          #   fsType = "btrfs";
+          #   options = ["subvol=immich" "compress=zstd" "noatime"];
+          # };
+          # "/data/paperless" = {
+          #   device = luks_data1_device;
+          #   fsType = "btrfs";
+          #   options = ["subvol=paperless" "compress=zstd" "noatime"];
+          # };
           "/boot" = {
             device = "/dev/disk/by-partlabel/boot";
             fsType = "vfat";
             options = [ "umask=0077" ];
           };
         };
-        swapDevices = [
-          {
-            device = "/swap/swapfile";
-            size = 20480; # 20GB
-          }
-        ];
+        zramSwap = {
+          enable = true;
+          memoryMax = 8000000000;
+        };
       }
     )
     (
@@ -124,13 +116,6 @@ in {
             fsType = "vfat";
           };
         };
-
-        swapDevices = [
-          {
-            device = "/.swapfile";
-            size = 20480; # 20GB
-          }
-        ];
       }
     )
   ];

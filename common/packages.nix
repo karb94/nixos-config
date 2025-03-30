@@ -40,6 +40,7 @@ let
     nh # Nix CLI helper
     nix-index # Files database for nixpkgs
     nixos-option # Inspect the value of nixOS configuration options
+    nix-output-monitor # Prettifies output of Nix commands
     nushell # A modern shell written in Rust
     oath-toolkit # One-time password authentication tool
     openssl # Cryptographic library
@@ -83,6 +84,15 @@ in
       enable = true;
       config = {
         safe.directory = "/etc/nixos";
+      };
+    };
+    zsh = {
+      enable = true;
+      syntaxHighlighting = {
+        enable = true;
+      };
+      autosuggestions = {
+        enable = true;
       };
     };
   };
