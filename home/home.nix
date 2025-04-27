@@ -55,7 +55,7 @@
   ];
   configSources = mkSymlinks ".config/" configFilesToSymlink;
 
-  desktopEntries = pkgs-unstable.callPackage share/applications/desktopEntries.nix {};
+  desktopEntries = pkgs-unstable.callPackage share/applications/desktopEntries.nix {pkgs=pkgs-unstable;};
 
   desktopApps = {
     "brave-browser" = pkgs.brave;

@@ -5,7 +5,7 @@
     # Nixpkgs
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-unstable-small.url = "github:nixos/nixpkgs/nixos-unstable-small";
+    # nixpkgs-unstable-small.url = "github:nixos/nixpkgs/nixos-unstable-small";
     # nixpkgs-bluez572.url = "github:nixos/nixpkgs/e89cf1c932006531f454de7d652163a9a5c86668";
 
     # Home manager
@@ -34,10 +34,10 @@
         config.allowUnfree = true;
         config.permittedInsecurePackages = [ "electron-27.3.11" ];
       };
-      pkgs-unstable-small = import inputs.nixpkgs-unstable-small {
-        system = system;
-        config.allowUnfree = true;
-      };
+      # pkgs-unstable-small = import inputs.nixpkgs-unstable-small {
+      #   system = system;
+      #   config.allowUnfree = true;
+      # };
       # pkgs-bluez572 = import inputs.nixpkgs-bluez572 {
       #   system = system;
       #   config.allowUnfree = true;
@@ -46,7 +46,7 @@
       brutus = nixpkgs.lib.nixosSystem {
         system = system;
         specialArgs = {
-          inherit inputs pkgs-unstable pkgs-unstable-small; # pkgs-bluez572;
+          inherit inputs pkgs-unstable; # pkgs-unstable-small;
           hostname = "brutus";
           impermanence = true;
           primaryUser = primaryUser;

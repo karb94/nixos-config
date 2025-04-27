@@ -1,9 +1,9 @@
-{ pkgs-unstable-small, ... }:
+{ pkgs-unstable, ... }:
 {
   services = {
     ollama = {
       enable = true;
-      package = pkgs-unstable-small.ollama;
+      package = pkgs-unstable.ollama;
       acceleration = "rocm";
       models = "/persist/models";
       user = "ollama";
@@ -12,7 +12,7 @@
     };
     open-webui = {
       enable = true;
-      package = pkgs-unstable-small.open-webui;
+      package = pkgs-unstable.open-webui;
       environment = {
         WEBUI_AUTH = "False";
         DEFAULT_MODELS = "deepseek-r1:32b";

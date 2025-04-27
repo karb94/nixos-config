@@ -22,7 +22,7 @@ let
     tor-browser-bundle-bin # Secure and private internet browser
     zathura # PDF viewer
   ];
-  shellScripts = lib.attrValues (import ../scripts pkgs);
+  shellScripts = lib.attrValues (import ../scripts pkgs-unstable);
 in
 {
   imports = [
