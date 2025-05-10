@@ -9,9 +9,8 @@ let
   generalPkgs = with pkgs; [
     alacritty # Terminal emulator
     brave # Web browser
-    freetube # FOSS youtube front-end
-    ioquake3
-    ledger-live-desktop # Crypto wallet
+    pkgs-unstable.freetube # FOSS youtube front-end
+    # ledger-live-desktop # Crypto wallet
     logseq # Note taking app
     mpv # Video player
     nsxiv # Image viewer
