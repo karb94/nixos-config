@@ -8,7 +8,7 @@
     serviceConfig = {
       Type = "oneshot";
       RemainAfterExit = true;
-      ExecStop = lib.concatStrings [
+      ExecStop = lib.concatStringsSep " " [
         "${pkgs.nix}/bin/nix"
         "flake update"
         "-vvv"

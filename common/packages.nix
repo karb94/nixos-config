@@ -16,6 +16,7 @@ let
     coreutils # GNU core utils
     cryptsetup # Tool to manage encrypted devices (LUKS)
     delta # Diff tool
+    evemu # Control your mouse programatically
     expect # Tool for automating interactive applications
     eza # A modern ls replacement
     fd # Better `find` command
@@ -57,7 +58,7 @@ let
     # zellij # Terminal multiplexer
     zoxide # A modern cd
   ];
-  neovim_pkgs = with pkgs; [
+  neovim_pkgs = with pkgs-unstable; [
     # nixfmt # Nix formatter
     lua-language-server # Lua language server
     neovim # Terminal editor
@@ -66,7 +67,7 @@ let
     bash-language-server # Bash language server
     ruff # Python linter
     isort # Python imports formatter
-    pyright # Python language server
+    basedpyright # Python language server
     vim-language-server # Vim language server
     stylua # An opinionated Lua code formatter
     tree-sitter # Code parser
