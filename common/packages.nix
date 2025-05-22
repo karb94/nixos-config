@@ -54,7 +54,7 @@ let
     unzip # Extraction utility for .zip archives
     usbutils # Tools for working with USB devices, such as lsusb
     uv # Python package resolver and installer
-    pkgs-unstable.yt-dlp # Youtube video downloader
+    yt-dlp # Youtube video downloader
     # zellij # Terminal multiplexer
     zoxide # A modern cd
   ];
