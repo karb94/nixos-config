@@ -1,5 +1,5 @@
 {
-  pkgs,
+  config,
   ...
 }:
 {
@@ -30,6 +30,9 @@
         bindkey "^[OH" beginning-of-line
         bindkey "^[OF" end-of-line
         bindkey "^[[3~" delete-char
+        zsh_dir="${config.xdg.configHome}/zsh/"
+        prompt_path="$${zsh_dir}/prompt.sh"
+        [ -f $prompt_path ] && . $prompt_path
       '';
     };
   };

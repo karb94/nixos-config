@@ -62,7 +62,7 @@
     "dy" = desktopEntries.dy;
     "freetube" = pkgs.freetube;
     "immich" = osConfig.services.immich.desktopItem;
-    "logseq" = pkgs.logseq;
+    "Logseq" = pkgs.logseq;
     "org.pwmt.zathura-pdf-mupdf" = pkgs.zathura;
     "pair_hp" = desktopEntries.pair_hp;
     "paperless" = osConfig.services.paperless.desktopItem;

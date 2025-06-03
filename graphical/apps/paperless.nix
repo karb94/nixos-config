@@ -67,6 +67,7 @@
         "paperless-web.service"
         "paperless-task-queue.service"
         "redis-paperless.service"
+        "paperless-exporter.service"
       ];
     };
     systemd.services.redis-paperless.wantedBy = lib.mkForce [ ];
