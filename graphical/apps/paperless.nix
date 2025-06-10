@@ -46,7 +46,7 @@
             pdfa_image_compression = "lossless";
             invalidate_digital_signatures = true;
           };
-          PAPERLESS_FILENAME_FORMAT = "{tag_list}/{title}";
+          PAPERLESS_FILENAME_FORMAT = "{{ tag_list }}/{{ title }}";
         };
         # Create a desktop entry to launch the service
         desktopItem = pkgs.makeDesktopItem {
@@ -67,7 +67,6 @@
         "paperless-web.service"
         "paperless-task-queue.service"
         "redis-paperless.service"
-        "paperless-exporter.service"
       ];
     };
     systemd.services.redis-paperless.wantedBy = lib.mkForce [ ];
