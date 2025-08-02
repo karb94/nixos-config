@@ -12,7 +12,10 @@
   ];
 
   # Logseq currently uses a version of Electron that has reached end-of-life
-  nixpkgs.config.permittedInsecurePackages = [ "electron-27.3.11" ];
+  # nixpkgs.config.permittedInsecurePackages = [
+  #   "electron-27.3.11"
+  #   "libxml2-2.13.8"
+  # ];
 
   # Use impermanence
   impermanence = {

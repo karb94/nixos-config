@@ -37,15 +37,15 @@ in
       "nngceckbapebfimnlniiiahkandclblb" # Bitwarden
       "cjpalhdlnbpafiamejdnhcphjbkeiagm" # uBlock Origin
       "dbepggeogbaibhgnhhndojpepiihcmeb" # Vimium
-      (
-        # Bypass paywalls
-        lib.strings.concatStrings [
-          "dcpihecpambacapedldabdbpakmachpb;"
-          "https://raw.githubusercontent.com/"
-          "iamadamdev/bypass-paywalls-chrome/"
-          "master/src/updates/updates.xml"
-        ]
-      )
+      # (
+      #   # Bypass paywalls
+      #   lib.strings.concatStrings [
+      #     "dcpihecpambacapedldabdbpakmachpb;"
+      #     "https://raw.githubusercontent.com/"
+      #     "iamadamdev/bypass-paywalls-chrome/"
+      #     "master/src/updates/updates.xml"
+      #   ]
+      # )
     ];
   };
 }

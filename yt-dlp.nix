@@ -1,16 +1,10 @@
-self: super: {
-  yt-dlp = super.yt-dlp.overrideAttrs (oldAttrs: rec {
-    version = "2025.6.09";
-    src = super.fetchFromGitHub {
+final: prev: {
+  yt-dlp = prev.yt-dlp.overrideAttrs (oldAttrs: rec {
+    src = prev.fetchFromGitHub {
       owner = "yt-dlp";
       repo = "yt-dlp";
-      rev = version;
-      hash = "sha256-l18DeZRQjyNc1OoSCsOk5BLYL6QjG246i+sQn0AWZEc=";
+      rev = "2025.07.21";
+      hash = "sha256-VNUkCdrzbOwD+iD9BZUQFJlWXRc0tWJAvLnVKNZNPhQ=";
     };
-    # src = super.fetchPypi {
-    #   inherit version;
-    #   pname = "yt_dlp";
-    #   hash = "";
-    # };
   });
 }

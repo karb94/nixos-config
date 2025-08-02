@@ -103,6 +103,7 @@ in {
           { directory = ".local/share/containers"; method = "symlink"; }
           ".config/BraveSoftware/Brave-Browser"
           ".config/Logseq"
+          ".config/spotify"
           ".ssh"
           ".tpm2_pkcs11"
         ];

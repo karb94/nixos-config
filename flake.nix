@@ -9,7 +9,7 @@
     # nixpkgs-bluez572.url = "github:nixos/nixpkgs/e89cf1c932006531f454de7d652163a9a5c86668";
 
     # Home manager
-    home-manager.url = "github:nix-community/home-manager/release-24.11";
+    home-manager.url = "github:nix-community/home-manager/release-25.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     # Impermanence
@@ -32,7 +32,11 @@
       pkgs-unstable = import inputs.nixpkgs-unstable {
         system = system;
         config.allowUnfree = true;
-        config.permittedInsecurePackages = [ "electron-27.3.11" ];
+        config.permittedInsecurePackages = [
+          "electron-27.3.11"
+          "libxml2-2.13.8"
+          "libsoup-2.74.3"
+        ];
       };
       # pkgs-unstable-small = import inputs.nixpkgs-unstable-small {
       #   system = system;
