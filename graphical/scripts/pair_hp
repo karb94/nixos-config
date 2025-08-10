@@ -1,9 +1,11 @@
 #! /bin/bash
 
-headphones=88:C9:E8:06:FD:4F
-bluetoothctl power on
-bluetoothctl agent on
-bluetoothctl discoverable on
-bluetoothctl pairable on
-grep "$headphones" -m 1 <(stdbuf -oL bluetoothctl --timeout 5 scan on)
-bluetoothctl connect "$headphones" || bluetoothctl remove "$headphones"
+# headphones=88:C9:E8:06:FD:4F
+# bluetoothctl power on
+# bluetoothctl agent on
+# bluetoothctl discoverable on
+# bluetoothctl pairable on
+# grep "$headphones" -m 1 <(stdbuf -oL bluetoothctl --timeout 5 scan on)
+# bluetoothctl connect "$headphones" || bluetoothctl remove "$headphones"
+
+busctl call org.bluez /org/bluez/hci0/dev_88_C9_E8_06_FD_4F org.bluez.Device1 Connect

@@ -33,7 +33,7 @@
         system = system;
         config.allowUnfree = true;
         config.permittedInsecurePackages = [
-          "electron-27.3.11"
+          # Citrix dependencies
           "libxml2-2.13.8"
           "libsoup-2.74.3"
         ];

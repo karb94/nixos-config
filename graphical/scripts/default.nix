@@ -45,9 +45,10 @@ pkgs: with pkgs; rec {
   } (builtins.readFile ./link_handler);
   pair_hp = pkgs.resholve.writeScriptBin "pair_hp" {
     inputs = [
-      bluez
-      coreutils
-      gnugrep
+      systemd
+      # bluez
+      # coreutils
+      # gnugrep
     ];
     interpreter = "${bash}/bin/sh";
   } (builtins.readFile ./pair_hp);
