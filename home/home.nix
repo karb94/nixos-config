@@ -96,6 +96,7 @@ in {
         directories = [
           "projects"
           ".config/dotfiles"
+          ".local/share/direnv"
           ".local/share/nvim"
           ".local/share/hyprland"
           ".local/share/zoxide"

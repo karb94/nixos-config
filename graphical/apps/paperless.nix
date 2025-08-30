@@ -31,7 +31,7 @@
       in
       {
         enable = true;
-        package = pkgs-unstable.paperless-ngx;
+        package = pkgs.paperless-ngx;
         mediaDir = "${paperlessDir}/media";
         consumptionDir = "${paperlessDir}/consume";
         port = 8000;
