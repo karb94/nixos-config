@@ -6,7 +6,8 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     # nixpkgs-unstable-small.url = "github:nixos/nixpkgs/nixos-unstable-small";
-    # nixpkgs-bluez572.url = "github:nixos/nixpkgs/e89cf1c932006531f454de7d652163a9a5c86668";
+    nixpkgs-paperless-ngx-2171.url = 
+      "github:nixos/nixpkgs/5a983011e0f4b3b286aaa73e011ce32b1449a528";
 
     # Home manager
     home-manager.url = "github:nix-community/home-manager/release-25.05";
@@ -42,15 +43,15 @@
       #   system = system;
       #   config.allowUnfree = true;
       # };
-      # pkgs-bluez572 = import inputs.nixpkgs-bluez572 {
-      #   system = system;
-      #   config.allowUnfree = true;
-      # };
+      pkgs-paperless = import inputs.nixpkgs-paperless-ngx-2171 {
+        system = system;
+        config.allowUnfree = true;
+      };
     in {
       brutus = nixpkgs.lib.nixosSystem {
         system = system;
         specialArgs = {
-          inherit inputs pkgs-unstable; # pkgs-unstable-small;
+          inherit inputs pkgs-unstable pkgs-paperless; # pkgs-unstable-small;
           hostname = "brutus";
           impermanence = true;
           primaryUser = primaryUser;
