@@ -2,6 +2,7 @@
 {
   lib,
   pkgs,
+  pkgs-unstable,
   primaryUser,
   ...
 }:
@@ -16,7 +17,7 @@
   config = {
     services.immich = {
       enable = true;
-      package = pkgs.immich;
+      package = pkgs-unstable.immich;
       host = "0.0.0.0";
       secretsFile = "/persist/system/secrets/apps/immich/secretsFile";
       mediaLocation = "/data/media/immich";
