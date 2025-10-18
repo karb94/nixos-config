@@ -11,6 +11,7 @@
     dunst
     nsxiv
     rofi-wayland
+    walker
     slurp
     grim
     swaybg
