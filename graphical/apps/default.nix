@@ -14,10 +14,10 @@ let
     logseq # Note taking app
     mpv # Video player
     nsxiv # Image viewer
-    pkgs-unstable.citrix_workspace # Remote desktop
+    # pkgs-unstable.citrix_workspace # Remote desktop
     protonvpn-gui
     spotify # Music player
-    tor-browser-bundle-bin # Secure and private internet browser
+    tor-browser # Secure and private internet browser
     zathura # PDF viewer
   ];
   shellScripts = lib.attrValues (import ../scripts pkgs);

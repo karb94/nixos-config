@@ -3,11 +3,11 @@
 
   inputs = {
     # Nixpkgs
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     # nixpkgs-unstable-small.url = "github:nixos/nixpkgs/nixos-unstable-small";
-    nixpkgs-paperless-ngx-2171.url = 
-      "github:nixos/nixpkgs/5a983011e0f4b3b286aaa73e011ce32b1449a528";
+    # nixpkgs-paperless-ngx-2171.url = 
+    #   "github:nixos/nixpkgs/5a983011e0f4b3b286aaa73e011ce32b1449a528";
 
     # Home manager
     home-manager.url = "github:nix-community/home-manager/release-25.05";

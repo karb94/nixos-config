@@ -10,7 +10,7 @@
   environment.systemPackages = with pkgs; [
     dunst
     nsxiv
-    rofi-wayland
+    rofi
     walker
     slurp
     grim
