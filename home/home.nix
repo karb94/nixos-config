@@ -81,10 +81,7 @@
     };
   in (lib.attrsets.mapAttrs' f desktopApps);
 in {
-  imports = [
-    inputs.impermanence.nixosModules.home-manager.impermanence
-    ./zsh.nix
-  ];
+  imports = [ ./zsh.nix ];
 
   home = {
     stateVersion = "22.11";
@@ -92,7 +89,7 @@ in {
     homeDirectory = "/home/${primaryUser}";
     file = homeSources;
     persistence = lib.mkIf impermanence {
-      "/persist/home/${primaryUser}" = {
+      "/persist" = {
         directories = [
           "projects"
           ".config/dotfiles"
@@ -101,7 +98,7 @@ in {
           ".local/share/hyprland"
           ".local/share/zoxide"
           ".local/state/syncthing"
-          { directory = ".local/share/containers"; method = "symlink"; }
+          { directory = ".local/share/containers"; }
           ".config/BraveSoftware/Brave-Browser"
           ".config/Logseq"
           ".config/spotify"
@@ -112,7 +109,6 @@ in {
           ".local/share/bash/history"
           ".local/share/newsboat/cache.db"
         ];
-        allowOther = false;
       };
     };
   };

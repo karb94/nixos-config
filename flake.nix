@@ -10,7 +10,7 @@
     #   "github:nixos/nixpkgs/5a983011e0f4b3b286aaa73e011ce32b1449a528";
 
     # Home manager
-    home-manager.url = "github:nix-community/home-manager/release-25.05";
+    home-manager.url = "github:nix-community/home-manager/release-25.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     # Impermanence

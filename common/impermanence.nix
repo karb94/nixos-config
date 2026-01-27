@@ -1,4 +1,5 @@
 {
+  inputs,
   lib,
   config,
   ...
@@ -7,6 +8,7 @@ let
   cfg = config.impermanence;
 in
 {
+  imports = [ inputs.impermanence.nixosModules.impermanence ];
   options = {
     impermanence = {
       enable = lib.mkEnableOption "impermanence";

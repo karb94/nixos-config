@@ -24,12 +24,11 @@ pkgs: with pkgs; rec {
   } (builtins.readFile ./dy);
   link_handler = pkgs.resholve.writeScriptBin "link_handler" {
     inputs = [
-      dy
-      util-linux
-      gnused
       curl
+      dy
       gnused
       nsxiv
+      util-linux
       zathura
     ];
     interpreter = "${bash}/bin/bash";

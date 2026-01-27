@@ -1,7 +1,6 @@
 { inputs, ... }:
 {
   imports = [
-    inputs.impermanence.nixosModules.impermanence
     ./bootloader.nix
     ./containers.nix
     ./database.nix

@@ -14,7 +14,7 @@ let
     logseq # Note taking app
     mpv # Video player
     nsxiv # Image viewer
-    # pkgs-unstable.citrix_workspace # Remote desktop
+    pkgs-unstable.citrix_workspace # Remote desktop
     protonvpn-gui
     spotify # Music player
     tor-browser # Secure and private internet browser
