@@ -16,7 +16,7 @@
       enable = true;
       autocd = true;
       defaultKeymap = "emacs";
-      dotDir = ".config/zsh";
+      dotDir = "${config.xdg.configHome}/zsh";
       enableCompletion = true;
       syntaxHighlighting.enable = true;
       autosuggestion = {
