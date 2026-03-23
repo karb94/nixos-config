@@ -36,6 +36,10 @@ in {
         supportedFilesystems = [ "ntfs" ];
       };
       hardware.enableAllFirmware = lib.mkDefault true;
+      services.btrfs.autoScrub = {
+        enable = true;
+        interval = "monthly";
+      };
     }
     (
       lib.mkIf impermanence {

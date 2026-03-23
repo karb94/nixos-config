@@ -59,11 +59,10 @@ let
     zoxide # A modern cd
   ];
   neovim_pkgs = with pkgs-unstable; [
-    # nixfmt # Nix formatter
+    nixfmt # Nix formatter
     lua-language-server # Lua language server
     neovim # Terminal editor
     nixd # Nix language server
-    nixfmt-rfc-style # NixPkgs official formatter
     bash-language-server # Bash language server
     ruff # Python linter
     isort # Python imports formatter
