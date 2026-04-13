@@ -3,7 +3,7 @@
   services = {
     ollama = {
       enable = true;
-      package = pkgs-unstable.ollama;
+      package = pkgs-unstable.ollama-rocm;
       acceleration = "rocm";
       models = "/persist/models";
       user = "ollama";
@@ -21,6 +21,7 @@
   #     port = 2284;
   #   };
   };
+  environment.systemPackages = [ pkgs-unstable.opencode ];
 # Open ports for used apps in your local network
 # https://discourse.nixos.org/t/open-firewall-ports-only-towards-local-network/13037/2
 # The --source is the LAN block address

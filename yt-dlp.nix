@@ -3,8 +3,8 @@ final: prev: {
     src = prev.fetchFromGitHub {
       owner = "yt-dlp";
       repo = "yt-dlp";
-      rev = "2026.02.21";
-      hash = "sha256-r9I/zLyqGPeIzsHsLxJcfnLC3jpuyKMyX1UaMoM08jk=";
+      rev = "2026.03.17";
+      hash = "sha256-A4LUCuKCjpVAOJ8jNoYaC3mRCiKH0/wtcsle0YfZyTA=";
     };
   });
 }

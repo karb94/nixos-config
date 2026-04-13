@@ -45,6 +45,7 @@
     "nvim/compiler"
     "nvim/init.lua"
     "nvim/lua"
+    "opencode"
     "picom"
     "rofi"
     "sxhkd"
